@@ -1,0 +1,26 @@
+#portfolio
+  %h1 Portfolio and testimonials
+
+  #portfolio-filters
+    %ul.nav.nav-tabs
+      %li.nav-item= link_to 'All', portfolio_path, class: params[:theme] ? 'nav-link' : 'nav-link active'
+      - @themes.each do |theme|
+        %li.nav-item
+          = link_to theme.title, portfolio_path(theme: theme.title), class: params[:theme] === theme.title ? 'nav-link active' : 'nav-link'
+  #portfolio-content
+    .card-columns
+      - @photosessions.each do |photosession|
+        .card
+          %img.card-img-top{ alt: photosession.title, src: "http://lorempixel.com/300/150" }
+            .card-body
+              %h4.card-title= photosession.title
+              %p.card-text= photosession.description
+              %a.btn.btn-primary{:href => "#"} Learn more
+            .card-footer
+              - photosession.cities.each do |city|
+                %span.badge.badge-pill.badge-secondary
+                  = city.title
+              - photosession.themes.each do |theme|
+                %span.badge.badge-pill.badge-success
+                  = theme.title
+    = paginate @photosessions, theme: 'twitter-bootstrap-4'

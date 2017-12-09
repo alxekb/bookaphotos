@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title BookaphotosCom
+    %title bookaphotos.com
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -11,4 +11,5 @@
     - if alert
       %p.alert= alert
     = render 'header'
-    = yield
+    %main.container{ role: "main" }
+      = yield

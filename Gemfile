@@ -66,3 +66,6 @@ gem 'activeadmin'
 
 gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'jquery-rails' # for bootstrap
+
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'

@@ -1,22 +1,19 @@
-%header
-  %nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
-    = link_to root_path, class: 'navbar-brand col-auto' do
-      Photoservice Go
-    %button.navbar-toggler.d-lg-none{"aria-controls" => "navbarsNavDefault", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarsNavDefault", "data-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
-    #navbarsNavDefault.collapse.navbar-collapse
-      %ul.navbar-nav.ml-auto
-        %li.nav-item.active
-          %a.nav-link{:href => "#"}
-            Photosessions
-            %span.sr-only (current)
-        %li.nav-item
-          %a.nav-link{:href => "#"} About us
-        %li.nav-item
-          %a.nav-link{:href => "#"} Portfolio
-        %li.nav-item
-          %a.nav-link{:href => "#"} Contacts
-        %li.nav-item
-          %a.nav-link{:href => "#"} Join our team
-        %li.nav-item
-          %a.nav-link.btn.btn-success{:href => "#"} Personal cabinet
+%nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+  = link_to root_path, class: 'navbar-brand col-auto' do
+    Bookaphotos.com
+  %button.navbar-toggler.d-lg-none{"aria-controls" => "navbarsNavDefault", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarsNavDefault", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarsNavDefault.collapse.navbar-collapse
+    %ul.navbar-nav.ml-auto
+      %li{ class: controller_name === 'photosessions' ? 'nav-item active' : 'nav-item' }
+        = link_to 'Photosessions', photosessions_path, class: 'nav-link'
+      %li{ class: action_name === 'about' ? 'nav-item active' : 'nav-item' }
+        = link_to 'About us', about_path, class: 'nav-link'
+      %li{ class: controller_name === 'portfolio' ? 'nav-item active' : 'nav-item' }
+        = link_to 'Portfolio', portfolio_path, class: 'nav-link'
+      %li{ class: action_name === 'contacts' ? 'nav-item active' : 'nav-item' }
+        %a.nav-link{:href => "#"} Contacts
+      %li{ class: controller_name === 'registrations' ? 'nav-item active' : 'nav-item' }
+        = link_to 'Join our team', new_user_registration_path, class: 'nav-link'
+      %li.nav-item
+        %a.nav-link.btn.btn-success{:href => "#"} Personal cabinet

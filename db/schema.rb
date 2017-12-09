@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128082151) do
+ActiveRecord::Schema.define(version: 20171209124958) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -43,6 +43,21 @@ ActiveRecord::Schema.define(version: 20171128082151) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cities_photo_sessions", force: :cascade do |t|
+    t.integer "city_id"
+    t.integer "photo_session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_cities_photo_sessions_on_city_id"
+    t.index ["photo_session_id"], name: "index_cities_photo_sessions_on_photo_session_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.integer "photo_session_id"
@@ -61,6 +76,21 @@ ActiveRecord::Schema.define(version: 20171128082151) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_photo_sessions_on_user_id"
+  end
+
+  create_table "photo_sessions_themes", force: :cascade do |t|
+    t.integer "photo_session_id"
+    t.integer "theme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_session_id"], name: "index_photo_sessions_themes_on_photo_session_id"
+    t.index ["theme_id"], name: "index_photo_sessions_themes_on_theme_id"
+  end
+
+  create_table "themes", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
