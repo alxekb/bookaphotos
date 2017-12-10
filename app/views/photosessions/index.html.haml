@@ -1,2 +1,9 @@
-%h1 Photosessions#index
-%p Find me in app/views/photosessions/index.html.haml
+#photosessions
+  .row
+    .col-3
+      = render 'filters'
+    .col-9
+      .col-12
+        = render 'sort_by', photosessions: @photosessions
+      .col-12
+        = render 'results', photosessions: @photosessions
