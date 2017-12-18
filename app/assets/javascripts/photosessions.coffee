@@ -12,4 +12,14 @@ $(document).on 'turbolinks:load', ->
       $("#filter_min").val(ui.values[0])
       $("#filter_max").val(ui.values[1])
       return
+
+  $("#datepicker").datepicker onSelect: (dateText, inst) ->
+    dateAsString = dateText
+    dateAsObject = $(this).datepicker('getDate')
+    $("#filter_date").val(dateAsString)
+
+    return
+
+  $("#datepicker").datepicker('setDate', $("#filter_date").val())
+
   return

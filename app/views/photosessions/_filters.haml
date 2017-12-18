@@ -25,7 +25,8 @@
           = link_to "#{city['key']} (#{city['doc_count']})", photosessions_path(params.merge(city: city[:key]))
   %div
     Nearest dates
-
+    #datepicker
+    = f.hidden_field :date, name: 'date', value: params[:date]
   %div
     Time
 
