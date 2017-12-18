@@ -1,7 +1,7 @@
 #photosessions
   .row
     .col-3
-      = render 'filters'
+      = render 'filters', photosessions: @photosessions
     .col-9
       .col-12
         = render 'sort_by', photosessions: @photosessions

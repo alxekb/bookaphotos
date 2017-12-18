@@ -41,6 +41,8 @@ set :keep_releases, 3
 
 namespace :deploy do
 
+  before :restart, 'elastic:import'
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:

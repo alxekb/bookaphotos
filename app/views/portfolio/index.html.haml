@@ -11,7 +11,7 @@
     .card-columns
       - @photosessions.each do |photosession|
         .card
-          %img.card-img-top{ alt: photosession.title, src: "http://lorempixel.com/300/150" }
+          = image_tag 'esm.jpg', class: 'card-img-top'
             .card-body
               %h4.card-title= photosession.title
               %p.card-text= photosession.description

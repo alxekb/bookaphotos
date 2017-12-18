@@ -1,1 +1,38 @@
-Filters
+- params.delete(:action)
+- params.delete(:controller)
+- params.delete(:page)
+
+- params.permit!
+
+= form_for 'filter', url: photosessions_path(params), method: :get do |f|
+  %div
+    Search by name
+    = f.text_field :q, name: 'q', value: params[:q]
+  %div
+    Search by price
+    #slider-range{ "data-min": @photosessions.aggregations.min_price[:value].to_i, "data-max": @photosessions.aggregations.max_price[:value].to_i, "data-value": [params[:min] || @photosessions.aggregations.min_price[:value].to_i, params[:max] || @photosessions.aggregations.max_price[:value].to_i] }
+    = f.number_field :min, name: 'min', value: params[:min] || @photosessions.aggregations.min_price[:value].to_i
+    = f.number_field :max, name: 'max', value: params[:max] || @photosessions.aggregations.max_price[:value].to_i
+
+  %div
+    Special offers only
+
+  %div
+    Popular cities
+    %ul
+      - @photosessions.aggregations.popular_cities.buckets.each do |city|
+        %li
+          = link_to "#{city['key']} (#{city['doc_count']})", photosessions_path(params.merge(city: city[:key]))
+  %div
+    Nearest dates
+
+  %div
+    Time
+
+  %div
+    %ul
+      - @photosessions.aggregations.popular_themes.buckets.each do |theme|
+        %li= link_to "#{theme['key']} (#{theme['doc_count']})", photosessions_path(params.merge(theme: theme[:key]))
+  %div
+    = f.submit 'Search', name: nil
+    = link_to 'Clear filters', photosessions_path
