@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171209124958) do
+ActiveRecord::Schema.define(version: 20171219094652) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(version: 20171209124958) do
     t.index ["photo_session_id"], name: "index_cities_photo_sessions_on_photo_session_id"
   end
 
+  create_table "covers", force: :cascade do |t|
+    t.string "photo_file_name"
+    t.string "photo_content_type"
+    t.integer "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer "photo_session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_session_id"], name: "index_covers_on_photo_session_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.integer "photo_session_id"
@@ -85,6 +96,16 @@ ActiveRecord::Schema.define(version: 20171209124958) do
     t.datetime "updated_at", null: false
     t.index ["photo_session_id"], name: "index_photo_sessions_themes_on_photo_session_id"
     t.index ["theme_id"], name: "index_photo_sessions_themes_on_theme_id"
+  end
+
+  create_table "session_days", force: :cascade do |t|
+    t.integer "photo_session_id"
+    t.datetime "when"
+    t.boolean "special"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_session_id"], name: "index_session_days_on_photo_session_id"
   end
 
   create_table "themes", force: :cascade do |t|

@@ -65,6 +65,7 @@ gem "haml-rails", "~> 1.0"
 
 gem 'devise'
 gem 'activeadmin'
+gem 'just-datetime-picker'
 
 gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'jquery-rails' # for bootstrap
@@ -76,3 +77,5 @@ gem 'bootstrap4-kaminari-views'
 gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
 gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
 gem 'elasticsearch-dsl'
+
+gem "paperclip", "~> 5.0.0"

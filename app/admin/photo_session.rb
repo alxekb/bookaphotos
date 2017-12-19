@@ -12,6 +12,23 @@ ActiveAdmin.register PhotoSession do
     f.inputs "PhotoSession Details" do
       f.input :title
       f.input :published
+
+      f.inputs 'Covers' do
+        f.has_many :covers do |c|
+          hint = c.object.nil? ? c.template.content_tag(:span, 'No cover yet')
+                                     : c.template.image_tag(c.object.photo.url(:thumb))
+          c.input :photo,    as: :file,                     label: 'cover',       hint: hint
+          c.input :_destroy, as: :boolean, required: false, label: 'Remove' unless c.object.new_record?
+        end
+      end
+
+      f.has_many :session_days do |s|
+        s.input :when, as: :just_datetime_picker
+        s.input :special
+        s.input :price
+        s.input :_destroy, as: :boolean, required: false, label: 'Remove' if s.object.present?
+      end
+
       f.input :user
       f.input :description
       f.input :price
