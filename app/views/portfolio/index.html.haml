@@ -12,15 +12,15 @@
       - @photosessions.each do |photosession|
         .card
           = image_tag 'esm.jpg', class: 'card-img-top'
-            .card-body
-              %h4.card-title= photosession.title
-              %p.card-text= photosession.description
-              %a.btn.btn-primary{:href => "#"} Learn more
-            .card-footer
-              - photosession.cities.each do |city|
-                %span.badge.badge-pill.badge-secondary
-                  = city.title
-              - photosession.themes.each do |theme|
-                %span.badge.badge-pill.badge-success
-                  = theme.title
-    = paginate @photosessions, theme: 'twitter-bootstrap-4'
+          .card-body
+            %h4.card-title= photosession.title
+            %p.card-text= photosession.description
+            %a.btn.btn-primary{:href => "#"} Learn more
+          .card-footer
+            - photosession.cities.each do |city|
+              %span.badge.badge-pill.badge-secondary
+                = city.title
+            - photosession.themes.each do |theme|
+              %span.badge.badge-pill.badge-success
+                = theme.title
+  = paginate @photosessions, theme: 'twitter-bootstrap-4'
