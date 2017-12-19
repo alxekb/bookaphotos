@@ -20,6 +20,12 @@ module PhotoSessionSearchable
           indexes :id
           indexes :title, analyzer: 'keyword', boost: 50, fielddata: true
         end
+
+        indexes :session_days do
+          indexes :when, type: "date"
+          indexes :special
+          indexes :price
+        end
       end
     end
 
@@ -28,7 +34,7 @@ module PhotoSessionSearchable
     def as_indexed_json(options={})
       as_json(
         only: ['title', 'description', 'price'],
-        methods: ['cities', 'themes']
+        methods: ['cities', 'themes', 'session_days']
         )
     end
 
@@ -51,7 +57,7 @@ module PhotoSessionSearchable
               must do
                 query_string do
                   query  params[:q]
-                  fields ['title^3', 'description']
+                  fields ['title', 'description']
                   default_operator 'and'
                 end
               end
@@ -73,6 +79,15 @@ module PhotoSessionSearchable
             if params[:theme]
               must do
                 term 'themes.title': params[:theme]
+              end
+            end
+
+            if params[:date].present?
+              must do
+                range 'session_days.when' do
+                  gte Date.strptime(params[:date], "%m/%d/%Y").beginning_of_day
+                  lte Date.strptime(params[:date], "%m/%d/%Y").end_of_day
+                end
               end
             end
 

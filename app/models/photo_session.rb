@@ -1,10 +1,13 @@
 require 'elasticsearch/model'
 
 class PhotoSession < ApplicationRecord
-  include PhotoSessionSearchable
+  include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
+
+  include PhotoSessionSearchable
   index_name "#{Rails.application.class.parent_name.downcase}_#{Rails.env.to_s.downcase}_#{name.pluralize.downcase}"
-  after_touch() { __elasticsearch__.index_document }
+
+  after_touch lambda { PhotoSession.__elasticsearch__.refresh_index! }
 
   belongs_to :user
 
@@ -17,6 +20,7 @@ class PhotoSession < ApplicationRecord
   accepts_nested_attributes_for :covers, allow_destroy: true, reject_if: ->(a) { a[:id].nil? && a[:photo].nil? }
 
   has_many :session_days, :dependent => :destroy
+
   accepts_nested_attributes_for :session_days, allow_destroy: true, reject_if: ->(a) { a[:id].nil? && a[:price].nil? }
 
   def self.touch

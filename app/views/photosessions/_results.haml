@@ -32,6 +32,9 @@
                 %span.badge.badge-pill.badge-success
                   = theme.title
             .clearfix
+            - photosession.session_days.each do |day|
+              %b= day.when
+              %hr/
             .date.d-inline-block
               Август, 12
             .time.d-inline-block
