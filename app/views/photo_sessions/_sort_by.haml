@@ -1,0 +1,21 @@
+- params.delete(:action)
+- params.delete(:controller)
+- params.delete(:page)
+
+- params.permit!
+
+#photosession-sort-by
+  %ul.nav.nav-pills.float-left
+    %li.nav-item
+      .nav-link.disabled
+        Sort by:
+    %li.nav-item
+      = link_to "Date", photo_sessions_path(params.merge(sort: 'session_days.when')), class: params[:sort] === 'session_days.when' || params[:sort].nil? ? 'nav-link active' : 'nav-link'
+    %li.nav-item
+      = link_to "Price", photo_sessions_path(params.merge(sort: 'price')), class: params[:sort] === 'price' ? 'nav-link active' : 'nav-link'
+    %li.nav-item
+      = link_to "Title", photo_sessions_path(params.merge(sort: 'title')), class: params[:sort] === 'title' ? 'nav-link active' : 'nav-link'
+  .float-right
+    = @photosessions.total_count
+    photosessions
+  .clearfix

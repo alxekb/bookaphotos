@@ -5,16 +5,13 @@
         .col-5
           .carousel.slide{"data-ride" => "carousel", id: "coverCarousel#{photosession.id}"}
             %ol.carousel-indicators
-              %li.active{"data-slide-to" => "0", "data-target" => "#coverCarousel#{photosession.id}"}
-              %li{"data-slide-to" => "1", "data-target" => "#coverCarousel#{photosession.id}"}
-              %li{"data-slide-to" => "2", "data-target" => "#coverCarousel#{photosession.id}"}
+              - photosession.covers.each_with_index do |cover, index|
+                %li{"data-slide-to" => cover.id, "data-target" => "#coverCarousel#{photosession.id}", class: index === 0 ? 'active' : ''}
             .carousel-inner
-              .carousel-item.active
-                = image_tag 'esm.jpg', class: 'd-block w-100'
-              .carousel-item
-                = image_tag 'esm.jpg', class: 'd-block w-100'
-              .carousel-item
-                = image_tag 'esm.jpg', class: 'd-block w-100'
+              - photosession.covers.each_with_index do |cover, index|
+                %div{ class: index === 0 ? 'carousel-item active' : 'carousel-item' }
+                  = image_tag cover.photo(:medium), class: 'd-block w-100'
+
             %a.carousel-control-prev{"data-slide" => "prev", :href => "#coverCarousel#{photosession.id}", :role => "button"}
               %span.carousel-control-prev-icon{"aria-hidden" => "true"}
               %span.sr-only Previous
@@ -32,19 +29,15 @@
                 %span.badge.badge-pill.badge-success
                   = theme.title
             .clearfix
-            - photosession.session_days.each do |day|
-              %b= day.when
-              %hr/
             .date.d-inline-block
-              Август, 12
-            .time.d-inline-block
-              16.00 - 17.00
+              - photosession.session_days.each do |day|
+                %span= day.when
             .cities
               - photosession.cities.each do |city|
                 %span.badge.badge-pill.badge-secondary
                   = city.title
             .title
-              = photosession.title
+              = link_to photosession.title, photosession
             .price
               = photosession.price
             .description

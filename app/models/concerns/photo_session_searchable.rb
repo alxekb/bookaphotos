@@ -11,6 +11,7 @@ module PhotoSessionSearchable
         indexes :title, analyzer: 'snowball', boost: 100, fielddata: true
         indexes :description, analyzer: 'snowball', boost: 100
         indexes :price, type: :integer
+        indexes :updated_at, type: :date
         indexes :cities do
           indexes :id
           indexes :title, analyzer: 'keyword', boost: 50, fielddata: true
@@ -22,7 +23,8 @@ module PhotoSessionSearchable
         end
 
         indexes :session_days do
-          indexes :when, type: "date"
+          indexes :when, type: :date
+          indexes :session_time, type: :integer
           indexes :special
           indexes :price
         end
@@ -33,7 +35,7 @@ module PhotoSessionSearchable
     #
     def as_indexed_json(options={})
       as_json(
-        only: ['title', 'description', 'price'],
+        only: ['title', 'description', 'price', 'updated_at'],
         methods: ['cities', 'themes', 'session_days']
         )
     end
@@ -82,11 +84,35 @@ module PhotoSessionSearchable
               end
             end
 
+            if params[:special]
+              must do
+                term 'session_days.special': true
+              end
+            end
+
             if params[:date].present?
               must do
                 range 'session_days.when' do
                   gte Date.strptime(params[:date], "%m/%d/%Y").beginning_of_day
                   lte Date.strptime(params[:date], "%m/%d/%Y").end_of_day
+                end
+              end
+            end
+
+            if params[:time].present?
+              must do
+                range 'session_days.session_time' do
+                  case params[:time]
+                  when 'morning'
+                    gte 0
+                    lte 1159
+                  when 'day'
+                    gte 1200
+                    lte 1759
+                  when 'evening'
+                    gte 1800
+                    lte 2359
+                  end
                 end
               end
             end
@@ -118,6 +144,14 @@ module PhotoSessionSearchable
         #     must { range price: { gte: params[:min], lte: params[:max] } }
         #   end
         # end
+        aggregation :time do
+          range do
+            field 'session_days.session_time'
+            key 'morning', from: 0, to: 1159
+            key 'day', from: 1200, to: 1759
+            key 'evening', from: 1800, to: 2359
+          end
+        end
 
         aggregation :min_price do
           min field: :price
@@ -143,6 +177,14 @@ module PhotoSessionSearchable
           terms do
             field 'themes.title'
           end
+        end
+
+        case
+        when params[:sort]
+          sort params[:sort].to_sym => 'asc'
+          # track_scores true
+        when params[:q].blank?
+          sort updated_at: 'desc'
         end
 
       end
