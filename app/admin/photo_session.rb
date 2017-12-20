@@ -22,6 +22,15 @@ ActiveAdmin.register PhotoSession do
         end
       end
 
+      f.inputs 'Photos' do
+        f.has_many :photos do |p|
+          hint = p.object.nil? ? p.template.content_tag(:span, 'No photo yet')
+                                     : p.template.image_tag(p.object.photo.url(:thumb))
+          p.input :photo,    as: :file,                     label: 'photo',       hint: hint
+          p.input :_destroy, as: :boolean, required: false, label: 'Remove' unless p.object.new_record?
+        end
+      end
+
       f.has_many :session_days do |s|
         s.input :when, as: :just_datetime_picker
         s.input :special
@@ -31,6 +40,9 @@ ActiveAdmin.register PhotoSession do
 
       f.input :user
       f.input :description
+      f.input :duration
+      f.input :photos_count
+      f.input :period_of_execution
       f.input :price
       f.input :cities, as: :check_boxes
       f.input :themes, as: :check_boxes

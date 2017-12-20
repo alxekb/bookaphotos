@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :photo_sessions
+
   get '/portfolio(/:theme)', to: 'portfolio#index', as: 'portfolio'
   get '/about_us', to: 'home#about', as: 'about'
 

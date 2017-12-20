@@ -1,1 +1,46 @@
-= @photosession.inspect
+.row
+  .col-12
+    .photosession-info
+      %h1
+        = @photosession.title
+      %p
+        = @photosession.description
+      .photosession-price.d-inline-block
+        $#{@photosession.price}
+      .rating.d-inline-block
+        = link_to 'Book', '#choose-date', class: 'btn btn-success'
+    .carousel.slide{"data-ride" => "carousel", id: "photoCarousel#{@photosession.id}"}
+      %ol.carousel-indicators
+        - @photosession.photos.each_with_index do |photo, index|
+          %li{"data-slide-to" => photo.id, "data-target" => "#photoCarousel#{@photosession.id}", class: index === 0 ? 'active' : ''}
+      .carousel-inner
+        - @photosession.photos.each_with_index do |photo, index|
+          %div{ class: index === 0 ? 'carousel-item active' : 'carousel-item' }
+            = image_tag photo.photo(:medium), class: 'd-block w-100'
+      - if @photosession.photos.size > 1
+        %a.carousel-control-prev{"data-slide" => "prev", :href => "#photoCarousel#{@photosession.id}", :role => "button"}
+          %span.carousel-control-prev-icon{"aria-hidden" => "true"}
+          %span.sr-only Previous
+        %a.carousel-control-next{"data-slide" => "next", :href => "#photoCarousel#{@photosession.id}", :role => "button"}
+          %span.carousel-control-next-icon{"aria-hidden" => "true"}
+          %span.sr-only Next
+  .col-4
+    = @photosession.duration
+    minutes
+  .col-4
+    = @photosession.photos_count
+    photos
+  .col-4
+    = @photosession.period_of_execution
+    days for result
+%hr/
+.row
+  .col-12#choose-date
+    %h3 Choose date and time
+    %h4 Step 1 of 3
+  .col-12
+    %ul
+      - @photosession.session_days.each do |day|
+        %li
+          %span= day.when
+          = link_to 'Book', root_path

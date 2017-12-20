@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171219094652) do
+ActiveRecord::Schema.define(version: 20171220142558) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -86,6 +86,9 @@ ActiveRecord::Schema.define(version: 20171219094652) do
     t.boolean "published"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "duration"
+    t.integer "photos_count"
+    t.integer "period_of_execution"
     t.index ["user_id"], name: "index_photo_sessions_on_user_id"
   end
 
@@ -96,6 +99,17 @@ ActiveRecord::Schema.define(version: 20171219094652) do
     t.datetime "updated_at", null: false
     t.index ["photo_session_id"], name: "index_photo_sessions_themes_on_photo_session_id"
     t.index ["theme_id"], name: "index_photo_sessions_themes_on_theme_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "photo_file_name"
+    t.string "photo_content_type"
+    t.integer "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer "photo_session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_session_id"], name: "index_photos_on_photo_session_id"
   end
 
   create_table "session_days", force: :cascade do |t|

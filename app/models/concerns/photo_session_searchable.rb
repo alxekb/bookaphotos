@@ -184,7 +184,7 @@ module PhotoSessionSearchable
           sort params[:sort].to_sym => 'asc'
           # track_scores true
         when params[:q].blank?
-          sort updated_at: 'desc'
+          sort 'session_days.when': 'asc'
         end
 
       end

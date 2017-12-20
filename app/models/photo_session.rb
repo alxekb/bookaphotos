@@ -19,8 +19,10 @@ class PhotoSession < ApplicationRecord
   has_many :covers, :dependent => :destroy
   accepts_nested_attributes_for :covers, allow_destroy: true, reject_if: ->(a) { a[:id].nil? && a[:photo].nil? }
 
-  has_many :session_days, :dependent => :destroy
+  has_many :photos, :dependent => :destroy
+  accepts_nested_attributes_for :photos, allow_destroy: true, reject_if: ->(a) { a[:id].nil? && a[:photo].nil? }
 
+  has_many :session_days, :dependent => :destroy
   accepts_nested_attributes_for :session_days, allow_destroy: true, reject_if: ->(a) { a[:id].nil? && a[:price].nil? }
 
   def self.touch
