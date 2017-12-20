@@ -20,6 +20,15 @@ $(document).on 'turbolinks:load', ->
 
     return
 
+  $('#slider-photo-count').slider
+    range: true
+    min: $('#slider-photo-count').data("min")
+    max: $('#slider-photo-count').data("max")
+    values: $('#slider-photo-count').data("value")
+    slide: (event, ui) ->
+      $("#order_photo_count").val(ui.value)
+      return
+
   $("#datepicker").datepicker('setDate', $("#filter_date").val())
 
   return

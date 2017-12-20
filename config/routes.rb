@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  resources :photo_sessions
+  resources :photo_sessions do
+    get '/:session_date_id/order', to: 'photo_sessions#order', as: 'order'
+  end
+
+  resources :orders
 
   get '/portfolio(/:theme)', to: 'portfolio#index', as: 'portfolio'
   get '/about_us', to: 'home#about', as: 'about'

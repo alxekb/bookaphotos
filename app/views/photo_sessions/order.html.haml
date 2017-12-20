@@ -1,0 +1,30 @@
+= form_for @order do |f|
+  .row
+    .col-12
+      %h1 Ordering info and additional options
+    .col-12
+      %h3 Step 2 of 3
+    .col-6
+      Options
+
+      %div
+        Search by price
+        #slider-photo-count{ "data-min": @photosession.photos_count, "data-max": @photosession.photos_count*10, "data-value": @photosession.photos_count }
+        = f.hidden_field :photo_count, value: @photosession.photos_count
+    .col-6
+      Ordering information
+      .form-group
+        = f.hidden_field 'photo_session_id', value: @photosession.id
+        = f.hidden_field 'session_date_id', value: @date.id
+        = f.text_field :name, class: 'form-control', placeholder: 'Name'
+      .form-group
+        = f.text_field :phone, class: 'form-control', placeholder: 'Phone'
+      .form-group
+        = f.text_field :email, class: 'form-control', placeholder: 'Email'
+      .form-group
+        = f.text_field :comment, class: 'form-control', placeholder: 'Comment (optional)'
+  .row
+    .col-6
+      = link_to 'Back to choosing date', @photosession, class: 'btn btn-link2'
+    .col-6
+      = f.submit 'Book', class: 'btn btn-link2'

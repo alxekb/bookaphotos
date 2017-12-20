@@ -43,4 +43,4 @@
       - @photosession.session_days.each do |day|
         %li
           %span= day.when
-          = link_to 'Book', root_path
+          = link_to 'Book', photo_session_order_path(photo_session_id: @photosession.id, session_date_id: day.id)
