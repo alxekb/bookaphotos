@@ -79,3 +79,5 @@ gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
 gem 'elasticsearch-dsl'
 
 gem "paperclip", "~> 5.0.0"
+
+gem "gmap_coordinates_picker"

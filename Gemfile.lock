@@ -139,6 +139,8 @@ GEM
     formtastic_i18n (0.6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    gmap_coordinates_picker (0.1.0)
+      rails (>= 3.1.0)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -345,6 +347,7 @@ DEPENDENCIES
   elasticsearch-dsl
   elasticsearch-model!
   elasticsearch-rails!
+  gmap_coordinates_picker
   haml-rails (~> 1.0)
   jbuilder (~> 2.5)
   jquery-rails

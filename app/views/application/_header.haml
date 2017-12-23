@@ -13,7 +13,9 @@
         = link_to 'Portfolio', portfolio_path, class: 'nav-link'
       %li{ class: action_name === 'contacts' ? 'nav-item active' : 'nav-item' }
         %a.nav-link{:href => "#"} Contacts
-      %li{ class: controller_name === 'registrations' ? 'nav-item active' : 'nav-item' }
-        = link_to 'Join our team', new_user_registration_path, class: 'nav-link'
+      - unless user_signed_in?
+        %li{ class: controller_name === 'registrations' ? 'nav-item active' : 'nav-item' }
+          = link_to 'Join our team', new_user_registration_path, class: 'nav-link'
       %li.nav-item
-        %a.nav-link.btn.btn-success{:href => "#"} Personal cabinet
+        = link_to profile_path, class: 'nav-link btn btn-success' do
+          Personal cabinet

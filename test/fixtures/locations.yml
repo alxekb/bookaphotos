@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  how_to_find: MyText
+  address: MyText
+  lat: 9.99
+  lng: 9.99
+
+two:
+  user: two
+  name: MyString
+  how_to_find: MyText
+  address: MyText
+  lat: 9.99
+  lng: 9.99
