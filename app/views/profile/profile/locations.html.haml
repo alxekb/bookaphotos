@@ -1,13 +1,13 @@
 .row
   .col-3
-    = render partial: 'sidebar'
+    = render partial: 'profile/sidebar'
   .col-8
     .row
       .col-12
         .float-left
           %h1 Locations
         .float-right
-          = link_to 'New location', new_location_path, data: { turbolinks: false }, class: 'btn btn-success'
+          = link_to 'New location', new_profile_location_path, data: { turbolinks: false }, class: 'btn btn-success'
       .col-12
         #search-location-form
           = form_for 'search', url: profile_locations_path, method: :get do |f|

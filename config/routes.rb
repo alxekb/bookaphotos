@@ -5,14 +5,15 @@ Rails.application.routes.draw do
     get '/:session_date_id/order', to: 'photo_sessions#order', as: 'order'
   end
 
-  resources :locations
+  namespace :profile do
+    get '/', to: 'profile#show'
+    resources :locations
+    resources :photo_sessions
+    resources :invoices, only: [:index]
+  end
 
-  get '/profile', to: 'profile#show'
-  get '/profile/tasks', to: 'profile#tasks', as: 'tasks'
-  get '/profile/shooting_days', to: 'profile#shooting_days', as: 'shooting_days'
-  get '/profile/photosessions', to: 'profile#photosessions', as: 'profile_photosessions'
-  get '/profile/locations', to: 'profile#locations', as: 'profile_locations'
-  get '/profile/invoices', to: 'profile#invoices', as: 'invoices'
+  # get '/profile/tasks', to: 'profile#tasks', as: 'tasks'
+  # get '/profile/shooting_days', to: 'profile#shooting_days', as: 'shooting_days'
 
   resources :orders
 

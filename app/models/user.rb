@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :locations
-  
+  has_many :invoices
+  has_many :photo_sessions
+
   def to_s
     email
   end

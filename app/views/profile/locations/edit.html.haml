@@ -1,0 +1,11 @@
+.row
+  .col-3
+    = render 'profile/sidebar'
+  .col-8
+    %h1 Editing location
+
+    = render 'form'
+
+    = link_to 'Show', [:profile, @location], data: { turbolinks: false }
+    \|
+    = link_to 'Back', profile_locations_path

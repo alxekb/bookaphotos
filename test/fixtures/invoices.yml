@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  photosession: one
+  user: one
+  price: 9.99
+  status: 1
+
+two:
+  photosession: two
+  user: two
+  price: 9.99
+  status: 1

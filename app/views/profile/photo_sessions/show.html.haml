@@ -1,0 +1,12 @@
+.row
+  .col-3
+    = render 'profile/sidebar'
+  .col-8
+    %p#notice= notice
+
+    %p
+      = @photo_session.inspect
+
+    = link_to 'Edit', edit_profile_photo_session_path(@photo_session)
+    \|
+    = link_to 'Back', profile_photo_sessions_path

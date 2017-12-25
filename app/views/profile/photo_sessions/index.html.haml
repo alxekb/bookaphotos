@@ -1,0 +1,28 @@
+.row
+  .col-3
+    = render 'profile/sidebar'
+  .col-8
+    %h1 Listing photo_sessions
+
+    %table
+      %thead
+        %tr
+          %th
+          %th
+          %th
+
+      %tbody
+        - @photo_sessions.each do |photo_session|
+          %tr
+            %td
+              = photo_session.title
+            %td
+              = photo_session.price
+            %td
+              = link_to 'Edit', edit_profile_photo_session_path(photo_session)
+              = link_to 'Show', [:profile, photo_session]
+              = link_to 'Destroy', [:profile, photo_session], method: :delete, data: { confirm: 'Are you sure?' }
+
+    %br
+
+    = link_to 'New Photo session', new_profile_photo_session_path

@@ -1,0 +1,19 @@
+.row
+  .col-3
+    = render 'profile/sidebar'
+  .col-8
+    %h1 Listing invoices
+
+    %table
+      %thead
+        %tr
+          %th
+          %th
+          %th
+
+      %tbody
+        - @invoices.each do |invoice|
+          %tr
+            %td= invoice.inspect
+            %td
+            %td
