@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20171223164336) do
 
-  create_table "active_admin_comments", force: :cascade do |t|
+  create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20171223164336) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "admin_users", force: :cascade do |t|
+  create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -43,76 +43,76 @@ ActiveRecord::Schema.define(version: 20171223164336) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "cities", force: :cascade do |t|
+  create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "cities_photo_sessions", force: :cascade do |t|
-    t.integer "city_id"
-    t.integer "photo_session_id"
+  create_table "cities_photo_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "city_id"
+    t.bigint "photo_session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_cities_photo_sessions_on_city_id"
     t.index ["photo_session_id"], name: "index_cities_photo_sessions_on_photo_session_id"
   end
 
-  create_table "covers", force: :cascade do |t|
+  create_table "covers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "photo_file_name"
     t.string "photo_content_type"
     t.integer "photo_file_size"
     t.datetime "photo_updated_at"
-    t.integer "photo_session_id"
+    t.bigint "photo_session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["photo_session_id"], name: "index_covers_on_photo_session_id"
   end
 
-  create_table "invoices", force: :cascade do |t|
-    t.integer "photosession_id"
-    t.integer "user_id"
-    t.decimal "price"
+  create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "photo_session_id"
+    t.bigint "user_id"
+    t.decimal "price", precision: 10
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["photosession_id"], name: "index_invoices_on_photosession_id"
+    t.index ["photo_session_id"], name: "index_invoices_on_photo_session_id"
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
-  create_table "locations", force: :cascade do |t|
-    t.integer "user_id"
+  create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
     t.string "name"
     t.text "how_to_find"
     t.text "address"
-    t.decimal "lat"
-    t.decimal "lng"
+    t.decimal "lat", precision: 10
+    t.decimal "lng", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "photo_session_id"
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "photo_session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "phone"
     t.string "email"
     t.text "comment"
-    t.integer "session_date_id"
+    t.bigint "session_day_id"
     t.integer "photo_count"
     t.index ["photo_session_id"], name: "index_orders_on_photo_session_id"
-    t.index ["session_date_id"], name: "index_orders_on_session_date_id"
+    t.index ["session_day_id"], name: "index_orders_on_session_day_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "photo_sessions", force: :cascade do |t|
+  create_table "photo_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.text "description"
-    t.decimal "price"
-    t.integer "user_id"
+    t.decimal "price", precision: 10
+    t.bigint "user_id"
     t.boolean "published"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -122,43 +122,43 @@ ActiveRecord::Schema.define(version: 20171223164336) do
     t.index ["user_id"], name: "index_photo_sessions_on_user_id"
   end
 
-  create_table "photo_sessions_themes", force: :cascade do |t|
-    t.integer "photo_session_id"
-    t.integer "theme_id"
+  create_table "photo_sessions_themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "photo_session_id"
+    t.bigint "theme_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["photo_session_id"], name: "index_photo_sessions_themes_on_photo_session_id"
     t.index ["theme_id"], name: "index_photo_sessions_themes_on_theme_id"
   end
 
-  create_table "photos", force: :cascade do |t|
+  create_table "photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "photo_file_name"
     t.string "photo_content_type"
     t.integer "photo_file_size"
     t.datetime "photo_updated_at"
-    t.integer "photo_session_id"
+    t.bigint "photo_session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["photo_session_id"], name: "index_photos_on_photo_session_id"
   end
 
-  create_table "session_days", force: :cascade do |t|
-    t.integer "photo_session_id"
+  create_table "session_days", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "photo_session_id"
     t.datetime "when"
     t.boolean "special"
-    t.decimal "price"
+    t.decimal "price", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["photo_session_id"], name: "index_session_days_on_photo_session_id"
   end
 
-  create_table "themes", force: :cascade do |t|
+  create_table "themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

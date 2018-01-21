@@ -14,7 +14,7 @@ class Profile::LocationsController < ApplicationController
 
   # GET /locations/new
   def new
-    @location = Location.new(lat: 10.10, lng: 11.24)
+    @location = Location.new(lat: 10, lng: 11)
   end
 
   # GET /locations/1/edit
@@ -24,9 +24,12 @@ class Profile::LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
+    params[:location] = params[:location].merge(lat: params[:lat]) unless params[:lat] === ""
+    params[:location] = params[:location].merge(lng: params[:lng]) unless params[:lat] === ""
+
     @location = Location.new(location_params)
     @location.user = current_user
-
+    
     respond_to do |format|
       if @location.save
         format.html { redirect_to [:profile, @location], notice: 'Location was successfully created.' }

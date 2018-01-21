@@ -2,27 +2,31 @@
   .col-3
     = render 'profile/sidebar'
   .col-8
-    %h1 Listing photo_sessions
-
-    %table
+    %form
+      .row
+        .col-6
+          .form-group
+            %input.form-control{ placeholder: "Search photosession" }
+        .col-3
+          %button.btn.btn-primary{ type: :submit } Submit
+        .col-3
+          = link_to 'New Photo session', new_profile_photo_session_path
+    %table.table
       %thead
         %tr
-          %th
-          %th
-          %th
-
+          %th{:scope => "col"} Type
+          %th{:scope => "col"} Name
+          %th{:scope => "col"} Active shooting days
+          %th{:scope => "col"} Publication date
+          %th{:scope => "col"} #
       %tbody
         - @photo_sessions.each do |photo_session|
           %tr
-            %td
-              = photo_session.title
-            %td
-              = photo_session.price
+            %th{ scope: "row"} Type
+            %td= photo_session.title
+            %td= photo_session.duration
+            %td= photo_session.created_at
             %td
               = link_to 'Edit', edit_profile_photo_session_path(photo_session)
               = link_to 'Show', [:profile, photo_session]
               = link_to 'Destroy', [:profile, photo_session], method: :delete, data: { confirm: 'Are you sure?' }
-
-    %br
-
-    = link_to 'New Photo session', new_profile_photo_session_path

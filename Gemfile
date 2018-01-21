@@ -67,7 +67,7 @@ gem 'devise'
 gem 'activeadmin'
 gem 'just-datetime-picker'
 
-gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails' # for bootstrap
 gem 'jquery-ui-rails'
 

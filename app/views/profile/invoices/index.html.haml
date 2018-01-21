@@ -1,19 +1,35 @@
+
 .row
   .col-3
     = render 'profile/sidebar'
   .col-8
-    %h1 Listing invoices
-
-    %table
+    %form
+      .row
+        .col-4
+          .form-group
+            %select.form-control
+              - current_user.photo_sessions.each do |ps|
+                %option{ value: ps.id }= ps.title
+        .col-4
+          .form-group
+            %select.form-control
+              - Invoice::STATUS.each_with_index do |status, index|
+                %option{ value: index }= status
+        .col-4
+          %button.btn.btn-primary{ type: :submit } Submit
+    %table.table
       %thead
         %tr
-          %th
-          %th
-          %th
-
+          %th{:scope => "col"} Date
+          %th{:scope => "col"} Photosession
+          %th{:scope => "col"} Client
+          %th{:scope => "col"} Price
+          %th{:scope => "col"} Status
       %tbody
         - @invoices.each do |invoice|
           %tr
-            %td= invoice.inspect
-            %td
-            %td
+            %th{:scope => "row"}= invoice.created_at
+            %td= invoice.photo_session.title
+            %td TODO
+            %td= invoice.price
+            %td= Invoice::STATUS[invoice.status]
