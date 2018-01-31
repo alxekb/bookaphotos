@@ -22,11 +22,36 @@
   .pagination
     margin: 24px 0
 
-
 #photosession-sort-by
-  margin: 24px 0
+  margin: 0 0 24px 0
 #photosessions-result
   margin: 24px 0
+  .photosession-card
+    .rating
+      color: gold
+    .card-img
+      img
+        height: 382px
+        width: 382px
+    &:hover
+      .card-img
+        opacity: .4
+        background: yellow
+    margin-bottom: 12px
+    .card-img-overlay
+      background: rgba(0, 0, 0, .2)
+      padding: 42px
+      margin: 0 15px
+      border-radius: 4px
+      .card-text
+        opacity: .6
+      &:hover
+        .card-text
+          opacity: 1
+      .book-btn
+        position: absolute
+        bottom: 5%
+        right: 5%
   .photosession-item
     margin: 0 0 24px 0
     .photosession-item-content
@@ -57,3 +82,24 @@
     color: #fff
   .photosession-price
     margin-right: 12px
+
+
+.left-sidebar
+  margin: 24px 0 0 0
+  padding: 0
+
+  #datepicker
+    .ui-datepicker
+      width: 243px
+
+  .slider-range-wrapper
+    padding: 10px
+
+  .filter-section
+    margin: 16px 0
+
+  .filter-popular-cities, .filter-times, .filter-thematics
+    ul
+      list-style: none
+      margin: 0
+      padding: 0

@@ -5,40 +5,55 @@
 - params.permit!
 
 = form_for 'filter', url: photo_sessions_path(params), method: :get do |f|
-  %div
-    Search by name
-    = f.text_field :q, name: 'q', value: params[:q]
-  %div
-    Search by price
-    #slider-range{ "data-min": @photosessions.aggregations.min_price[:value].to_i, "data-max": @photosessions.aggregations.max_price[:value].to_i, "data-value": [params[:min] || @photosessions.aggregations.min_price[:value].to_i, params[:max] || @photosessions.aggregations.max_price[:value].to_i] }
-    = f.number_field :min, name: 'min', value: params[:min] || @photosessions.aggregations.min_price[:value].to_i
-    = f.number_field :max, name: 'max', value: params[:max] || @photosessions.aggregations.max_price[:value].to_i
-
-  %div
-    Special offers only
-    = check_box_tag 'special', '1', params[:special].present? ? true : false
-  %div
-    Popular cities
-    %ul
-      - @photosessions.aggregations.popular_cities.buckets.each do |city|
-        %li
-          = link_to "#{city['key']} (#{city['doc_count']})", photo_sessions_path(params.merge(city: city[:key]))
-  %div
-    Nearest dates
-    #datepicker
-    = f.hidden_field :date, name: 'date', value: params[:date]
-  %div
-    Time
-    %ul
-      - @photosessions.aggregations.time.buckets.each do |time|
-        - if time.last['doc_count'].to_i > 0
-          %li= link_to "#{time.first} (#{time.last['doc_count']})", photo_sessions_path(params.merge(time: time.first))
+  .card
+    .card-body
+      .form-group
+        = f.text_field :q, name: 'q', value: params[:q], placeholder: 'Search by name', class: 'form-control'
+      .form-group
+        %label
+          %b
+            Search by price ($)
+        .row
+          .col
+            = f.number_field :min, name: 'min', value: params[:min] || @photosessions.aggregations.min_price[:value].to_i, class: 'form-control'
+          .col
+            = f.number_field :max, name: 'max', value: params[:max] || @photosessions.aggregations.max_price[:value].to_i, class: 'form-control'
+        .slider-range-wrapper
+          #slider-range{ "data-min": @photosessions.aggregations.min_price[:value].to_i, "data-max": @photosessions.aggregations.max_price[:value].to_i, "data-value": [params[:min] || @photosessions.aggregations.min_price[:value].to_i, params[:max] || @photosessions.aggregations.max_price[:value].to_i] }
 
 
-  %div
-    %ul
-      - @photosessions.aggregations.popular_themes.buckets.each do |theme|
-        %li= link_to "#{theme['key']} (#{theme['doc_count']})", photo_sessions_path(params.merge(theme: theme[:key]))
-  %div
-    = f.submit 'Search', name: nil
-    = link_to 'Clear filters', photo_sessions_path
+
+      .form-check
+        %label.form-check-label
+          = check_box_tag 'special', '1', params[:special].present? ? true : false, class: 'form-check-input'
+          Special offers only
+      .form-group.filter-section.filter-popular-cities
+        %label
+          %b Popular cities
+        %ul
+          - @photosessions.aggregations.popular_cities.buckets.each do |city|
+            %li
+              = link_to "#{city['key']} (#{city['doc_count']})", photo_sessions_path(params.merge(city: city[:key]))
+      .form-group.filter-section
+        %label
+          %b Nearest dates
+        #datepicker
+        = f.hidden_field :date, name: 'date', value: params[:date]
+      .form-group.filter-section.filter-times
+        %label
+          %b Time
+        %ul
+          - @photosessions.aggregations.time.buckets.each do |time|
+            - if time.last['doc_count'].to_i > 0
+              %li= link_to "#{time.first} (#{time.last['doc_count']})", photo_sessions_path(params.merge(time: time.first))
+
+
+      .form-group.filter-section.filter-thematics
+        %label
+          %b Thematics
+        %ul
+          - @photosessions.aggregations.popular_themes.buckets.each do |theme|
+            %li= link_to "#{theme['key']} (#{theme['doc_count']})", photo_sessions_path(params.merge(theme: theme[:key]))
+    .card-footer.text-muted.text-right
+      = link_to 'Clear filters', photo_sessions_path, class: 'btn btn-link'
+      = f.submit 'Search', name: nil, class: 'btn btn-outline-success'

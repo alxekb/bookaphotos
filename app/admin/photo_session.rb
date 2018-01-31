@@ -44,6 +44,7 @@ ActiveAdmin.register PhotoSession do
       f.input :photos_count
       f.input :period_of_execution
       f.input :price
+      f.input :price_per_photo
       f.input :cities, as: :check_boxes
       f.input :themes, as: :check_boxes
     end

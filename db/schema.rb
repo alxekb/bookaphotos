@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171223164336) do
+ActiveRecord::Schema.define(version: 20180131140548) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20171223164336) do
     t.integer "duration"
     t.integer "photos_count"
     t.integer "period_of_execution"
+    t.decimal "price_per_photo", precision: 10
     t.index ["user_id"], name: "index_photo_sessions_on_user_id"
   end
 
