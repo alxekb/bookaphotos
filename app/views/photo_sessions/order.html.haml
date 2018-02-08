@@ -9,7 +9,7 @@
 
       %div
         Search by price
-        #slider-photo-count{ "data-min": @photosession.photos_count, "data-max": @photosession.photos_count*10, "data-value": @photosession.photos_count }
+        #slider-photo-count{ "data-min": @photosession.photos_count, "data-max": @photosession.photos_count.to_i*10, "data-value": @photosession.photos_count }
         = f.hidden_field :photo_count, value: @photosession.photos_count
     .col-6
       Ordering information
