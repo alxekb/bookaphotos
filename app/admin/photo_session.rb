@@ -35,6 +35,7 @@ ActiveAdmin.register PhotoSession do
         s.input :when, as: :just_datetime_picker
         s.input :special
         s.input :price
+        s.input :currency
         s.input :_destroy, as: :boolean, required: false, label: 'Remove' if s.object.present?
       end
 
@@ -44,9 +45,22 @@ ActiveAdmin.register PhotoSession do
       f.input :photos_count
       f.input :period_of_execution
       f.input :price
+      f.input :currency
       f.input :price_per_photo
       f.input :cities, as: :check_boxes
       f.input :themes, as: :check_boxes
+
+      f.inputs do
+        f.input :lat
+        f.input :lng
+        f.latlng lang: :en, api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw', map: :google
+      end
+
+      f.input :for_whom
+      f.input :preparation
+      f.input :what_to_take
+      f.input :how_route
+      f.input :how_find
     end
     f.actions
   end

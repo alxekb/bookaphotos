@@ -10,6 +10,7 @@ class PhotoSession < ApplicationRecord
   after_touch lambda { PhotoSession.__elasticsearch__.refresh_index! }
 
   belongs_to :user
+  belongs_to :currency
 
   scope :published, -> { where(published: true) }
 

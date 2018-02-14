@@ -3,6 +3,7 @@ require 'elasticsearch/model'
 class SessionDay < ApplicationRecord
   attribute :session_time
   belongs_to :photo_session
+  belongs_to :currency
 
   after_commit { self.photo_session.__elasticsearch__.index_document }
 
