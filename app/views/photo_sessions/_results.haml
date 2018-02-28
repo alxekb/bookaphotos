@@ -33,49 +33,5 @@
               = photosession.currency
               = photosession.price
           = link_to 'Book', photosession, class: 'btn btn-success book-btn'
-    -# .photosession-item
-    -#   .row
-    -#     .col-5
-    -#       .carousel.slide{"data-ride" => "carousel", id: "coverCarousel#{photosession.id}"}
-    -#         %ol.carousel-indicators
-    -#           - photosession.covers.each_with_index do |cover, index|
-    -#             %li{"data-slide-to" => cover.id, "data-target" => "#coverCarousel#{photosession.id}", class: index === 0 ? 'active' : ''}
-    -#         .carousel-inner
-    -#           - photosession.covers.each_with_index do |cover, index|
-    -#             %div{ class: index === 0 ? 'carousel-item active' : 'carousel-item' }
-    -#               = image_tag cover.photo(:medium), class: 'd-block w-100'
-    -#
-    -#         %a.carousel-control-prev{"data-slide" => "prev", :href => "#coverCarousel#{photosession.id}", :role => "button"}
-    -#           %span.carousel-control-prev-icon{"aria-hidden" => "true"}
-    -#           %span.sr-only Previous
-    -#         %a.carousel-control-next{"data-slide" => "next", :href => "#coverCarousel#{photosession.id}", :role => "button"}
-    -#           %span.carousel-control-next-icon{"aria-hidden" => "true"}
-    -#           %span.sr-only Next
-    -#     .col-7
-    -#       .photosession-item-content
-    -#         .rating.d-inline-block
-    -#           1 2 3 4 5
-    -#         .comments.d-inline-block
-    -#           (12 comments)
-    -#         .thematics.d-inline-block
-    -#           - photosession.themes.each do |theme|
-    -#             %span.badge.badge-pill.badge-success
-    -#               = theme.title
-    -#         .clearfix
-    -#         .date.d-inline-block
-    -#           - photosession.session_days.each do |day|
-    -#             %span= day.when.strftime("%H:%M %d %B %Y")
-    -#         .cities
-    -#           - photosession.cities.each do |city|
-    -#             %span.badge.badge-pill.badge-secondary
-    -#               = city.title
-    -#         .title
-    -#           = link_to photosession.title, photosession
-    -#         .price
-    -#           = photosession.price
-    -#         .description
-    -#           = photosession.description
-    -#         .book
-    -#           = link_to 'Book', root_path, class: 'btn btn-success'
 
 = paginate @photosessions, theme: 'twitter-bootstrap-4'

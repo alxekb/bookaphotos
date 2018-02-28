@@ -5,6 +5,7 @@ class PhotoSessionsController < ApplicationController
 
   def show
     @photosession = PhotoSession.find params[:id]
+    @photosessions = PhotoSession.all.sample(3)
   end
 
   def order
