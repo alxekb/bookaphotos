@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :profile do
     get '/', to: 'profile#show'
+    get '/clients', to: 'profile#clients'
     resources :locations
     resources :photo_sessions
     resources :invoices, only: [:index]

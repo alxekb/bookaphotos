@@ -1,0 +1,25 @@
+.row
+  .col-3
+    = render partial: 'profile/sidebar'
+  .col-8
+    %h1 Clients
+    %table.table.table-striped
+      %thead
+        %tr
+          %th{:scope => "col"} #
+          %th{:scope => "col"} Client email
+          %th{:scope => "col"} Client phone
+          %th{:scope => "col"} Client name
+          %th{:scope => "col"} Client comment
+          %th{:scope => "col"} Prohotosession
+          %th{:scope => "col"} Date ordered
+      %tbody
+        - @orders.each do |order|
+          %tr
+            %th{:scope => "row"}= order.id
+            %td= order.email
+            %td= order.phone
+            %td= order.name
+            %td= order.comment
+            %td= order.photo_session.title
+            %td= order.created_at
