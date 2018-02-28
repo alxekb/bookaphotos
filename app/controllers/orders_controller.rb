@@ -9,6 +9,6 @@ class OrdersController < ApplicationController
   private
 
   def orders_params
-    params.require(:order).permit(:name, :email, :phone, :comment, :photo_session_id, :session_day_id, :photo_count)
+    params.require(:order).permit(:name, :email, :phone, :comment, :photo_session_id, :session_day_id, :photo_count, :i_want_to_get_info, :i_accept_term, :i_consent_personal_data)
   end
 end

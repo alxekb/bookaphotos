@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180214085835) do
+ActiveRecord::Schema.define(version: 20180228172338) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -124,6 +124,9 @@ ActiveRecord::Schema.define(version: 20180214085835) do
     t.text "comment"
     t.bigint "session_day_id"
     t.integer "photo_count"
+    t.boolean "i_want_to_get_info"
+    t.boolean "i_accept_term"
+    t.boolean "i_consent_personal_data"
     t.index ["photo_session_id"], name: "index_orders_on_photo_session_id"
     t.index ["session_day_id"], name: "index_orders_on_session_day_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
