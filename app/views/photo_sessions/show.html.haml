@@ -1,7 +1,7 @@
 .jumbotron
   .container
     %h1.display-3= @photosession.title
-    %p= @photosession.description
+    %p= simple_format @photosession.description
     %p
       %span.photosession-info-price #{@photosession.currency} #{@photosession.price}
       = link_to 'Book »', '#choose-date', class: 'btn btn-primary btn-lg'
@@ -22,30 +22,6 @@
         %span.sr-only Next
 
 
-
-
-
-#choose-date
-  .card-deck.mb-3.text-center
-    .row
-      - @photosession.session_days.each do |day|
-        .col-4
-          .card.mb-4.box-shadow
-            .card-header
-              %h4.my-0.font-weight-normal= day.when.strftime("%d %B %Y %H:%M")
-            .card-body
-              %h1.card-title.pricing-card-title
-                #{@photosession.currency} #{@photosession.price}
-                %small.text-muted / #{@photosession.photos_count.to_i} photos
-              %ul.list-unstyled.mt-3.mb-4
-                %li #{@photosession.photos_count.to_i} photos included users included
-                %li= @photosession.duration
-                %li
-                  = @photosession.period_of_execution.to_i
-                  days for result
-                %li Help text for map
-              = link_to 'Book', photo_session_order_path(photo_session_id: @photosession.id, session_date_id: day.id), class: 'btn btn-lg btn-block btn-outline-primary'
-
 #photosession-add-information
   - specs = ['for_whom', 'preparation', 'what_to_take', 'how_route', 'how_find']
   %ul#myTab.nav.nav-tabs{ role: "tablist"}
@@ -60,6 +36,21 @@
         %p= @photosession[spec.to_sym]
     %div{ "aria-labelledby" => "map-tab", :role => "tabpanel", class: "tab-pane fade", id: "map" }
       = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw',  :static => 'true', :zoom_level => 10 , :default_coordinates => [@photosession.lat, @photosession.lng], map_width: '100%', autocomplete: { enable: true, class: 'form-control' }
+
+
+#choose-date
+  .card-deck.mb-3.text-center
+    .row
+      - @photosession.session_days.each do |day|
+        .col-xs-4
+          .card.mb-4.box-shadow
+            .card-header
+              %h4.my-0.font-weight-normal= day.when.strftime("%d %B %Y %H:%M")
+            .card-body
+              %h1.card-title.pricing-card-title
+                #{@photosession.currency} #{@photosession.price}
+                %small.text-muted / #{@photosession.photos_count.to_i} photos
+              = link_to 'Book', photo_session_order_path(photo_session_id: @photosession.id, session_date_id: day.id), class: 'btn btn-lg btn-block btn-outline-primary'
 
 
 #photosessions-result

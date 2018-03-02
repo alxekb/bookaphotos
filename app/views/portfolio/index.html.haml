@@ -14,7 +14,7 @@
           = image_tag 'esm.jpg', class: 'card-img-top'
           .card-body
             %h4.card-title= photosession.title
-            %p.card-text= photosession.description
+            %p.card-text= simple_format photosession.description
             %a.btn.btn-primary{:href => "#"} Learn more
           .card-footer
             - photosession.cities.each do |city|
