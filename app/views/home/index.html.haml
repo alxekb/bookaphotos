@@ -1,3 +1,157 @@
 #home
-  %h1 Home#index
-  %p Find me in app/views/home/index.html.haml
+  .container
+    .row.main-cover
+      .col-lg-4.client
+        %img.rounded{:alt => "Generic placeholder image", :height => "140", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "140"}/
+        %h2 Client
+        %p.btn.btn-outline-secondary I need a photos for my Instagram!
+      .col-lg-4
+        %h2.text-right
+          Book a photosession
+          %br
+          from $49
+        %br
+        .text-center.start-search-photosessions
+          = link_to photo_sessions_path, class: 'btn btn-lg btn-success' do
+            Search photosessions
+      .col-lg-4.photographer
+        %img.rounded{:alt => "Generic placeholder image", :height => "140", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "140"}/
+        %h2 Photographer
+        %p.btn.btn-outline-secondary How to find the Client?
+  .container
+    .row.how-it-works
+      .col-lg-12
+        %h1 How it works
+      .col-lg-3
+        %p We have a bunch of photographers over the world
+      .col-lg-3
+        %p They made a specific photosessions with predefined
+        %ul
+          %li locations
+          %li dates
+          %li starting times
+          %li price
+          %li photo examples
+      .col-lg-3
+        %p You can browse the sessions and of you'd like some of them just buy it with our website
+      .col-lg-3
+        %p We guarantee a safety with a payment and smooth booking operation.
+      .col-lg-12
+        %center
+          = link_to photo_sessions_path, class: 'btn btn-outline-success' do
+            %h5 Try out our search
+            page here >>>
+
+  .container
+    .row.use-cases
+      .col-lg-12
+        %h1 User cases
+      .col-md-3
+        .card.mb-3.box-shadow
+          %img.card-img-top{:alt => "Thumbnail [100%x225]", "data-holder-rendered" => "true", "data-src" => "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail", :src => "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1623f4170b1%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1623f4170b1%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.8359375%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E", :style => "height: 225px; width: 100%; display: block;"}/
+          .card-body
+            %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+      .col-md-3
+        .card.mb-3.box-shadow
+          %img.card-img-top{:alt => "Thumbnail [100%x225]", "data-holder-rendered" => "true", "data-src" => "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail", :src => "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1623f4170b2%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1623f4170b2%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.8359375%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E", :style => "height: 225px; width: 100%; display: block;"}/
+          .card-body
+            %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+      .col-md-3
+        .card.mb-3.box-shadow
+          %img.card-img-top{:alt => "Thumbnail [100%x225]", "data-holder-rendered" => "true", "data-src" => "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail", :src => "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1623f4170b3%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1623f4170b3%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.8359375%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E", :style => "height: 225px; width: 100%; display: block;"}/
+          .card-body
+            %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+      .col-md-3
+        .card.mb-3.box-shadow
+          %img.card-img-top{:alt => "Thumbnail [100%x225]", "data-holder-rendered" => "true", "data-src" => "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail", :src => "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1623f4170b4%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1623f4170b4%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2296.8359375%22%20y%3D%22118.8%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E", :style => "height: 225px; width: 100%; display: block;"}/
+          .card-body
+            %p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+
+.about-us
+  .container
+    .row
+      .col-lg-12
+        %h1 About us
+    .row
+      .col-lg-4
+      .col-lg-4
+        %center
+          %img.rounded-circle{:alt => "Generic placeholder image", :height => "140", :src => "data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==", :width => "140"}/
+          %h3 Aleksei Ivanov
+          %p Photographer, founder
+      .col-lg-4
+
+
+.project-timeline
+  .container
+    .row
+      .col-lg-12
+        %h1 Project timeline
+    .row
+      .col-lg-3
+      .col-lg-6
+        %center
+          %table.table.table-striped
+            %thead
+              %tr
+                %th{:scope => "col"} Event
+                %th{:scope => "col"} Year
+                %th{:scope => "col"} Status
+            %tbody
+              %tr
+                %td Idea
+                %td May 2014
+                %td
+                  %input{ type: "checkbox", checked: 'checked' }
+              %tr
+                %td Prototyping MVP
+                %td June 2014
+                %td
+                  %input{ type: "checkbox", checked: 'checked' }
+              %tr
+                %td Product testing
+                %td Sep 2014
+                %td
+                  %input{ type: "checkbox", checked: 'checked' }
+              %tr
+                %td First client attracted
+                %td Nov 2014
+                %td
+                  %input{ type: "checkbox", checked: 'checked' }
+              %tr
+                %td Sales growth
+                %td 2015-2016
+                %td
+                  %input{ type: "checkbox", checked: 'checked' }
+              %tr
+                %td Seed stage completed MVP sold
+                %td Nov 2017
+                %td
+                  %input{ type: "checkbox", checked: 'checked' }
+              %tr
+                %td Startup registration
+                %td Nov 2017
+                %td
+                  %input{ type: "checkbox", checked: 'checked' }
+              %tr
+                %td Developing a platform
+                %td Dec 2017
+                %td
+                  %input{ type: "checkbox" }
+              %tr
+                %td Rising funds
+                %td Feb 2018
+                %td
+                  %input{ type: "checkbox" }
+              %tr
+                %td Release
+                %td Apr 2018
+                %td
+                  %input{ type: "checkbox" }
+
+      .col-lg-3
+
+    .row
+      .col-lg-12
+        .text-center
+          = link_to 'See our elevator pitch', root_path
