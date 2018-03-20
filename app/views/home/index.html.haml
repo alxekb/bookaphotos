@@ -50,29 +50,35 @@
         .card.mb-3.box-shadow
           = image_tag 'frontpage-instagram.jpg', class: 'card-img-top'
           .card-body
-            %h6 Photos for instagram
+            %h5 Photos for instagram
             %p.card-text
-              Use #lookoftheday tag while searching a session!
+              Use
+              = link_to '#lookoftheday', photo_sessions_path
+              tag while searching a session!
 
       .col-md-3
         .card.mb-3.box-shadow
           = image_tag 'frontpage-vacation.jpg', class: 'card-img-top'
           .card-body
-            %h6 Vacation photosessions
+            %h5 Vacation photosessions
             %p.card-text
               Use cities selector and choose a dates accordingly with your ticket with filter!
       .col-md-3
         .card.mb-3.box-shadow
           = image_tag 'frontpage-business.jpg', class: 'card-img-top'
           .card-body
-            %h6 Photos for your business
+            %h5 Photos for your business
             %p.card-text
-              Use #business and #portrait tag together to get best results!
+              Use
+              = link_to '#business', photo_sessions_path
+              and
+              = link_to '#portrait', photo_sessions_path
+              tag together to get best results!
       .col-md-3
         .card.mb-3.box-shadow
           = image_tag 'frontpage-family.jpg', class: 'card-img-top'
           .card-body
-            %h6 Family sessions
+            %h5 Family sessions
             %p.card-text
               Just find the nearest location! That's it!
 
