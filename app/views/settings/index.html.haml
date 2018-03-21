@@ -45,8 +45,8 @@
             %tr
               %th
                 %div
-                  %h5 #{order.photo_session.title}
-                  ##{order.id}
+                  %h5= order.photo_session.title
+                  = order.id
                 %div= order.created_at
                 %div
                   = order.photo_count
