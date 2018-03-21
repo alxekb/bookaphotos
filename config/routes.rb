@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  get 'settings/index'
+
   root to: 'home#index'
 
   resources :photo_sessions do
     get '/:session_date_id/order', to: 'photo_sessions#order', as: 'order'
   end
+
+  resources :settings, only: [:index, :create]
 
   namespace :profile do
     get '/', to: 'profile#show'

@@ -21,8 +21,10 @@
           = link_to 'Join our team', new_user_registration_path, class: 'nav-link'
       %li.nav-item
         - if user_signed_in?
-          = link_to profile_path, class: 'nav-link btn btn-success' do
+          = link_to settings_path, class: 'nav-link btn btn-success' do
             Personal cabinet
+          -# = link_to profile_path, class: 'nav-link btn btn-success' do
+          -#   Personal cabinet
         - else
           = link_to new_user_session_path, class: 'nav-link btn btn-success' do
             Sign in
