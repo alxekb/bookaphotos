@@ -29,5 +29,4 @@ class PhotoSession < ApplicationRecord
   def self.touch
     update_all(updated_at: Time.now)
   end
-
 end
