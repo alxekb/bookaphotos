@@ -44,7 +44,9 @@
             - photosession = order.photo_session
             %tr
               %th
-                %div ##{order.id}
+                %div
+                  #{order.photo_session.title}
+                  ##{order.id}
                 %div= order.created_at
                 %div
                   = order.photo_count
