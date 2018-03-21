@@ -2,7 +2,11 @@ class OrdersController < ApplicationController
   def create
     # render plain: orders_params.inspect
     @order = Order.new(orders_params)
-    @order.user = User.first
+    if current_user
+      @order.user = current_user
+    else
+      @order.user = User.first
+    end
     @order.save
   end
 
