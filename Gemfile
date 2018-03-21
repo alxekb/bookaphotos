@@ -80,5 +80,5 @@ gem 'elasticsearch-dsl'
 
 gem "paperclip", "~> 5.0.0"
 
-gem "gmap_coordinates_picker"
+gem "gmap_coordinates_picker", git: 'git@github.com:dhack8/gmap_coordinates_picker.git'
 gem "activeadmin_latlng"

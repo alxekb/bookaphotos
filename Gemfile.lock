@@ -1,4 +1,11 @@
 GIT
+  remote: git@github.com:dhack8/gmap_coordinates_picker.git
+  revision: 550c74414fdbfff56dd06f1054c4359ea451e7f2
+  specs:
+    gmap_coordinates_picker (0.0.13)
+      rails (>= 3.1.0, < 6)
+
+GIT
   remote: git@github.com:plataformatec/devise.git
   revision: d545fe3e3f85938683cbe41b03af1d5cbea2151c
   specs:
@@ -146,8 +153,6 @@ GEM
     formtastic_i18n (0.6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    gmap_coordinates_picker (0.1.0)
-      rails (>= 3.1.0)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
@@ -355,7 +360,7 @@ DEPENDENCIES
   elasticsearch-dsl
   elasticsearch-model!
   elasticsearch-rails!
-  gmap_coordinates_picker
+  gmap_coordinates_picker!
   haml-rails (~> 1.0)
   jbuilder (~> 2.5)
   jquery-rails
