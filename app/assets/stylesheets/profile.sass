@@ -1,3 +1,42 @@
-// Place all the styles related to the profile controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import simple_calendar
+.sidebar
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  z-index: 100
+  padding: 0
+  box-shadow: -4px 1px 10px rgba(0, 0, 0, .2) inset
+.sidebar-sticky
+  position: sticky
+  top: 48px
+  height: calc(100vh)
+  padding-top: .5rem
+  overflow-x: hidden
+  overflow-y: auto
+.profile-settings
+  position: absolute
+  bottom: 30px
+.simple-calendar
+  .today
+    background: #c4e8f4
+  .day
+    min-height: 80px !important
+    height: auto !important
+    a
+      color: #2E2F30
+      &:hover
+        color: #2E2F30
+  td:hover
+    box-shadow: 0 1px 4px #888, 0 0 20px #666
+
+.profile_photo_session_link
+  height: 100%
+  &:hover
+    text-decoration: none
+//misc
+.border-3
+  border: 3px solid #dee2e6
+.pl-02
+  padding-left: 0.2rem !important
+//end misc
