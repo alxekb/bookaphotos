@@ -1,4 +1,6 @@
 class Profile::ProfileController < ApplicationController
+  layout 'photographer'
+
   def show
   end
 
