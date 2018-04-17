@@ -5,7 +5,7 @@ development: &db
   database: bookaphotos
   pool: 5
   username: <%= ENV.fetch('DB_DEV_USERNAME') { 'root' } %>
-    password: <%= ENV.fetch('DB_DEV_PASSWORD') { '' } %>
+  password: <%= ENV.fetch('DB_DEV_PASSWORD') { '' } %>
   host: localhost
 
 test:
