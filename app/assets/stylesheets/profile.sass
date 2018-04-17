@@ -16,6 +16,8 @@
   overflow-y: auto
 .profile-settings
   position: absolute
+  width: 100%
+  max-width: 100%
   bottom: 30px
 .simple-calendar
   .today
@@ -40,3 +42,13 @@
 .pl-02
   padding-left: 0.2rem !important
 //end misc
+.col-6.profile-icon:before
+  content: ''
+  width: 0
+.col-6.profile-icon:before, .ib
+  white-space: normal
+  display: inline-block
+  vertical-align: middle
+  max-width: 100%
+.col-6.profile-icon:before
+  padding-top: 100%
