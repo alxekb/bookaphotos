@@ -6,31 +6,28 @@
       %span= current_user.email
   %ul.nav.flex-column
     %li.nav-item
-      = link_to profile_path, class: 'nav-link' do
+      = link_to photographer_path, class: 'nav-link' do
         Dashboard
     %li.nav-item
       = link_to root_path, class: 'nav-link' do
         Tasks
     %li.nav-item
-      = link_to root_path, class: 'nav-link' do
+      = link_to photographer_session_days_path, class: 'nav-link' do
         Shooting days
     %li.nav-item
-      = link_to profile_photo_sessions_path, class: 'nav-link' do
+      = link_to photographer_photo_sessions_path, class: 'nav-link' do
         Photosessions
     %li.nav-item
-      = link_to profile_locations_path, class: 'nav-link' do
+      = link_to photographer_locations_path, class: 'nav-link' do
         Locations
     %li.nav-item
-      = link_to profile_invoices_path, class: 'nav-link' do
+      = link_to photographer_invoices_path, class: 'nav-link' do
         Invoices
     %li.nav-item
-      = link_to profile_clients_path, class: 'nav-link' do
+      = link_to photographer_clients_path, class: 'nav-link' do
         Clients
-  %div.profile-settings.d-block.w-100
-    %div.notifications.d-block.w-100
-      %div.d-block.w-50.mx-auto.py-3
-        %i.fa.fa-bell.fa-2x.d-block.w-25.mx-auto
-    %div.profile-section.d-block.w-100.text-center
-      %div.d-block.w-50.mx-auto.py-3.border-3.rounded-circle.bg-white
-        %i.fa.fa-user.fa-4x.w-50.mx-auto.d-block.pl-02
-      %span= current_user.email
+  %div.row.justify-content-center.profile-settings
+    %div.col-12.d-block.text-center.mb-2
+      %i.fa.fa-bell.fa-2x
+    %div.col-6.profile-icon.d-block.border-3.rounded-circle.pr-0.pl-0.text-center
+      %i.fa.fa-user.fa-5x.align-middle
