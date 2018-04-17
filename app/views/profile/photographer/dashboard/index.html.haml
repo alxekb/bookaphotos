@@ -1,0 +1,35 @@
+%div.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3
+  %span Hello, #{current_user.email}
+%div.container
+  %div.row.justify-content-between
+    %div.col.border-3.text-center.mr-2.p-0
+      %span Upcoming PhotoSessions
+      %span.d-block 5
+      %span 500$
+    %div.col.border-3.text-center.mr-2.p-0
+      %span Sorting Photos
+      %span.d-block 5
+      %span 500$
+    %div.col.border-3.text-center.mr-2.p-0
+      %span Developing Photos
+      %span.d-block 5
+      %span 500$
+    %div.col.border-3.text-center.mr-2.p-0
+      %span Sending Photos
+      %span.d-block 5
+      %span 500$
+    %div.col.border-3.text-center.mr-2.p-0
+      %span Done
+      %span.d-block 5
+      %span 500$
+  %div.row.py-5
+    %div.col
+      = week_calendar events: Order.all, attribute: :created_at do |_date, orders|
+        - orders.each do |order|
+          = link_to profile_photo_session_path(order.photo_session), class: 'd-block profile_photo_session_link' do
+            %div.d-block.w-100.border-bottom
+              = order.session_day.when.strftime("%H:%M")
+              %br
+              = order.photo_session.title
+              %br
+              = order.photo_session.cities.map(&:title).join(',')

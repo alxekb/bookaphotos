@@ -1,0 +1,26 @@
+%form
+  .row
+    .col-6
+      .form-group
+        %input.form-control{ placeholder: "Search photosession" }
+    .col-3
+      %button.btn.btn-primary{ type: :submit } Submit
+    .col-3
+      = link_to 'New Shooting Day', new_photographer_session_day_path
+%table.table
+  %thead
+    %tr
+      %th{:scope => "col"} Date
+      %th{:scope => "col"} Time
+      %th{:scope => "col"} Photosession
+      %th{:scope => "col"} Location
+      %th{:scope => "col"} Booked appointments
+      %th{:scope => "col"} Status
+  %tbody
+    - @photo_sessions.each do |photo_session|
+      - photo_session.shooting_days.each do |shooting_day|
+        %tr
+          %th{ scope: "row"}= shooting_day.when.strftime("%d.%m.%Y")
+          %td= shooting_day.when.strftime("%H:%M")
+          %td= photo_session.title
+          %td= photo_session.user.location

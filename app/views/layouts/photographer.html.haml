@@ -18,4 +18,8 @@
         %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
           %span{"aria-hidden" => "true"} ×
     %main.container-fluid{ role: "main" }
-      = yield
+      %div.row
+        %nav.col-md-2.px-0.sidebar.bg-light.d-none.d-md-block
+          = render partial: 'profile/sidebar'
+        %div.col-md-9.col-lg-10.ml-sm-auto.pt-3.px-4
+          = yield

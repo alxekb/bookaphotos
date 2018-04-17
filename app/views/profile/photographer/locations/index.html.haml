@@ -1,0 +1,23 @@
+%form
+  .row
+    .col-6
+      .form-group
+        %input.form-control{ placeholder: "Search location" }
+    .col-3
+      %button.btn.btn-primary{ type: :submit } Submit
+    .col-3
+      = link_to 'New Location', new_photographer_location_path, data: { turbolinks: false }
+%table.table
+  %thead
+    %tr
+      %th{:scope => "col"} Location
+      %th{:scope => "col"} Address
+      %th{:scope => "col"} #
+  %tbody
+    - @locations.each do |location|
+      %tr
+        %th{ scope: "row"}= location.name
+        %td= location.address
+        %td
+          = link_to 'Edit', edit_photographer_location_path(location), data: { turbolinks: false }
+          = link_to 'Destroy', [:photographer, location], method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,0 +1,24 @@
+= form_for [:photographer, @location] do |f|
+  - if @location.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@location.errors.count, "error")} prohibited this location from being saved:"
+      %ul
+        - @location.errors.full_messages.each do |message|
+          %li= message
+
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :how_to_find
+    = f.text_area :how_to_find, class: 'form-control'
+  .form-group
+    = f.label :address
+    = f.text_field :address, class: 'form-control'
+  .form-group
+    %label
+      Coordinates
+    = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw', :lat_column => 'lat', :lng_column => 'lng' , :zoom_level => 14, :default_coordinates => [@location.lat || 10, @location.lng || 10], autocomplete: { enable: true, class: 'form-control' }
+
+  .actions
+    = f.submit 'Save', class: 'btn btn-primary'
