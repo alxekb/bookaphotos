@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resources :session_days
       resources :invoices
       resources :clients, as: :clients
+      resources :tasks
     end
 
     scope module: :client, as: :client, path: 'profile' do
