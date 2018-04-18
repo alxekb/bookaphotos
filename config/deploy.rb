@@ -2,7 +2,7 @@
 lock '3.4.1'
 
 set :application, 'bookaphotos.com'
-set :repo_url, 'git@github.com:developerby/bookaphotos.com.git'
+set :repo_url, 'git@gitlab.com:PhotoBookingSystem/bookaphotos.com.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
