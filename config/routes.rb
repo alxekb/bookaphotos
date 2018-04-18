@@ -9,16 +9,21 @@ Rails.application.routes.draw do
 
   resources :settings, only: [:index, :create]
 
-  namespace :profile do
-    get '/', to: 'profile#show'
-    get '/clients', to: 'profile#clients'
-    resources :locations
-    resources :photo_sessions
-    resources :invoices, only: [:index]
-  end
+  scope module: :profile do
+    scope module: :photographer, as: :photographer, path: 'photographer' do
+      get '/', to: 'dashboard#index'
+      resources :locations
+      resources :photo_sessions
+      resources :session_days
+      resources :invoices
+      resources :clients, as: :clients
+      resources :tasks
+    end
 
-  # get '/profile/tasks', to: 'profile#tasks', as: 'tasks'
-  # get '/profile/shooting_days', to: 'profile#shooting_days', as: 'shooting_days'
+    scope module: :client, as: :client, path: 'profile' do
+      get '/', to: 'dashboard#index'
+    end
+  end
 
   resources :orders
 

@@ -4,8 +4,8 @@ development: &db
   reconnect: false
   database: bookaphotos
   pool: 5
-  username: root
-  password:
+  username: <%= ENV.fetch('DB_DEV_USERNAME') { 'root' } %>
+  password: <%= ENV.fetch('DB_DEV_PASSWORD') { '' } %>
   host: localhost
 
 test:

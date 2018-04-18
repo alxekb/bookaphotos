@@ -1,0 +1,20 @@
+= form_for [:photographer, @photo_session] do |f|
+  - if @photo_session.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@photo_session.errors.count, "error")} prohibited this photo_session from being saved:"
+      %ul
+        - @photo_session.errors.full_messages.each do |message|
+          %li= message
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: 'form-control'
+  .form-group
+    = f.label :price
+    = f.number_field :price, class: 'form-control'
+
+  .actions
+    = f.submit 'Save'

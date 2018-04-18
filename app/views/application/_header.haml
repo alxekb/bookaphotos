@@ -5,26 +5,29 @@
     %span.navbar-toggler-icon
   #navbarsNavDefault.collapse.navbar-collapse
     %ul.navbar-nav.ml-auto
-      %li{ class: controller_name === 'photo_sessions' ? 'nav-item active' : 'nav-item' }
+      %li{class: active_path(photo_sessions_path) }
         = link_to 'Photosessions', photo_sessions_path, class: 'nav-link'
-      %li{ class: action_name === 'about' ? 'nav-item active' : 'nav-item' }
+      %li{ class: active_path(about_path) }
         = link_to 'About us', about_path, class: 'nav-link'
-      %li{ class: controller_name === 'portfolio' ? 'nav-item active' : 'nav-item' }
+      %li{ class: active_path(portfolio_path) }
         = link_to 'Portfolio', portfolio_path, class: 'nav-link'
-      %li{ class: action_name === 'contacts' ? 'nav-item active' : 'nav-item' }
+      %li{ class: active_path('#') }
         %a.nav-link{:href => "#"} Contacts
       - if user_signed_in?
         %li.nav-item
           = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link'
+        %li.nav-item{ class: active_path(profile_defined_path) }
+          = link_to 'Personal Cabinet', profile_defined_path, class:  'nav-link'
       - else
-        %li{ class: controller_name === 'registrations' ? 'nav-item active' : 'nav-item' }
+        %li{ class: active_path(new_user_registration_path) }
           = link_to 'Join our team', new_user_registration_path, class: 'nav-link'
-      %li.nav-item
-        - if user_signed_in?
-          = link_to settings_path, class: 'nav-link btn btn-success' do
-            Personal cabinet
-          -# = link_to profile_path, class: 'nav-link btn btn-success' do
-          -#   Personal cabinet
-        - else
-          = link_to new_user_session_path, class: 'nav-link btn btn-success' do
-            Sign in
+        %li
+          = link_to 'Sign In', new_user_session_path, class: 'nav-link btn btn-success'
+        -#- if user_signed_in?
+        -#  = link_to settings_path, class: 'nav-link btn btn-success' do
+        -#    Personal cabinet
+        -#  -# = link_to profile_path, class: 'nav-link btn btn-success' do
+        -#  -#   Personal cabinet
+        -#- else
+        -#  = link_to new_user_session_path, class: 'nav-link btn btn-success' do
+        -#    Sign in
