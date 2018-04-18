@@ -1,0 +1,30 @@
+%div.d-flex.flex-wrap.flex-md-nowrap.pb-2.mb-3
+  %form
+  .row
+    .col-6
+      .form-group
+        %input.form-control{ placeholder: "Search photosession" }
+    .col-2
+      %button.btn.btn-primary{ type: :submit } Submit
+    .col-4
+      = link_to 'New Invoice', new_photographer_invoice_path
+%div.container
+  %div.row
+    %div.col-lg-12
+      %table.table
+        %thead
+          %tr
+            %th{:scope => "col"} Date
+            %th{:scope => "col"} Photosession
+            %th{:scope => "col"} Client
+            %th{:scope => "col"} Price
+            %th{:scope => "col"} Status
+        %tbody
+          - @invoices.each do |invoice|
+            - invoice.photo_session.session_days.each do |session_day|
+              %tr
+                %th{ scope: "row"}= session_day.when.strftime("%d.%m.%Y")
+                %td= invoice.photo_session.title
+                %td Client
+                %td= invoice.price
+                %td= invoice.status
