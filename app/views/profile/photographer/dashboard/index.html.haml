@@ -4,7 +4,7 @@
   %div.row.justify-content-between
     %div.col.border-3.text-center.mr-2.p-0
       %span Upcoming PhotoSessions
-      %span.d-block 5
+      %span.d-block= current_user.photographer_upcoming_events
       %span 500$
     %div.col.border-3.text-center.mr-2.p-0
       %span Sorting Photos
@@ -24,12 +24,12 @@
       %span 500$
   %div.row.py-5
     %div.col
-      = week_calendar events: Order.all, attribute: :created_at do |_date, orders|
-        - orders.each do |order|
-          = link_to profile_photo_session_path(order.photo_session), class: 'd-block profile_photo_session_link' do
+      = week_calendar events: current_user.photo_sessions, attribute: :created_at do |_date, photo_sessions|
+        - photo_sessions.each do |photo_session|
+          = link_to photographer_photo_session_path(photo_session), class: 'd-block profile_photo_session_link' do
             %div.d-block.w-100.border-bottom
-              = order.session_day.when.strftime("%H:%M")
+              = photo_session.session_day.when.strftime("%H:%M")
               %br
-              = order.photo_session.title
+              = photo_session.title
               %br
-              = order.photo_session.cities.map(&:title).join(',')
+              = photo_session.cities.map(&:title).join(',')
