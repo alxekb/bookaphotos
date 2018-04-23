@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include EmailValidatable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -24,9 +25,19 @@ class User < ApplicationRecord
   has_attached_file :avatar, styles: { medium: "64x64#", thumb: "16x16#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+  validates :email,
+            presence: true,
+            uniqueness: { case_sensitive: false },
+            email: true
+  validates :password, :password_confirmation, presence: true, length: { minimum: 8 }
+  validates :password, confirmation: true
+  validates :role,
+            presence: true,
+            inclusion: { in: User.roles }
+
   def photographer_upcoming_events
     orders.joins(photo_session: :session_days)
-          .where('session_days.when >= ?', Date.current).count
+          .where("session_days.when >= ?", Date.current).count
   end
 
   def to_s
