@@ -8,4 +8,6 @@ class Profile < ApplicationRecord
            :photographer?,
            :client?,
            to: :user
+  validates :user, presence: true
+  # TODO migrate profile related data from user such as: role, avatar, phone, name, etc.
 end
