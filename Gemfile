@@ -51,7 +51,7 @@ group :development, :test do
   gem "brakeman", require: false
   gem "dotenv-rails"
   gem "factory_bot_rails", "~> 4.0"
-  gem "faker"
+  gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
   gem "rspec-rails", "~> 3.6"
   gem "rubocop-rails"
   gem "pry"
@@ -76,6 +76,7 @@ group :development do
   gem "bullet"
   gem "pry-rails"
   gem "lol_dba"
+  gem "rails-erd" # Create entity relational diagrams
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
