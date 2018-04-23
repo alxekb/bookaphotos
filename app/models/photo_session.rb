@@ -26,6 +26,29 @@ class PhotoSession < ApplicationRecord
   has_many :session_days, :dependent => :destroy
   accepts_nested_attributes_for :session_days, allow_destroy: true, reject_if: ->(a) { a[:id].nil? && a[:price].nil? }
 
+  validates :title,
+           :description,
+           :price,
+           :user_id,
+           :currency_id,
+           :duration,
+           :photos_count,
+           :period_of_execution,
+           :price_per_photo,
+           :for_whom,
+           :preparation,
+           :what_to_take,
+           :how_route,
+           :how_find,
+           :lat,
+           :lng, presence: true
+  validates :price,
+            :price_per_photo,
+            :duration,
+            :period_of_execution,
+            :photos_count, numericality: { greater_than_or_equal_to: 1 }
+  validates :published, inclusion: { in: [true, false] }
+
   def self.touch
     update_all(updated_at: Time.now)
   end
