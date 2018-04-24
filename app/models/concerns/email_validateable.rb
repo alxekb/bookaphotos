@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'mail'
-module EmailValidatable
+require "mail"
+module EmailValidateable
   extend ActiveSupport::Concern
 
   class EmailValidator < ActiveModel::EachValidator
