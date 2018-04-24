@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418142010) do
+ActiveRecord::Schema.define(version: 20180424153239) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -185,7 +185,7 @@ ActiveRecord::Schema.define(version: 20180418142010) do
 
   create_table "session_days", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "photo_session_id"
-    t.datetime "when"
+    t.datetime "start_time"
     t.boolean "special"
     t.decimal "price", precision: 10
     t.datetime "created_at", null: false

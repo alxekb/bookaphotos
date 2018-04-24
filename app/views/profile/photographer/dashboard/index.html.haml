@@ -28,7 +28,7 @@
         - photo_sessions.each do |photo_session|
           = link_to photographer_photo_session_path(photo_session), class: 'd-block profile_photo_session_link' do
             %div.d-block.w-100.border-bottom
-              = photo_session.session_day.when.strftime("%H:%M")
+              = photo_session.session_day.start_time.strftime("%H:%M")
               %br
               = photo_session.title
               %br

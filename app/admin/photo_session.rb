@@ -32,7 +32,7 @@ ActiveAdmin.register PhotoSession do
       end
 
       f.has_many :session_days do |s|
-        s.input :when, as: :just_datetime_picker
+        s.input :start_time, as: :just_datetime_picker
         s.input :special
         s.input :price
         s.input :currency

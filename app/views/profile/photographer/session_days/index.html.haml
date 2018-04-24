@@ -20,7 +20,7 @@
     - @photo_sessions.each do |photo_session|
       - photo_session.shooting_days.each do |shooting_day|
         %tr
-          %th{ scope: "row"}= shooting_day.when.strftime("%d.%m.%Y")
-          %td= shooting_day.when.strftime("%H:%M")
+          %th{ scope: "row"}= shooting_day.start_time.strftime("%d.%m.%Y")
+          %td= shooting_day.start_time.strftime("%H:%M")
           %td= photo_session.title
           %td= photo_session.user.location

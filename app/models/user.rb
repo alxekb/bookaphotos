@@ -37,7 +37,7 @@ class User < ApplicationRecord
 
   def photographer_upcoming_events
     orders.joins(photo_session: :session_days)
-          .where("session_days.when >= ?", Date.current).count
+          .where("session_days.start_time >= ?", Date.current).count
   end
 
   def to_s

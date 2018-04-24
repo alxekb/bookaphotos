@@ -23,7 +23,7 @@ module PhotoSessionSearchable
         end
 
         indexes :session_days do
-          indexes :when, type: :date
+          indexes :start_time, type: :date
           indexes :session_time, type: :integer
           indexes :special
           indexes :price
@@ -92,7 +92,7 @@ module PhotoSessionSearchable
 
             if params[:date].present?
               must do
-                range 'session_days.when' do
+                range 'session_days.start_time' do
                   gte Date.strptime(params[:date], "%m/%d/%Y").beginning_of_day
                   lte Date.strptime(params[:date], "%m/%d/%Y").end_of_day
                 end
@@ -184,7 +184,7 @@ module PhotoSessionSearchable
           sort params[:sort].to_sym => 'asc'
           # track_scores true
         when params[:q].blank?
-          sort 'session_days.when': 'asc'
+          sort 'session_days.start_time': 'asc'
         end
 
       end
