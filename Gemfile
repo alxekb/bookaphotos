@@ -85,7 +85,7 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "haml-rails", "~> 1.0"
 
-gem "devise", git: "git@github.com:plataformatec/devise.git"
+gem "devise"
 gem "activeadmin"
 gem "just-datetime-picker"
 
