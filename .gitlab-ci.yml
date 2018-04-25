@@ -16,18 +16,18 @@ before_script:
   - ruby -v
   - which ruby
   - gem install bundler --no-ri --no-rdoc
-  - RAILS_ENV=test bundle install --jobs $(nproc) --path vendor
+  - bundle install --jobs $(nproc) "${FLAGS[@]}"
   - cp config/database.yml.gitlab config/database.yml
-  - RAILS_ENV=test bundle exec rake db:create db:schema:load
+  - bundle exec rake db:create db:schema:load
 
 rspec:
   script:
-    - RAILS_ENV=test bundle exec rspec --exclude-pattern "**/features/*_spec.rb"
+    - bundle exec rspec --exclude-pattern "**/features/*_spec.rb"
 
 rubocop:
   script:
-    - RAILS_ENV=test bundle exec rubocop
+    - bundle exec rubocop
 
 brakeman:
   script:
-    - RAILS_ENV=test bundle exec brakeman
+    - bundle exec brakeman
