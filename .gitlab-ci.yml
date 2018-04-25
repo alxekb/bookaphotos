@@ -12,7 +12,7 @@ cache:
     - vendor/ruby
 
 before_script:
-  - apt-get update -qq && apt-get install -y -qq mysql-server mysql-client libmysqlclient-dev cmake
+  - apt-get update -qq && apt-get install -y -qq mysql-server mysql-client cmake
   - ruby -v
   - which ruby
   - gem install bundler --no-ri --no-rdoc
