@@ -30,6 +30,10 @@ class Order < ApplicationRecord
     if !self.i_consent_personal_data && !self.i_accept_term
       errors.add(:i_consent_personal_data, "You must agree to continue.")
       errors.add(:i_accept_term, "You must accept term's to continue")
+    elsif !self.i_consent_personal_data
+      errors.add(:i_consent_personal_data, "You must agree to continue.")
+    elsif !self.i_accept_term
+      errors.add(:i_accept_term, "You must accept term's to continue")
     end
   end
 end

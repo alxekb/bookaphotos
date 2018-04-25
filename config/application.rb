@@ -1,8 +1,8 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails/all'
+require "rails/all"
 
-require 'elasticsearch/rails/instrumentation'
+require "elasticsearch/rails/instrumentation"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

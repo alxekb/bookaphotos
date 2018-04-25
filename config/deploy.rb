@@ -1,8 +1,9 @@
 # config valid only for current version of Capistrano
-lock '3.4.1'
 
-set :application, 'bookaphotos.com'
-set :repo_url, 'git@gitlab.com:PhotoBookingSystem/bookaphotos.com.git'
+lock "3.4.1"
+
+set :application, "bookaphotos.com"
+set :repo_url, "git@gitlab.com:PhotoBookingSystem/bookaphotos.com.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -10,7 +11,7 @@ set :repo_url, 'git@gitlab.com:PhotoBookingSystem/bookaphotos.com.git'
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
 
-set :deploy_to, '/var/www/bookaphotos.com'
+set :deploy_to, "/var/www/bookaphotos.com"
 
 set :stages, %w(staging production)
 set :default_stage, "production"
@@ -40,15 +41,15 @@ set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 set :keep_releases, 3
 
 namespace :deploy do
-  desc 'Restart application'
+  desc "Restart application"
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
     end
   end
-  
-  before :restart, 'elastic:import'
+
+  before :restart, "elastic:import"
   after :publishing, :restart
 
   after :restart, :clear_cache do

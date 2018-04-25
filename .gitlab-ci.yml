@@ -1,0 +1,22 @@
+before_script:
+  - rvm use 2.5.0
+  - ruby -v
+  - which ruby
+  - bundle install --quiet
+  - bundle exec rake webpacker:check_node
+  - bundle exec rake assets:clean
+  - bundle exec rake assets:precompile
+  - bundle exec rake db:migrate --quiet
+  - bundle exec rake db:migrate --quiet RAILS_ENV=test
+
+rspec:
+  script:
+    - bundle exec rspec --exclude-pattern "**/features/*_spec.rb"
+
+rubocop:
+  script:
+    - bundle exec rubocop
+
+brakeman:
+  script:
+    - bundle exec brakeman

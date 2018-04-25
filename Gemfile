@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", "~> 5.1.4"
+gem "rails", "~> 5.1.5"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3"
 
@@ -53,7 +53,7 @@ group :development, :test do
   gem "factory_bot_rails", "~> 4.0"
   gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
   gem "rspec-rails", "~> 3.6"
-  gem "rubocop-rails"
+  gem "rubocop"
   gem "pry"
 end
 
@@ -61,6 +61,7 @@ group :test do
   gem "database_cleaner"
   gem "rails-controller-testing"
   gem "shoulda-matchers", "~> 3.1"
+  gem "simplecov", require: false
 end
 
 group :development do

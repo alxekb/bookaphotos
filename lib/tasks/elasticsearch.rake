@@ -1,2 +1,3 @@
 # encoding: utf-8
-require 'elasticsearch/rails/tasks/import'
+
+require "elasticsearch/rails/tasks/import"

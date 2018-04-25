@@ -1,10 +1,10 @@
-- params.delete(:action)
-- params.delete(:controller)
-- params.delete(:page)
+-#- params.delete(:action)
+-#- params.delete(:controller)
+-#- params.delete(:page)
+-#
+-#- params.permit!
 
-- params.permit!
-
-= form_for 'filter', url: photo_sessions_path(params), method: :get do |f|
+= form_for 'filter', url: photo_sessions_path, method: :get do |f|
   .card
     .card-body
       .form-group
@@ -33,7 +33,7 @@
         %ul
           - @photosessions.aggregations.popular_cities.buckets.each do |city|
             %li
-              = link_to "#{city['key']} (#{city['doc_count']})", photo_sessions_path(params.merge(city: city[:key]))
+              = link_to "#{city['key']} (#{city['doc_count']})", photo_sessions_path(city: city[:key])
       .form-group.filter-section
         %label
           %b Nearest dates
@@ -45,7 +45,7 @@
         %ul
           - @photosessions.aggregations.time.buckets.each do |time|
             - if time.last['doc_count'].to_i > 0
-              %li= link_to "#{time.first} (#{time.last['doc_count']})", photo_sessions_path(params.merge(time: time.first))
+              %li= link_to "#{time.first} (#{time.last['doc_count']})", photo_sessions_path(time: time.first)
 
 
       .form-group.filter-section.filter-thematics
@@ -53,7 +53,7 @@
           %b Thematics
         %ul
           - @photosessions.aggregations.popular_themes.buckets.each do |theme|
-            %li= link_to "#{theme['key']} (#{theme['doc_count']})", photo_sessions_path(params.merge(theme: theme[:key]))
+            %li= link_to "#{theme['key']} (#{theme['doc_count']})", photo_sessions_path(theme: theme[:key])
     .card-footer.text-muted.text-right
       = link_to 'Clear filters', photo_sessions_path, class: 'btn btn-link'
       = f.submit 'Search', name: nil, class: 'btn btn-outline-success'

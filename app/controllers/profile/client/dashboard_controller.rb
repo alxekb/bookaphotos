@@ -10,6 +10,6 @@ class Profile::Client::DashboardController < ProfileController
     user.name = params[:user][:name]
     user.save
 
-    redirect_to client_path, notice: 'Setting was updated'
+    redirect_to client_path, notice: "Setting was updated"
   end
 end

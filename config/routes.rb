@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
-  get 'settings/index'
+  get "settings/index"
 
-  root to: 'home#index'
+  root to: "home#index"
 
   resources :photo_sessions do
-    get '/:session_date_id/order', to: 'photo_sessions#order', as: 'order'
+    get "/:session_date_id/order", to: "photo_sessions#order", as: "order"
   end
 
   resources :settings, only: [:index, :create]
 
   scope module: :profile do
-    scope module: :photographer, as: :photographer, path: 'photographer' do
-      get '/', to: 'dashboard#index'
+    scope module: :photographer, as: :photographer, path: "photographer" do
+      get "/", to: "dashboard#index"
       resources :locations
       resources :photo_sessions
       resources :session_days
@@ -20,15 +20,15 @@ Rails.application.routes.draw do
       resources :tasks
     end
 
-    scope module: :client, as: :client, path: 'profile' do
-      get '/', to: 'dashboard#index'
+    scope module: :client, as: :client, path: "profile" do
+      get "/", to: "dashboard#index"
     end
   end
 
   resources :orders
 
-  get '/portfolio(/:theme)', to: 'portfolio#index', as: 'portfolio'
-  get '/about_us', to: 'home#about', as: 'about'
+  get "/portfolio(/:theme)", to: "portfolio#index", as: "portfolio"
+  get "/about_us", to: "home#about", as: "about"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

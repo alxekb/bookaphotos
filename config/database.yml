@@ -11,6 +11,9 @@ development: &db
 test:
   <<: *db
   database: test_bookaphotos
+  username: <%= ENV.fetch('DB_TEST_USERNAME') { 'root' } %>
+  password: <%= ENV.fetch('DB_TEST_PASSWORD') { '' } %>
+  host: localhost
 
 production:
   <<: *db

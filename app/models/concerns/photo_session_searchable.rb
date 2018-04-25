@@ -1,4 +1,4 @@
-require 'elasticsearch/model'
+require "elasticsearch/model"
 
 module PhotoSessionSearchable
   extend ActiveSupport::Concern
@@ -8,18 +8,18 @@ module PhotoSessionSearchable
 
     settings index: { number_of_shards: 1, number_of_replicas: 0 } do
       mapping do
-        indexes :title, analyzer: 'snowball', boost: 100, fielddata: true
-        indexes :description, analyzer: 'snowball', boost: 100
+        indexes :title, analyzer: "snowball", boost: 100, fielddata: true
+        indexes :description, analyzer: "snowball", boost: 100
         indexes :price, type: :integer
         indexes :updated_at, type: :date
         indexes :cities do
           indexes :id
-          indexes :title, analyzer: 'keyword', boost: 50, fielddata: true
+          indexes :title, analyzer: "keyword", boost: 50, fielddata: true
         end
 
         indexes :themes do
           indexes :id
-          indexes :title, analyzer: 'keyword', boost: 50, fielddata: true
+          indexes :title, analyzer: "keyword", boost: 50, fielddata: true
         end
 
         indexes :session_days do
@@ -33,10 +33,10 @@ module PhotoSessionSearchable
 
     # Customize the JSON serialization for Elasticsearch
     #
-    def as_indexed_json(options={})
+    def as_indexed_json(_options = {})
       as_json(
-        only: ['title', 'description', 'price', 'updated_at'],
-        methods: ['cities', 'themes', 'session_days']
+        only: %w[title description price updated_at],
+        methods: %w[cities themes session_days]
         )
     end
 
@@ -47,7 +47,7 @@ module PhotoSessionSearchable
     # @return [Elasticsearch::Model::Response::Response]
     #
 
-    def self.search(params={})
+    def self.search(params = {})
       definition = Elasticsearch::DSL::Search::Search.new do
         size 1000
         query do
@@ -59,8 +59,8 @@ module PhotoSessionSearchable
               must do
                 query_string do
                   query  params[:q]
-                  fields ['title', 'description']
-                  default_operator 'and'
+                  fields %w[title description]
+                  default_operator "and"
                 end
               end
             end
@@ -74,25 +74,25 @@ module PhotoSessionSearchable
 
             if params[:city]
               must do
-                term 'cities.title': params[:city]
+                term "cities.title": params[:city]
               end
             end
 
             if params[:theme]
               must do
-                term 'themes.title': params[:theme]
+                term "themes.title": params[:theme]
               end
             end
 
             if params[:special]
               must do
-                term 'session_days.special': true
+                term "session_days.special": true
               end
             end
 
             if params[:date].present?
               must do
-                range 'session_days.start_time' do
+                range "session_days.start_time" do
                   gte Date.strptime(params[:date], "%m/%d/%Y").beginning_of_day
                   lte Date.strptime(params[:date], "%m/%d/%Y").end_of_day
                 end
@@ -101,15 +101,15 @@ module PhotoSessionSearchable
 
             if params[:time].present?
               must do
-                range 'session_days.session_time' do
+                range "session_days.session_time" do
                   case params[:time]
-                  when 'morning'
+                  when "morning"
                     gte 0
                     lte 1159
-                  when 'day'
+                  when "day"
                     gte 1200
                     lte 1759
-                  when 'evening'
+                  when "evening"
                     gte 1800
                     lte 2359
                   end
@@ -146,10 +146,10 @@ module PhotoSessionSearchable
         # end
         aggregation :time do
           range do
-            field 'session_days.session_time'
-            key 'morning', from: 0, to: 1159
-            key 'day', from: 1200, to: 1759
-            key 'evening', from: 1800, to: 2359
+            field "session_days.session_time"
+            key "morning", from: 0, to: 1159
+            key "day", from: 1200, to: 1759
+            key "evening", from: 1800, to: 2359
           end
         end
 
@@ -169,22 +169,22 @@ module PhotoSessionSearchable
 
         aggregation :popular_cities do
           terms do
-            field 'cities.title'
+            field "cities.title"
           end
         end
 
         aggregation :popular_themes do
           terms do
-            field 'themes.title'
+            field "themes.title"
           end
         end
 
         case
         when params[:sort]
-          sort params[:sort].to_sym => 'asc'
+          sort params[:sort].to_sym => "asc"
           # track_scores true
         when params[:q].blank?
-          sort 'session_days.start_time': 'asc'
+          sort "session_days.start_time": "asc"
         end
 
       end
