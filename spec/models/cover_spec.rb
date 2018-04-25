@@ -10,10 +10,10 @@ RSpec.describe Cover, type: :model do
   describe "validations" do
     let(:cover) { build(:cover) }
     it "should have a thumb style" do
-      Cover.attachment_definitions[:photo][:styles][:thumb].should == "100x100#"
+      expect(Cover.attachment_definitions[:photo][:styles][:thumb]).to eq("100x100#")
     end
     it "should have a medium style" do
-      Cover.attachment_definitions[:photo][:styles][:medium].should == "300x300#"
+      expect(Cover.attachment_definitions[:photo][:styles][:medium]).to eq("300x300#")
     end
   end
 end
