@@ -4,9 +4,8 @@ services:
   - mysql:latest
 
 variables:
-  MYSQL_DB: test_bookaphotos
-  MYSQ:_USER: root
-  MYSQL_PASSWORD: ""
+  MYSQL_DATABASE: test_bookaphotos
+  MYSQL_ROOT_PASSWORD: ""
 
 cache:
   paths:
