@@ -1,33 +1,19 @@
-image: "ruby:2.5"
-
-services:
-  - mysql:latest
-
-variables:
-  MYSQL_DATABASE: test_bookaphotos
-  MYSQL_ROOT_PASSWORD: ""
-
-cache:
-  paths:
-    - vendor/ruby
-
 before_script:
-  - apt-get update -qq && apt-get install -y -qq mysql-server mysql-client cmake
   - ruby -v
   - which ruby
   - gem install bundler --no-ri --no-rdoc
-  - bundle install --jobs $(nproc) "${FLAGS[@]}"
-  - cp config/database.yml.gitlab config/database.yml
-  - bundle exec rake db:create db:schema:load
+  - bundle install --quiet
+  - bundle exec rake db:migrate --quiet
+  - bundle exec rake db:test:prepare --quiet
 
 rspec:
   script:
-    - bundle exec rspec --exclude-pattern "**/features/*_spec.rb"
+    - rspec
+
+brakeman:
+  script:
+    - bundle exec brakeman -z -q
 
 rubocop:
   script:
     - bundle exec rubocop
-
-brakeman:
-  script:
-    - bundle exec brakeman
