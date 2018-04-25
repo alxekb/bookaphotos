@@ -1,22 +1,30 @@
+image: "ruby:2.5"
+
+services:
+  - mysql:latest
+
+variables:
+  POSTGRES_DB: test_bookaphotos
+  POSTGRES_USER: root
+  POSTGRES_PASSWORD: ""
+
 before_script:
-  - rvm use 2.5.0
+  - apt-get update -qq && apt-get install -y -qq mysql cmake
   - ruby -v
   - which ruby
-  - bundle install --quiet
-  - bundle exec rake webpacker:check_node
-  - bundle exec rake assets:clean
-  - bundle exec rake assets:precompile
-  - bundle exec rake db:migrate --quiet
-  - bundle exec rake db:migrate --quiet RAILS_ENV=test
+  - gem install bundler --no-ri --no-rdoc
+  - RAILS_ENV=test bundle install --jobs $(nproc) "${FLAGS[@]}"
+  - cp config/database.yml.gitlab config/database.yml
+  - RAILS_ENV=test bundle exec rake db:create db:schema:load
 
 rspec:
   script:
-    - bundle exec rspec --exclude-pattern "**/features/*_spec.rb"
+    - RAILS_ENV=test bundle exec rspec --exclude-pattern "**/features/*_spec.rb"
 
 rubocop:
   script:
-    - bundle exec rubocop
+    - RAILS_ENV=test bundle exec rubocop
 
 brakeman:
   script:
-    - bundle exec brakeman
+    - RAILS_ENV=test bundle exec brakeman
