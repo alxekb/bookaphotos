@@ -1,6 +1,6 @@
 image: "ruby:2.5.0"
 services:
-  - postgresql:latest
+  - postgres:latest
 variables:
   POSTGRES_DB: test_bookaphotos
   POSTGRES_USER: runner
