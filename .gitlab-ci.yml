@@ -1,12 +1,16 @@
+image: "ruby:2.5.0"
 services:
-  - mysql:latest
+  - postgresql:latest
 variables:
-  MYSQL_DATABASE: test_bookaphotos
-  MYSQL_ROOT_PASSWORD: ""
+  POSTGRES_DB: test_bookaphotos
+  POSTGRES_USER: runner
+  POSTGRES_PASSWORD: ""
+  RAILS_ENV: test
 before_script:
   - ruby -v
   - which ruby
-  - apt-get update -q && apt-get install nodejs -yqq && apt-get install mysql-server mysql-client -y
+  - apt-get update -q && apt-get install nodejs -yqq && apt-get install postgresql -y
+  - apt-get install -y -qq postgresql-contrib libpq-dev cmake
   - gem install bundler --no-ri --no-rdoc
   - bundle install --quiet
   - bundle exec rake db:migrate --quiet
@@ -14,7 +18,7 @@ before_script:
 
 rspec:
   script:
-    - rspec
+    - bundle exec rspec
 
 brakeman:
   script:

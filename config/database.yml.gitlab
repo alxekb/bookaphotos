@@ -1,10 +1,23 @@
+# PostgreSQL
 test:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   reconnect: false
   pool: 5
   host: localhost
   database: test_bookaphotos
-  username: root
+  username: l1meon
   password: ""
   host: localhost
+
+# MySQL
+#test:
+#  adapter: mysql2
+#  encoding: utf8
+#  reconnect: false
+#  pool: 5
+#  host: localhost
+#  database: test_bookaphotos
+#  username: root
+#  password: ""
+#  host: localhost
