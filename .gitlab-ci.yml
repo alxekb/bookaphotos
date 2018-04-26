@@ -1,29 +1,39 @@
-image: "ruby:2.5.0"
-services:
-  - postgres:latest
-variables:
-  POSTGRES_DB: test_bookaphotos
-  POSTGRES_USER: runner
-  POSTGRES_PASSWORD: ""
-  RAILS_ENV: test
-before_script:
-  - ruby -v
-  - which ruby
-  - apt-get update -q && apt-get install nodejs -yqq && apt-get install postgresql -y
-  - apt-get install -y -qq postgresql-contrib libpq-dev cmake
-  - gem install bundler --no-ri --no-rdoc
-  - bundle install --quiet
-  - bundle exec rake db:migrate --quiet
-  - bundle exec rake db:test:prepare --quiet
-
-rspec:
+#image: "ruby:2.5.0"
+#services:
+#  - postgres:latest
+#variables:
+#  POSTGRES_DB: test_bookaphotos
+#  POSTGRES_USER: runner
+#  POSTGRES_PASSWORD: ""
+#  RAILS_ENV: test
+#before_script:
+#  - ruby -v
+#  - which ruby
+#  - apt-get update -q && apt-get install nodejs -yqq && apt-get install postgresql -y
+#  - apt-get install -y -qq postgresql-contrib libpq-dev cmake
+#  - gem install bundler --no-ri --no-rdoc
+#  - bundle install --quiet
+#  - bundle exec rake db:migrate --quiet
+#  - bundle exec rake db:test:prepare --quiet
+#
+#rspec:
+#  script:
+#    - bundle exec rspec
+#
+#brakeman:
+#  script:
+#    - bundle exec brakeman -z -q
+#
+#rubocop:
+#  script:
+#    - bundle exec rubocop
+test:
+  stage: test
   script:
-    - bundle exec rspec
-
-brakeman:
-  script:
-    - bundle exec brakeman -z -q
-
-rubocop:
-  script:
-    - bundle exec rubocop
+  - apt-get update -qy
+  - apt-get install -y nodejs
+  - bundle install --path /cache
+  - bundle exec rake db:create RAILS_ENV=test
+  - bundle exec rspec
+  - bundle exec brakeman
+  - bundle exec rubocop
