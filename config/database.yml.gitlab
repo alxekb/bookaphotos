@@ -2,13 +2,11 @@
 test:
   adapter: postgresql
   encoding: utf8
-  reconnect: false
   pool: 5
   host: localhost
   database: test_bookaphotos
-  username: l1meon
+  username: postgres
   password: ""
-  host: localhost
 
 # MySQL
 #test:
