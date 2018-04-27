@@ -38,10 +38,6 @@ rubocop:
   stage: test
   script:
     - bundle exec rubocop
-test_sst:
-  stage: test
-  script:
-    - ssh -T git@gitlab.com
 deploy_application:
   stage: deploy
   script:
