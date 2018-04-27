@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :photo_session do
-    title { Faker::GameOfThrones.quote }
+    sequence(:title) { |n| "#{Faker::GameOfThrones.quote}-#{n}" }
     description { Faker::GameOfThrones.quote }
     price { Faker::Number.between(1, 5000) }
     published { Faker::Boolean.boolean(0.5) }

@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :theme do
-    title { Faker::GameOfThrones.quote }
+    sequence(:title) { |n| "#{Faker::GameOfThrones.quote}-#{n}" }
   end
 end

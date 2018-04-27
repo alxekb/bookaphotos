@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :currency do
-    title { Faker::Currency.code }
+    sequence(:title) { |n| "#{Faker::Currency.code}-#{n}" }
   end
 end
