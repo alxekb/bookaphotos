@@ -1,10 +1,12 @@
 image: "ruby:2.5"
 services:
   - postgres:latest
+  - elasticsearch:latest
 variables:
   POSTGRES_DB: test_db
   POSTGRES_USER: runner
   POSTGRES_PASSWORD: ""
+  ELASTICSEARCH_URL: "http://elasticsearch:9200"
 stages:
   - test
 before_script:
