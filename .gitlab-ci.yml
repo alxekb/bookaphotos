@@ -8,7 +8,6 @@ variables:
   POSTGRES_PASSWORD: ""
   ELASTICSEARCH_URL: "http://elasticsearch:9200"
   LANG: "en_US.UTF-8"
-  LC_ALL: "en_US.UTF-8"
 stages:
   - test
 before_script:
@@ -16,31 +15,16 @@ before_script:
   - bundle install --without postgres production --jobs $(nproc) "${FLAGS[@]}"
   - cp config/database.yml.gitlab config/database.yml
   - RAILS_ENV=test bundle exec rails db:create db:schema:load
-#  - ruby -v
-#  - which ruby
-#  - cp config/database.yml.gitlab config/database.yml
-#  - apt-get update -q && apt-get install nodejs -yqq && apt-get install postgresql -y
-#  - apt-get install -y -qq postgresql-contrib libpq-dev cmake
-#  - gem install bundler --no-ri --no-rdoc
-#  - bundle install -j $(nproc) --path vendor
-#  - bundle exec rake db:migrate
-#  - bundle exec rake db:test:prepare
 
-test:
+rspec:
   stage: test
   script:
     - bundle exec rspec
+brakeman:
+  stage: test
+  script:
     - bundle exec brakeman -z -q --skip-files app/views/
+rubocop:
+  stage: test
+  script:
     - bundle exec rubocop
-
-#rspec:
-#  script:
-#    - bundle exec rspec
-#
-#brakeman:
-#  script:
-#    - bundle exec brakeman -z -q
-#
-#rubocop:
-#  script:
-#    - bundle exec rubocop
