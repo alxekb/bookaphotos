@@ -30,7 +30,7 @@ test:
   stage: test
   script:
     - bundle exec rspec
-    - bundle exec brakeman -z -q
+    - bundle exec brakeman -z -q --skip-files app/views/
     - bundle exec rubocop
 
 #rspec:
