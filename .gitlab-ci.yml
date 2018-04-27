@@ -41,7 +41,11 @@ rubocop:
 deploy_application:
   stage: deploy
   script:
-    - gem install capistrano
-    - cap production deploy
+    - gem install capistrano -v 3.4.0
+    - gem install capistrano3-puma
+    - gem install capistrano-bundler
+    - gem install rvm1-capistrano3
+    - gem install capistrano-rails -v 1.1
+    - bundle exec cap production deploy
   only:
     - master
