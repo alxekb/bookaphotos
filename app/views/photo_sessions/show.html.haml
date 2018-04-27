@@ -45,7 +45,7 @@
         .col-xs-4
           .card.mb-4.box-shadow
             .card-header
-              %h4.my-0.font-weight-normal= day.when.strftime("%d %B %Y %H:%M")
+              %h4.my-0.font-weight-normal= day.start_time.strftime("%d %B %Y %H:%M")
             .card-body
               %h1.card-title.pricing-card-title
                 #{@photosession.currency} #{@photosession.price}

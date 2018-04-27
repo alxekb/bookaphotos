@@ -23,7 +23,7 @@
           - @invoices.each do |invoice|
             - invoice.photo_session.session_days.each do |session_day|
               %tr
-                %th{ scope: "row"}= session_day.when.strftime("%d.%m.%Y")
+                %th{ scope: "row"}= session_day.start_time.strftime("%d.%m.%Y")
                 %td= invoice.photo_session.title
                 %td Client
                 %td= invoice.price

@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 namespace :elastic do
   desc "Import with FORCE elastic"
   task :import do

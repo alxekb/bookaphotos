@@ -1,0 +1,30 @@
+image: "ruby:2.5"
+services:
+  - postgres:latest
+  - elasticsearch:latest
+variables:
+  POSTGRES_DB: test_db
+  POSTGRES_USER: runner
+  POSTGRES_PASSWORD: ""
+  ELASTICSEARCH_URL: "http://elasticsearch:9200"
+  LANG: "en_US.UTF-8"
+stages:
+  - test
+before_script:
+  - apt-get update -q && apt-get install nodejs -yqq
+  - bundle install --without postgres production --jobs $(nproc) "${FLAGS[@]}"
+  - cp config/database.yml.gitlab config/database.yml
+  - RAILS_ENV=test bundle exec rails db:create db:schema:load
+
+rspec:
+  stage: test
+  script:
+    - bundle exec rspec
+brakeman:
+  stage: test
+  script:
+    - bundle exec brakeman -z -q --skip-files app/views/
+rubocop:
+  stage: test
+  script:
+    - bundle exec rubocop

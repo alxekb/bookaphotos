@@ -1,0 +1,22 @@
+# PostgreSQL
+test:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  host: postgres
+  database: test_db
+  user: runner
+  password: ""
+
+# MySQL
+#test:
+#  adapter: mysql2
+#  encoding: utf8
+#  reconnect: false
+#  pool: 5
+#  host: localhost
+#  database: test_bookaphotos
+#  username: root
+#  password: ""
+#  host: localhost

@@ -32,7 +32,7 @@ class Profile::Photographer::LocationsController < Profile::PhotographerControll
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to [:photographer, @location], notice: 'Location was successfully created.' }
+        format.html { redirect_to [:photographer, @location], notice: "Location was successfully created." }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class Profile::Photographer::LocationsController < Profile::PhotographerControll
 
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to [:photographer, @location], notice: 'Location was successfully updated.' }
+        format.html { redirect_to [:photographer, @location], notice: "Location was successfully updated." }
         format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class Profile::Photographer::LocationsController < Profile::PhotographerControll
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to profile_locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to profile_locations_url, notice: "Location was successfully destroyed." }
       format.json { head :no_content }
     end
   end

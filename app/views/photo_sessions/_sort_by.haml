@@ -1,12 +1,12 @@
-- params.delete(:action)
-- params.delete(:controller)
-- params.delete(:page)
-
-- params.permit!
+-#- params.delete(:action)
+-#- params.delete(:controller)
+-#- params.delete(:page)
+-#
+-#- params.permit!
 
 
 #photosession-sort-by.text-center
   .btn-group
-    = link_to "Date", photo_sessions_path(params.merge(sort: 'session_days.when')), class: params[:sort] === 'session_days.when' || params[:sort].nil? ? 'btn btn-secondary active' : 'btn btn-secondary'
-    = link_to "Price", photo_sessions_path(params.merge(sort: 'price')), class: params[:sort] === 'price' ? 'btn btn-secondary active' : 'btn btn-secondary'
-    = link_to "Title", photo_sessions_path(params.merge(sort: 'title')), class: params[:sort] === 'title' ? 'btn btn-secondary active' : 'btn btn-secondary'
+    = link_to "Date", photo_sessions_path(sort: 'session_days.start_time'), class: params[:sort] === 'session_days.start_time' || params[:sort].nil? ? 'btn btn-secondary active' : 'btn btn-secondary'
+    = link_to "Price", photo_sessions_path(sort: 'price'), class: params[:sort] === 'price' ? 'btn btn-secondary active' : 'btn btn-secondary'
+    = link_to "Title", photo_sessions_path(sort: 'title'), class: params[:sort] === 'title' ? 'btn btn-secondary active' : 'btn btn-secondary'

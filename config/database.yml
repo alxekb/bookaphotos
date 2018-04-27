@@ -1,16 +1,31 @@
+# PostgreSQL
 development: &db
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
-  reconnect: false
   database: bookaphotos
   pool: 5
   username: <%= ENV.fetch('DB_DEV_USERNAME') { 'root' } %>
   password: <%= ENV.fetch('DB_DEV_PASSWORD') { '' } %>
   host: localhost
 
+
+# MYSQL
+#development: &db
+#  adapter: mysql2
+#  encoding: utf8
+#  reconnect: false
+#  database: bookaphotos
+#  pool: 5
+#  username: <%= ENV.fetch('DB_DEV_USERNAME') { 'root' } %>
+#  password: <%= ENV.fetch('DB_DEV_PASSWORD') { '' } %>
+#  host: localhost
+
 test:
   <<: *db
   database: test_bookaphotos
+  username: <%= ENV.fetch('DB_TEST_USERNAME') { 'root' } %>
+  password: <%= ENV.fetch('DB_TEST_PASSWORD') { '' } %>
+  host: localhost
 
 production:
   <<: *db

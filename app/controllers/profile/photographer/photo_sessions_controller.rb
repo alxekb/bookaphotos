@@ -29,7 +29,7 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
 
     respond_to do |format|
       if @photo_session.save
-        format.html { redirect_to [:photographer, @photo_session], notice: 'Photo session was successfully created.' }
+        format.html { redirect_to [:photographer, @photo_session], notice: "Photo session was successfully created." }
         format.json { render :show, status: :created, location: @photo_session }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
   def update
     respond_to do |format|
       if @photo_session.update(photo_session_params)
-        format.html { redirect_to [:photographer, @photo_session], notice: 'Photo session was successfully updated.' }
+        format.html { redirect_to [:photographer, @photo_session], notice: "Photo session was successfully updated." }
         format.json { render :show, status: :ok, location: @photo_session }
       else
         format.html { render :edit }
@@ -57,19 +57,19 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
   def destroy
     @photo_session.destroy
     respond_to do |format|
-      format.html { redirect_to profile_photo_sessions_url, notice: 'Photo session was successfully destroyed.' }
+      format.html { redirect_to profile_photo_sessions_url, notice: "Photo session was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_photo_session
-      @photo_session = PhotoSession.find_by(id: params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_photo_session
+    @photo_session = PhotoSession.find_by(id: params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def photo_session_params
-      params.fetch(:photo_session, {}).permit(:title, :description, :price)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def photo_session_params
+    params.fetch(:photo_session, {}).permit(:title, :description, :price)
+  end
 end

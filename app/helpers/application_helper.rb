@@ -1,9 +1,9 @@
 module ApplicationHelper
   def active_path(path)
     if current_page?(path)
-      'nav-item active'
+      "nav-item active"
     else
-      'nav-item'
+      "nav-item"
     end
   end
 

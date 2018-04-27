@@ -10,9 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413095223) do
+ActiveRecord::Schema.define(version: 20180424153239) do
 
-  create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
@@ -26,7 +29,7 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "admin_users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -43,13 +46,13 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "cities", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "cities_photo_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "cities_photo_sessions", force: :cascade do |t|
     t.bigint "city_id"
     t.bigint "photo_session_id"
     t.datetime "created_at", null: false
@@ -58,7 +61,7 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["photo_session_id"], name: "index_cities_photo_sessions_on_photo_session_id"
   end
 
-  create_table "covers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "covers", force: :cascade do |t|
     t.string "photo_file_name"
     t.string "photo_content_type"
     t.integer "photo_file_size"
@@ -69,16 +72,16 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["photo_session_id"], name: "index_covers_on_photo_session_id"
   end
 
-  create_table "currencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "currencies", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "invoices", force: :cascade do |t|
     t.bigint "photo_session_id"
     t.bigint "user_id"
-    t.decimal "price", precision: 10
+    t.decimal "price"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -86,13 +89,13 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
-  create_table "langs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "langs", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "langs_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "langs_users", force: :cascade do |t|
     t.bigint "lang_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -101,19 +104,19 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["user_id"], name: "index_langs_users_on_user_id"
   end
 
-  create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "locations", force: :cascade do |t|
     t.bigint "user_id"
     t.string "name"
     t.text "how_to_find"
     t.text "address"
-    t.decimal "lat", precision: 10
-    t.decimal "lng", precision: 10
+    t.decimal "lat"
+    t.decimal "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
-  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "photo_session_id"
     t.datetime "created_at", null: false
@@ -132,10 +135,10 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "photo_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "photo_sessions", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.decimal "price", precision: 10
+    t.decimal "price"
     t.bigint "user_id"
     t.boolean "published"
     t.datetime "created_at", null: false
@@ -143,7 +146,7 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.integer "duration"
     t.integer "photos_count"
     t.integer "period_of_execution"
-    t.decimal "price_per_photo", precision: 10
+    t.decimal "price_per_photo"
     t.bigint "currency_id"
     t.text "for_whom"
     t.text "preparation"
@@ -156,7 +159,7 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["user_id"], name: "index_photo_sessions_on_user_id"
   end
 
-  create_table "photo_sessions_themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "photo_sessions_themes", force: :cascade do |t|
     t.bigint "photo_session_id"
     t.bigint "theme_id"
     t.datetime "created_at", null: false
@@ -165,7 +168,7 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["theme_id"], name: "index_photo_sessions_themes_on_theme_id"
   end
 
-  create_table "photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "photos", force: :cascade do |t|
     t.string "photo_file_name"
     t.string "photo_content_type"
     t.integer "photo_file_size"
@@ -176,18 +179,18 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["photo_session_id"], name: "index_photos_on_photo_session_id"
   end
 
-  create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "profiles", force: :cascade do |t|
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "session_days", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "session_days", force: :cascade do |t|
     t.bigint "photo_session_id"
-    t.datetime "when"
+    t.datetime "start_time"
     t.boolean "special"
-    t.decimal "price", precision: 10
+    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "currency_id"
@@ -195,13 +198,13 @@ ActiveRecord::Schema.define(version: 20180413095223) do
     t.index ["photo_session_id"], name: "index_session_days_on_photo_session_id"
   end
 
-  create_table "themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "themes", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

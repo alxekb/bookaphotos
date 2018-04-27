@@ -10,11 +10,11 @@ class ProfileController < ApplicationController
 
   def set_layout
     if current_user.client?
-      'application'
+      "application"
     elsif current_user.photographer?
-      'photographer'
+      "photographer"
     else
-      'application'
+      "application"
     end
   end
 end

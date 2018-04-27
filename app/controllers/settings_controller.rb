@@ -10,6 +10,6 @@ class SettingsController < ApplicationController
     user.name = params[:user][:name]
     user.save
 
-    redirect_to settings_path, notice: 'Setting was updated'
+    redirect_to settings_path, notice: "Setting was updated"
   end
 end
