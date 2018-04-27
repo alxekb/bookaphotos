@@ -1,11 +1,12 @@
 # PostgreSQL
 test:
   adapter: postgresql
-  encoding: utf8
+  encoding: unicode
   pool: 5
-  host: localhost
-  database: test_bookaphotos
-  username: postgres
+  timeout: 5000
+  host: postgres
+  database: test_db
+  user: runner
   password: ""
 
 # MySQL

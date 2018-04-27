@@ -2,33 +2,40 @@ image: "ruby:2.5"
 services:
   - postgres:latest
 variables:
-  POSTGRES_DB: test_bookaphotos
-#  POSTGRES_USER: postgres
-#  POSTGRES_PASSWORD: ''
-  RAILS_ENV: test
-  DATABASE_URL: "postgresql://postgres:postgres@:5432/$POSTGRES_DB"
-cache:
-  paths:
-    - vendor/ruby
+  POSTGRES_DB: test_db
+  POSTGRES_USER: runner
+  POSTGRES_PASSWORD: ""
+stages:
+  - test
 before_script:
-  - ruby -v
-  - which ruby
+  - bundle install --without postgres production --jobs $(nproc) "${FLAGS[@]}"
   - cp config/database.yml.gitlab config/database.yml
-  - apt-get update -q && apt-get install nodejs -yqq && apt-get install postgresql -y
-  - apt-get install -y -qq postgresql-contrib libpq-dev cmake
-  - gem install bundler --no-ri --no-rdoc
-  - bundle install -j $(nproc) --path vendor
-  - bundle exec rake db:migrate
-  - bundle exec rake db:test:prepare
+  - RAILS_ENV=test bundle exec rails db:create db:schema:load
+#  - ruby -v
+#  - which ruby
+#  - cp config/database.yml.gitlab config/database.yml
+#  - apt-get update -q && apt-get install nodejs -yqq && apt-get install postgresql -y
+#  - apt-get install -y -qq postgresql-contrib libpq-dev cmake
+#  - gem install bundler --no-ri --no-rdoc
+#  - bundle install -j $(nproc) --path vendor
+#  - bundle exec rake db:migrate
+#  - bundle exec rake db:test:prepare
 
-rspec:
+test:
+  state: test
   script:
     - bundle exec rspec
-
-brakeman:
-  script:
-    - bundle exec brakeman -z -q
-
-rubocop:
-  script:
+    - bundle exec brakeman
     - bundle exec rubocop
+
+#rspec:
+#  script:
+#    - bundle exec rspec
+#
+#brakeman:
+#  script:
+#    - bundle exec brakeman -z -q
+#
+#rubocop:
+#  script:
+#    - bundle exec rubocop
