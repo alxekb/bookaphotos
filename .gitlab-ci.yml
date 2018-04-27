@@ -22,7 +22,7 @@ before_script:
 #  - bundle exec rake db:test:prepare
 
 test:
-  state: test
+  stage: test
   script:
     - bundle exec rspec
     - bundle exec brakeman
