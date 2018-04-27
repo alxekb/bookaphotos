@@ -46,6 +46,7 @@ group :development, :test do
   gem "capistrano3-puma", require: false
   gem "capistrano-bundler", require: false
   gem "capistrano-rails", "~> 1.1", require: false
+  gem 'capistrano-rails-collection'
   gem "awesome_print"
   gem "brakeman", require: false
   gem "dotenv-rails"
