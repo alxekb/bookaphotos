@@ -30,7 +30,7 @@ test:
   stage: test
   script:
     - bundle exec rspec
-    - bundle exec brakeman
+    - bundle exec brakeman -z -q
     - bundle exec rubocop
 
 #rspec:
