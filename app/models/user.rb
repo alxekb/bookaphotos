@@ -22,8 +22,7 @@ class User < ApplicationRecord
     photographer: 1
   }
 
-  has_attached_file :avatar, styles: { medium: "64x64#", thumb: "16x16#" }, default_url: "/images/:style/missing.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  delegate :first_name, :last_name, :phone, :avatar, to: :profile
 
   validates :email,
             presence: true,
@@ -34,13 +33,4 @@ class User < ApplicationRecord
   validates :role,
             presence: true,
             inclusion: { in: User.roles }
-
-  def photographer_upcoming_events
-    orders.joins(photo_session: :session_days)
-          .where("session_days.start_time >= ?", Date.current).count
-  end
-
-  def to_s
-    email
-  end
 end
