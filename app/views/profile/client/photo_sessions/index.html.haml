@@ -1,0 +1,15 @@
+.row.pt-5
+  .col-12
+    - breadcrumb :photo_sessions
+.container.border
+  .row
+    .col-12
+      %h3 Photo Sessions
+  - @orders.each do |order|
+    .row
+      .col-md-2= image_tag(order.photo_session.cover, class: 'img-fluid img-thumbnail')
+      .col-md-3= link_to order.photo_session.title, client_photo_session_path(order)
+      .col-md-3
+        = order.photo_session_day
+        %br
+        = order.photo_session_hour

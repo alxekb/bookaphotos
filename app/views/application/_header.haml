@@ -1,5 +1,5 @@
-%nav.navbar.navbar-expand-md.navbar-dark.bg-dark
-  = link_to root_path, class: 'navbar-brand col-auto' do
+%nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top.flex-md-nowrap.p-0.shadow
+  = link_to root_path, class: 'navbar-brand col-auto col-sm-3 col-md-2 mr-0' do
     Bookaphotos.com
   %button.navbar-toggler.d-lg-none{"aria-controls" => "navbarsNavDefault", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarsNavDefault", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
@@ -14,20 +14,20 @@
       %li{ class: active_path('#') }
         %a.nav-link{:href => "#"} Contacts
       - if user_signed_in?
-        %li.nav-item
-          = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link'
-        %li.nav-item{ class: active_path(profile_defined_path) }
-          = link_to 'Personal Cabinet', profile_defined_path, class:  'nav-link'
+        %li.nav-item.dropdown
+          = link_to 'Personal Cabinet',
+           '#',
+            class: 'nav-link dropdown-toggle',
+             id: 'profileDropdown',
+              role: 'button',
+              data: { toggle: 'dropdown' },
+              aria: { haspopup: 'true', expanded: 'false' }
+          .dropdown-menu{ aria: { labelledby: 'profileDropdown' } }
+            = link_to 'Dashboard', profile_defined_path, class: 'dropdown-item'
+            = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+          //{ class: active_path(profile_defined_path) }
       - else
         %li{ class: active_path(new_user_registration_path) }
           = link_to 'Join our team', new_user_registration_path, class: 'nav-link'
         %li
           = link_to 'Sign In', new_user_session_path, class: 'nav-link btn btn-success'
-        -#- if user_signed_in?
-        -#  = link_to settings_path, class: 'nav-link btn btn-success' do
-        -#    Personal cabinet
-        -#  -# = link_to profile_path, class: 'nav-link btn btn-success' do
-        -#  -#   Personal cabinet
-        -#- else
-        -#  = link_to new_user_session_path, class: 'nav-link btn btn-success' do
-        -#    Sign in

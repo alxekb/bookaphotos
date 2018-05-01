@@ -1,0 +1,51 @@
+.row.pt-3
+  .col-12
+    %h4.mb-3 Profile settings
+    = form_for @user_profile,
+      url: client_settings_path, method: :patch, class: 'horizontal-form'  do |f|
+      .row
+        .col-12.col-md-4
+          .row
+            .col-12.mb-3.form-group
+              %label
+                First Name
+                = f.text_field :first_name, class: 'form-control'
+              .invalid-feedback
+                Valid First Name is required.
+          .row
+            .col-12.mb-3.form-group
+              %label
+                Last Name
+                = f.text_field :last_name, class: 'form-control'
+              .invalid-feedback
+                Valid Last Name is required
+        .col-12.col-md-4
+          .row
+            .col-12.mb-3
+              %label
+                Phone
+                = f.text_field :phone, class: 'form-control'
+              .invalid-feedback
+                Valid phone is required.
+        .col-12.col-md-4
+          .row
+            - if @user_profile.avatar.present?
+              .col-12.col-md-3
+                = image_tag(@user_profile.avatar.url(:medium), class: 'img-fluid img-thumbnail')
+              .col-12.col-md-9
+                .form-group.form-check.pt-md-3
+                  = f.check_box :_destroy, class: 'form-check-input', id: 'avatarRemove'
+                  %label.form-check-label{for: 'avatarRemove'}
+                    Remove avatar
+                -#= f.check_box :_destroy
+            - else
+              .col-12.col-md-9
+                %label
+                  Avatar
+                  = f.file_field :avatar, class: 'form-control-file'
+              .invalid-feedback
+                Valid avatar is required
+      %hr
+      .row
+        .col-12.col-md-4
+          = f.submit 'Save', class: 'btn btn-primary btn-lg btn-block'

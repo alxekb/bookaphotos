@@ -7,7 +7,6 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %script{ src: "https://use.fontawesome.com/cd577af1ab.js" }
   %body
-    = render 'header'
     - if notice
       .alert.alert-success
         = notice
@@ -18,6 +17,11 @@
         = alert
         %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
           %span{"aria-hidden" => "true"} ×
-    %main.container.pt-5{ role: "main" }
-      = breadcrumbs separator: " &rsaquo; "
-      = yield
+    = render 'header'
+    %main.container-fluid{ role: "main" }
+      .row
+        %nav.col-md-2.px-0.sidebar.bg-light.d-none.d-md-block
+          = render partial: 'profile/sidebar'
+        %div.col-md-9.col-lg-10.ml-sm-auto.pt-3.px-4
+          = breadcrumbs separator: " &rsaquo; "
+          = yield

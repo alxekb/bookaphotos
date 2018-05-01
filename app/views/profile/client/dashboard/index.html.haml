@@ -1,0 +1,23 @@
+.row.pt-5
+  .col-12
+    - breadcrumb :dashboard
+.row
+  .col-12.border
+    - unless @user.upcoming_photosessions.empty?
+      - @user.upcoming_photosessions do |photo_session|
+        .card
+          = image_tag(photo_session.cover)
+          .card-body
+            %h5.card-title= photo_session.title
+            %p.card-text
+              = photo_session.day
+              %br
+              = photo_session.hour
+            = link_to photo_session.title, photo_session, class: 'btn btn-primary'
+    - else
+      %h4 You don't have any upcoming photo sessions
+.row.mt-3
+  .col-12.border
+    %h4 Finished photosessions
+    %hr
+    = render partial: 'profile/client/dashboard/photo_session'
