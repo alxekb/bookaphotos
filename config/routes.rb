@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "settings/index"
+  #get "settings/index"
 
   root to: "home#index"
 
@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get "/:session_date_id/order", to: "photo_sessions#order", as: "order"
   end
 
-  resources :settings, only: [:index, :create]
+  #resources :settings, only: [:index, :create]
 
   scope module: :profile do
     scope module: :photographer, as: :photographer, path: "photographer" do
@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
     scope module: :client, as: :client, path: "profile" do
       get "/", to: "dashboard#index"
+      resources :photo_sessions, only: %i[index show]
+      resource :settings, only: %i[index update] do
+        get "/", to: "settings#index"
+      end
     end
   end
 
