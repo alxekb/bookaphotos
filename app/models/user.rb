@@ -22,6 +22,7 @@ class User < ApplicationRecord
     client: 0,
     photographer: 1
   }
+  delegate :first_name, :last_name, :phone, :avatar, to: :profile
 
   validates :email,
             presence: true,
@@ -32,13 +33,4 @@ class User < ApplicationRecord
   validates :role,
             presence: true,
             inclusion: { in: User.roles }
-
-  def photographer_upcoming_events
-    orders.joins(photo_session: :session_days)
-          .where("session_days.start_time >= ?", Date.current).count
-  end
-
-  def to_s
-    email
-  end
 end

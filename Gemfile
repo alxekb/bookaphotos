@@ -106,3 +106,5 @@ gem "gmap_coordinates_picker", "0.0.10"
 gem "activeadmin_latlng"
 
 gem "simple_calendar", "~> 2.0"
+gem "gretel"
+gem "draper", "~> 3.0", ">= 3.0.1"

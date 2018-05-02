@@ -1,0 +1,57 @@
+%table.table
+  %thead.thead-dark
+    %tr
+      %th{:scope => "col"} Order ID, PhotoSession Title, Ordered Date
+      %th{:scope => "col"} Quantity of the photos
+      %th{:scope => "col"} PhotoSession Date and Time
+      %th{:scope => "col"} Additional information
+      %th{:scope => "col"} Contact with photograph
+      %th{:scope => "col"} Actions
+      %th{:scope => "col"} Status
+  %tbody
+    - @user.finished_photosessions.each do |order|
+      - photosession = order.photo_session
+      %tr
+        %td
+          %div
+            %h5= order.photo_session.title
+            = order.id
+            %span
+              Ordered:
+              = order.created_at
+        %td
+          %div
+            = order.photo_count
+            photos
+        %td
+          %div
+            = photosession.day
+            %br
+            = photosession.hour
+        %td
+          %div= order.comment
+        %td
+          %div= photosession.photographer_email
+          %div= photosession.photographer_phone
+        %td
+          = link_to 'Cancel', root_path, class: 'btn btn-outline-danger'
+          or
+          = link_to 'Postpone', root_path, class: 'btn btn-outline-primary'
+        %td In progress
+      %tr.border-bottom-order
+        %td{ colspan: 4 }
+          %h5 Instructions
+          #photosession-add-information
+            - specs = ['for_whom', 'preparation', 'what_to_take', 'how_route', 'how_find']
+            %ul#myTab.nav.nav-tabs{ role: "tablist"}
+              - specs.each_with_index do |spec, index|
+                %li.nav-item
+                  %a{"aria-controls" => spec, "aria-selected" => "true", "data-toggle" => "tab", :href => "##{spec}", role: "tab", class: index === 0 ? "nav-link active" : "nav-link", id: "#{spec}-tab" }= spec
+              %li.nav-item
+                %a{"aria-controls" => 'map', "aria-selected" => "true", "data-toggle" => "tab", :href => "#map", role: "tab", class: "nav-link", id: "map-tab" } Map
+            #myTabContent.tab-content
+              - specs.each_with_index do |spec, index|
+                %div{ "aria-labelledby" => "#{spec}-tab", :role => "tabpanel", class: index === 0 ? "tab-pane fade show active" : "tab-pane fade", id: spec }
+                  %p= photosession[spec.to_sym]
+              %div{ "aria-labelledby" => "map-tab", :role => "tabpanel", class: "tab-pane fade", id: "map" }
+                = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw',  :static => 'true', :zoom_level => 10 , :default_coordinates => [photosession.lat || 10, photosession.lng || 10], map_width: '100%', autocomplete: { enable: true, class: 'form-control' }

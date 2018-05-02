@@ -1,13 +1,13 @@
 class Profile < ApplicationRecord
   belongs_to :user
-  delegate :name,
-           :email,
+  delegate :email,
            :role,
-           :avatar,
-           :phone,
            :photographer?,
            :client?,
            to: :user
   validates :user, presence: true
-  # TODO migrate profile related data from user such as: role, avatar, phone, name, etc.
+  validates :first_name, :last_name, :phone, presence: true
+
+  has_attached_file :avatar, styles: { medium: "64x64#", thumb: "16x16#" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 end

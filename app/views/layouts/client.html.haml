@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %title bookaphotos.com
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %script{ src: "https://use.fontawesome.com/cd577af1ab.js" }
+  %body
+    - if notice
+      .alert.alert-success
+        = notice
+        %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+    - if alert
+      .alert.alert-danger
+        = alert
+        %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+    = render 'header'
+    %main.container-fluid{ role: "main" }
+      .row
+        %nav.col-md-2.px-0.sidebar.bg-light.d-none.d-md-block
+          = render partial: 'profile/sidebar'
+        %div.col-md-9.col-lg-10.ml-sm-auto.pt-3.px-4
+          = breadcrumbs separator: " &rsaquo; "
+          = yield
