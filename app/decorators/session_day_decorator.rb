@@ -11,5 +11,4 @@ class SessionDayDecorator < ApplicationDecorator
   def hour
     start_time.strftime("%H:%M")
   end
-
 end
