@@ -41,6 +41,8 @@ class OrdersController < ApplicationController
     new_client.email = user_params[:email]
     temp_password = Devise.friendly_token.first(8)
     new_client.password = temp_password
+    new_client.password_confirmation = temp_password
+    #TODO Send mail to new registered user with login credentials
     new_client.save
     new_client
   end
