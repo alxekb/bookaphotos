@@ -9,12 +9,10 @@ RSpec.describe Order, type: :model do
 
   describe "validations" do
     context "Presence" do
-      it { is_expected.to validate_presence_of(:name) }
-      it { is_expected.to validate_presence_of(:phone) }
-      it { is_expected.to validate_presence_of(:email) }
-    end
-    context "email uniqueness" do
-      it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+      it { is_expected.to validate_presence_of(:client_id) }
+      it { is_expected.to validate_presence_of(:photographer_id) }
+      it { is_expected.to belong_to(:client) }
+      it { is_expected.to belong_to(:photographer) }
     end
   end
 

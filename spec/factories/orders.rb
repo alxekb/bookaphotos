@@ -1,11 +1,9 @@
 FactoryBot.define do
   factory :order do
-    user
+    client
+    photographer
     photo_session
     session_day
-    name { Faker::GameOfThrones.character }
-    phone { Faker::PhoneNumber.cell_phone }
-    email { Faker::Internet.email }
     comment { Faker::Lorem.sentence }
     photo_count { Faker::Number.between(1, 100) }
     i_want_to_get_info true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501082149) do
+ActiveRecord::Schema.define(version: 20180502111106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,22 +117,22 @@ ActiveRecord::Schema.define(version: 20180501082149) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
     t.bigint "photo_session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "phone"
-    t.string "email"
     t.text "comment"
     t.bigint "session_day_id"
     t.integer "photo_count"
     t.boolean "i_want_to_get_info"
     t.boolean "i_accept_term"
     t.boolean "i_consent_personal_data"
+    t.bigint "client_id"
+    t.bigint "photographer_id"
+    t.boolean "retouch"
+    t.index ["client_id"], name: "index_orders_on_client_id"
     t.index ["photo_session_id"], name: "index_orders_on_photo_session_id"
+    t.index ["photographer_id"], name: "index_orders_on_photographer_id"
     t.index ["session_day_id"], name: "index_orders_on_session_day_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "photo_sessions", force: :cascade do |t|

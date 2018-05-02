@@ -12,7 +12,8 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :langs
 
-  has_many :orders
+  has_many :orders, class_name: "Order", foreign_key: "photographer_id"
+  has_many :bookings, class_name: "Order", foreign_key: "client_id"
   accepts_nested_attributes_for :profile
 
   after_create :create_profile
@@ -21,7 +22,6 @@ class User < ApplicationRecord
     client: 0,
     photographer: 1
   }
-
   delegate :first_name, :last_name, :phone, :avatar, to: :profile
 
   validates :email,
