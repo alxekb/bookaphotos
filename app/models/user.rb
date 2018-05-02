@@ -12,7 +12,8 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :langs
 
-  has_many :orders
+  has_many :orders, class_name: "Order", foreign_key: "photographer_id"
+  has_many :bookings, class_name: "Order", foreign_key: "client_id"
   accepts_nested_attributes_for :profile
 
   after_create :create_profile
@@ -21,9 +22,6 @@ class User < ApplicationRecord
     client: 0,
     photographer: 1
   }
-
-  has_attached_file :avatar, styles: { medium: "64x64#", thumb: "16x16#" }, default_url: "/images/:style/missing.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   validates :email,
             presence: true,

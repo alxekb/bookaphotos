@@ -1,0 +1,73 @@
+= form_for @booking do |f|
+  #order-photosession
+    .row
+      .col-12
+        %center
+          %h1 Ordering info and additional options
+      .col-12
+        %center
+          %h4 Step 2 of 3
+      .col-6
+        .choose-photo-count
+          %h5 How many photos you want to get?
+          #slider-photo-count{ "data-min": @photosession.photos_count, "data-max": 99, "data-value": @photosession.photos_count }
+          %label
+            = f.number_field :photo_count,
+              value: @photosession.photos_count,
+              class: 'form-control',
+              step: 1,
+              max: 100,
+              min: @photosession.photos_count.to_i,
+              readonly: true
+            %small{ class: "form-text text-muted" }
+              max 99
+          %h5.additional-option Additional options
+          .form-group
+            .form-check
+              %label.form-check-label
+                = f.check_box :retouch, class: 'form-check-input', placeholder: 'Your email'
+                Retouch 10 photos (+$10)
+              %small{ class: "form-text text-muted" }
+                A wonderful serenity has taken possession
+                of my entire soul, like these sweet mornings
+                of spring which I enjoy with my whole heart
+      .col-6
+        .order-user-info
+          %h5 Ordering information
+          .form-group
+            = f.hidden_field 'photo_session_id', value: @photosession.id
+            = f.hidden_field 'session_day_id', value: @date.id
+            = f.hidden_field :photographer_id, value: @photosession.user_id
+            = text_field_tag 'user[email]', nil, class: 'form-control', placeholder: 'Your email'
+          .form-group
+            = text_field_tag 'user[first_name]', nil, class: 'form-control', placeholder: 'Your First Name'
+          .form-group
+            = text_field_tag 'user[last_name]', nil, class: 'form-control', placeholder: 'Your Last Name'
+          .form-group
+            = text_field_tag 'user[phone]', nil, class: 'form-control', placeholder: 'Your Phone'
+          .form-group
+            = f.text_area :comment, class: 'form-control', placeholder: 'Your comment (optional)'
+          .form-group
+            .form-check
+              %label.form-check-label
+                = f.check_box :i_want_to_get_info, class: 'form-check-input', checked: true
+                I want to get info about new photosessions
+          .form-group
+            .form-check
+              %label.form-check-label
+                = f.check_box :i_accept_term, class: 'form-check-input', checked: true
+                I accept #{link_to 'term of service', root_path}
+          .form-group
+            .form-check
+              %label.form-check-label
+                = f.check_box :i_consent_personal_data, class: 'form-check-input', checked: true
+                I consent to the processing of personal data
+
+
+
+    .row.oreder-btn-controls
+      .col-6
+        = link_to 'Back to choosing date', @photosession, class: 'btn btn-info'
+      .col-6
+        .float-right
+          = f.submit 'Book', class: 'btn btn-primary'

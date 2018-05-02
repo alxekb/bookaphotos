@@ -1,18 +1,15 @@
 class Order < ApplicationRecord
   include EmailValidateable
-  belongs_to :user
+  belongs_to :client, class_name: "User"
+  belongs_to :photographer, class_name: "User"
   belongs_to :photo_session
   belongs_to :session_day
 
-  validates :name,
-            :phone,
-            :user_id,
+  validates :client_id,
+            :photographer_id,
             :photo_session_id,
             :session_day_id,
             presence: true
-  validates :email,
-            presence: true,
-            uniqueness: { case_sensitive: false }, email: true
   validates :comment, presence: true, allow_nil: true, allow_blank: true
   validates :photo_count,
             numericality: { greater_than_or_equal_to: 1 },

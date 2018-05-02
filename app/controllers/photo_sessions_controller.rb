@@ -11,6 +11,10 @@ class PhotoSessionsController < ApplicationController
   def order
     @photosession = PhotoSession.find params[:photo_session_id]
     @date = SessionDay.find params[:session_date_id]
-    @order = Order.new
+    if current_user
+      @booking = current_user.bookings.new
+    else
+      @booking = Order.new
+    end
   end
 end
