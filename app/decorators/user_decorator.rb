@@ -1,11 +1,10 @@
 class UserDecorator < Draper::Decorator
   delegate_all
 
-  decorates_association :photo_session
-  decorates_association :user
+  decorates_association :photo_sessions
 
   def photographer
-    if current_user.photograph?
+    if current_user.photographer?
       current_user
     else
       nil
@@ -33,13 +32,15 @@ class UserDecorator < Draper::Decorator
         .where("session_days.start_time >= ?", Date.current).count
   end
 
+  # client photo sessions
   def upcoming_photosessions
-    orders.joins(photo_session: :session_days)
-        .where("session_days.start_time >= ?", Date.current)
+    bookings.joins(photo_session: :session_days)
+        .where("session_days.start_time >= ?", Date.current).decorate
   end
 
+  # client photo sessions
   def finished_photosessions
-    orders.joins(photo_session: :session_days)
+    bookings.joins(photo_session: :session_days)
         .where("session_days.start_time <= ?", Date.current)
   end
 end

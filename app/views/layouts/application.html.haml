@@ -8,16 +8,16 @@
     %script{ src: "https://use.fontawesome.com/cd577af1ab.js" }
   %body
     = render 'header'
-    - if notice
-      .alert.alert-success
-        = notice
-        %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
-    - if alert
-      .alert.alert-danger
-        = alert
-        %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
     %main.container.pt-5{ role: "main" }
+      - if notice
+        .alert.alert-success
+          = notice
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+      - if alert
+        .alert.alert-danger
+          = alert
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
       = breadcrumbs separator: " &rsaquo; "
       = yield

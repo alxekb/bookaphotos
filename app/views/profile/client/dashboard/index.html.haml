@@ -2,18 +2,21 @@
   .col-12
     - breadcrumb :dashboard
 .row
-  .col-12.border
+  .col-12
     - unless @user.upcoming_photosessions.empty?
-      - @user.upcoming_photosessions do |photo_session|
-        .card
-          = image_tag(photo_session.cover)
-          .card-body
-            %h5.card-title= photo_session.title
-            %p.card-text
-              = photo_session.day
-              %br
-              = photo_session.hour
-            = link_to photo_session.title, photo_session, class: 'btn btn-primary'
+      .row
+        .col-12.border-bottom
+          %h4 Upcoming Photo Sessions
+        - @user.upcoming_photosessions.each do |order|
+          .card.col-12.col-md-3.mt-3
+            = image_tag(order.photo_session.cover)
+            .card-body
+              %h5.card-title= order.photo_session.title
+              %p.card-text
+                = order.session_day.day
+                %br
+                = order.session_day.hour
+              = link_to 'Details', client_photo_session_path(order), class: 'btn btn-primary'
     - else
       %h4 You don't have any upcoming photo sessions
 .row.mt-3

@@ -1,6 +1,6 @@
 class Profile::Client::PhotoSessionsController < ProfileController
   def index
-    @orders = @user.orders.decorate
+    @orders = @user.bookings.decorate
   end
 
   def show

@@ -1,16 +1,63 @@
 .row.pt-5
   .col-12
     - breadcrumb :photo_session, @order.photo_session
-.container.border
+.container.border.px-md-5.pt-md-2
   .row
     .col-12
       %h2 Photo Session Details
-  .row
-    .col-12.col-md-6
+  .row.justify-content-between.p-md-3
+    .col-12.col-md-6.border.nmx-1
       %span
         Photo session
         = @photo_session.title
-      .row
-        .col-6 Order
+      .row.pb-md-5
+        .col-12.col-md-8
+          .col-6 Order
+          .col-6
+            = @order.id
+          .col-6 Order status
+          .col-6
+            Paid
+            -#= @order.status
+          .col-6 Photographer
+          .col-6
+            = @photo_session.photographer_full_name
+          .col-6 Photos count
+          .col-6
+            = @order.photo_count
+          .col-6 Session length
+          .col-6
+            = @photo_session.duration
+        .col-12.col-md-4
+          = image_tag(@photo_session.photographer_avatar, class: 'img-fluid')
+      .row.pt-md-3.mt-md-3
+        .col-6 Date
         .col-6
-          = @order.id
+          = @order.day
+        .col-6 Time
+        .col-6
+          = @order.time
+        .col-6 Location
+        .col-6
+          = @photo_session.cities.first.title
+          -#TODO Where the location is stored?
+        .col-6 Address
+        .col-6
+          = @photo_session.how_route
+          -#TODO Where the address is stored?
+      .row.pt-md-4.mt-md-5
+        .col-12.text-center
+          = link_to 'Download photos', '#'
+          or
+          = link_to 'browse your album online', '#'
+      .row.pt-md-5.mt-md-5.align-bottom
+        .col-12.col-md-auto.border-right
+          = link_to 'Invite a friend', '#'
+        .col-12.col-md-auto.border-left.border-right
+          = link_to 'Cancel', '#'
+        .col-12.col-md-auto.border-right.border-left
+          = link_to 'Postpone', '#'
+        .col-12.col-md-auto.border-left
+          = link_to 'Ask a question', '#'
+    .col-12.col-md-6.border.nmx-1
+      = image_tag(@photo_session.full_cover, class: 'img-fluid')
