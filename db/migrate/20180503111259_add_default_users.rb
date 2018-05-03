@@ -1,25 +1,28 @@
 class AddDefaultUsers < ActiveRecord::Migration[5.1]
   def up
     admin = AdminUser
-                .find_or_create_by(
+                .find_or_initialize_by(
                   email: 'admin@bookaphotos.com',
-                  password: 'rails123',
-                  password_confirmation: 'rails123'
                 )
+    admin.password = 'rails123'
+    admin.password_confirmation = 'rails123'
+    admin.save
     photographer = User
-                       .find_or_create_by(
+                       .find_or_initialize_by(
                          email: 'photographer@bookaphotos.com',
-                         password: 'rails123',
-                         password_confirmation: 'rails123',
-                         role: "photographer"
                        )
+    photographer.password = 'rails123'
+    photographer.password_confirmation = 'rails12'
+    photographer.role = "photographer"
+    photographer.save
     client = User
-                 .find_or_create_by(
+                 .find_or_initialize_by(
                    email: 'client@bookaphotos.com',
-                   password: 'rails123',
-                   password_confirmation: 'rails123',
-                   role: "client"
                  )
+    client.password = 'rails123'
+    client.password_confirmation = 'rails123'
+    client.role = "client"
+    client.save
   end
 
   def down
