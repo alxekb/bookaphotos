@@ -15,7 +15,7 @@ class Order < ApplicationRecord
             presence: true
   validates :comment, presence: true, allow_nil: true, allow_blank: true
   validates :photo_count,
-            numericality: { greater_than_or_equal_to: 1 },
+            numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: additional_photos_limit },
             allow_blank: true,
             allow_nil: true
   validates :i_accept_term,
@@ -35,5 +35,9 @@ class Order < ApplicationRecord
     elsif !self.i_accept_term
       errors.add(:i_accept_term, "You must accept term's to continue")
     end
+  end
+
+  def additional_photos_limit
+    session_day.additional_photos_limit
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180503123450) do
+ActiveRecord::Schema.define(version: 20180504172401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,7 +139,6 @@ ActiveRecord::Schema.define(version: 20180503123450) do
   create_table "photo_sessions", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.decimal "price"
     t.bigint "user_id"
     t.boolean "published"
     t.datetime "created_at", null: false
@@ -147,15 +146,10 @@ ActiveRecord::Schema.define(version: 20180503123450) do
     t.integer "duration"
     t.integer "photos_count"
     t.integer "period_of_execution"
-    t.decimal "price_per_photo"
     t.bigint "currency_id"
     t.text "for_whom"
     t.text "preparation"
     t.text "what_to_take"
-    t.text "how_route"
-    t.text "how_find"
-    t.string "lat"
-    t.string "lng"
     t.index ["currency_id"], name: "index_photo_sessions_on_currency_id"
     t.index ["user_id"], name: "index_photo_sessions_on_user_id"
   end
@@ -202,6 +196,8 @@ ActiveRecord::Schema.define(version: 20180503123450) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "currency_id"
+    t.decimal "price_per_additional_photo"
+    t.integer "additional_photos_limit"
     t.index ["currency_id"], name: "index_session_days_on_currency_id"
     t.index ["photo_session_id"], name: "index_session_days_on_photo_session_id"
   end
