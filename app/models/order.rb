@@ -23,7 +23,7 @@ class Order < ApplicationRecord
             inclusion: { in: [true] }
   validates :i_want_to_get_info, inclusion: { in: [true, false] }
   validate :ensure_user_agreement
-  validate :additional_photos_limit
+  validate :order_additional_photos_limit
 
   private
 
@@ -38,9 +38,11 @@ class Order < ApplicationRecord
     end
   end
 
-  def additional_photos_limit
-    if self.photo_count != session_day.additional_photos_limit
-      errors.add(:photo_count, "Can't be more than specified by photographer.")
+  def order_additional_photos_limit
+    if session_day
+      if self.photo_count != self.session_day.additional_photos_limit
+        errors.add(:photo_count, "Can't be more than specified by photographer.")
+      end
     end
   end
 end

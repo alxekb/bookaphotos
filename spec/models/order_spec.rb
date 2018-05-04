@@ -3,8 +3,17 @@
 require "rails_helper"
 
 RSpec.describe Order, type: :model do
+  let(:session_day) { create(:session_day) }
+  let(:client) { create(:user, role: :client) }
+  let(:photographer) { create(:user, role: :photographer) }
+  let(:order) { build(:order,
+                      photographer: photographer,
+                      client: client,
+                      photo_count: session_day.additional_photos_limit,
+                      photographer_id: photographer.id)
+  }
   it "has a valid factory" do
-    expect(build(:order)).to be_valid
+    expect(order).to be_valid
   end
 
   describe "validations" do

@@ -6,6 +6,6 @@ FactoryBot.define do
     special { Faker::Boolean.boolean(0.5) }
     price { Faker::Number.between(1, 5000) }
     price_per_additional_photo { Faker::Number.between(1, 5000) }
-    additional_photos_limit { Faker::Number.between(1, 5000) }
+    additional_photos_limit { 10 }
   end
 end
