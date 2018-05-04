@@ -28,23 +28,15 @@ class PhotoSession < ApplicationRecord
 
   validates :title,
            :description,
-           :price,
            :user_id,
            :currency_id,
            :duration,
            :photos_count,
            :period_of_execution,
-           :price_per_photo,
            :for_whom,
            :preparation,
-           :what_to_take,
-           :how_route,
-           :how_find,
-           :lat,
-           :lng, presence: true
-  validates :price,
-            :price_per_photo,
-            :duration,
+           :what_to_take, presence: true
+  validates :duration,
             :period_of_execution,
             :photos_count, numericality: { greater_than_or_equal_to: 1 }
   validates :published, inclusion: { in: [true, false] }
