@@ -15,7 +15,7 @@ class Order < ApplicationRecord
             presence: true
   validates :comment, presence: true, allow_nil: true, allow_blank: true
   validates :photo_count,
-            numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: additional_photos_limit },
+            numericality: { greater_than_or_equal_to: 1 },
             allow_blank: true,
             allow_nil: true
   validates :i_accept_term,
@@ -23,6 +23,7 @@ class Order < ApplicationRecord
             inclusion: { in: [true] }
   validates :i_want_to_get_info, inclusion: { in: [true, false] }
   validate :ensure_user_agreement
+  validate :additional_photos_limit
 
   private
 
@@ -38,6 +39,8 @@ class Order < ApplicationRecord
   end
 
   def additional_photos_limit
-    session_day.additional_photos_limit
+    if self.photo_count != session_day.additional_photos_limit
+      errors.add(:photo_count, "Can't be more than specified by photographer.")
+    end
   end
 end
