@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180503111259) do
+ActiveRecord::Schema.define(version: 20180503123450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20180503111259) do
     t.bigint "client_id"
     t.bigint "photographer_id"
     t.boolean "retouch"
+    t.string "aasm_state"
     t.index ["client_id"], name: "index_orders_on_client_id"
     t.index ["photo_session_id"], name: "index_orders_on_photo_session_id"
     t.index ["photographer_id"], name: "index_orders_on_photographer_id"

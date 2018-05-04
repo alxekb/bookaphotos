@@ -1,14 +1,17 @@
 class Order < ApplicationRecord
-  include EmailValidateable
+  include OrderStateMachine
+
   belongs_to :client, class_name: "User"
   belongs_to :photographer, class_name: "User"
   belongs_to :photo_session
   belongs_to :session_day
 
+
   validates :client_id,
             :photographer_id,
             :photo_session_id,
             :session_day_id,
+            :aasm_state,
             presence: true
   validates :comment, presence: true, allow_nil: true, allow_blank: true
   validates :photo_count,
