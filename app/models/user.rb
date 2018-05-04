@@ -18,6 +18,9 @@ class User < ApplicationRecord
 
   after_create :create_profile
 
+  scope :photographers, -> { where(role: :photographer) }
+  scope :clients, -> { where(role: :client) }
+
   enum role: {
     client: 0,
     photographer: 1

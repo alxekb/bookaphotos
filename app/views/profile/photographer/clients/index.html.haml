@@ -14,10 +14,13 @@
     - @orders.each do |order|
       %tr
         %th{:scope => "row"}= order.id
-        %td= order.email
-        %td= order.phone
-        %td= order.name
+        %td= order.client_email
+        %td= order.client_phone
+        %td= order.client_full_name
         %td= order.comment
-        %td= order.photo_session.title
-        %td= order.created_at
+        %td= order.photo_session_title
+        %td
+          = order.created_hour
+          %br
+          = order.created_day
         %td 0
