@@ -35,8 +35,8 @@
       %div{ "aria-labelledby" => "#{spec}-tab", :role => "tabpanel", class: index === 0 ? "tab-pane fade show active" : "tab-pane fade", id: spec }
         %p= @photosession[spec.to_sym]
     %div{ "aria-labelledby" => "map-tab", :role => "tabpanel", class: "tab-pane fade", id: "map" }
-      = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw',  :static => 'true', :zoom_level => 10 , :default_coordinates => [@photosession.lat.to_i, @photosession.lng.to_i], map_width: '100%', autocomplete: { enable: true, class: 'form-control' }
-
+      = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw',  :static => 'true', :zoom_level => 10 , :default_coordinates => [@photosession.lat, @photosession.lng], map_width: '100%', autocomplete: { enable: true, class: 'form-control' }
+      -#TODO Fix map coordinates
 
 #choose-date
   .card-deck.mb-3.text-center

@@ -3,7 +3,7 @@ class PhotoSessionDecorator < ApplicationDecorator
 
   decorates_association :orders
   decorates_association :client
-  decorates_association :session_days
+  #decorates_association :session_days
 
   def photographer
     user
@@ -35,5 +35,9 @@ class PhotoSessionDecorator < ApplicationDecorator
 
   def location
     user.location.name
+  end
+
+  def active_session_days_count
+    session_days.where("start_time >= ?", Date.current).count
   end
 end

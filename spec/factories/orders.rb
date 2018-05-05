@@ -5,7 +5,7 @@ FactoryBot.define do
     photo_session
     session_day
     comment { Faker::Lorem.sentence }
-    photo_count { Faker::Number.between(1, 100) }
+    photo_count { 10 }
     i_want_to_get_info true
     i_accept_term true
     i_consent_personal_data true

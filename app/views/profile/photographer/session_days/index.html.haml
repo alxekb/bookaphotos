@@ -18,9 +18,9 @@
       %th{:scope => "col"} Status
   %tbody
     - @photo_sessions.each do |photo_session|
-      - photo_session.shooting_days.each do |shooting_day|
+      - photo_session.session_days.each do |shooting_day|
         %tr
           %th{ scope: "row"}= shooting_day.start_time.strftime("%d.%m.%Y")
           %td= shooting_day.start_time.strftime("%H:%M")
           %td= photo_session.title
-          %td= photo_session.user.location
+          %td= photo_session.user.locations.each(&:name)

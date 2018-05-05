@@ -18,9 +18,10 @@
   %tbody
     - @photo_sessions.each do |photo_session|
       %tr
-        %th{ scope: "row"} Type
+        %th{ scope: "row"}
+          = photo_session.session_type
         %td= photo_session.title
-        %td= photo_session.duration
+        %td= photo_session.active_session_days_count
         %td= photo_session.created_at
         %td
           = link_to 'Edit', edit_photographer_photo_session_path(photo_session)
