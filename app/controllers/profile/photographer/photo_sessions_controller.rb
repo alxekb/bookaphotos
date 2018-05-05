@@ -4,7 +4,7 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
   # GET /photo_sessions
   # GET /photo_sessions.json
   def index
-    @photo_sessions = PhotoSession.all
+    @photo_sessions = PhotoSession.all.decorate
   end
 
   # GET /photo_sessions/1
@@ -14,7 +14,7 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
 
   # GET /photo_sessions/new
   def new
-    @photo_session = PhotoSession.new
+    @photo_session = current_user.photo_sessions.new
   end
 
   # GET /photo_sessions/1/edit
@@ -24,9 +24,7 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
   # POST /photo_sessions
   # POST /photo_sessions.json
   def create
-    @photo_session = PhotoSession.new(photo_session_params)
-    @photo_session.user = current_user
-
+    @photo_session = current_user.photo_sessions.new(photo_session_params)
     respond_to do |format|
       if @photo_session.save
         format.html { redirect_to [:photographer, @photo_session], notice: "Photo session was successfully created." }
@@ -70,6 +68,20 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def photo_session_params
-    params.fetch(:photo_session, {}).permit(:title, :description, :price)
+    params.require(:photo_session)
+          .permit(
+            :user_id,
+            :title,
+            :description,
+            :published,
+            :duration,
+            :photos_count,
+            :period_of_execution,
+            :currency_id,
+            :for_whom,
+            :preparation,
+            :what_to_take,
+            :session_type
+          )
   end
 end

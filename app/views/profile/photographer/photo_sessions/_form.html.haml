@@ -1,20 +1,44 @@
-= form_for [:photographer, @photo_session] do |f|
-  - if @photo_session.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@photo_session.errors.count, "error")} prohibited this photo_session from being saved:"
-      %ul
-        - @photo_session.errors.full_messages.each do |message|
-          %li= message
+.col-12
+  = form_for @photo_session, url:  photographer_photo_sessions_path do |f|
+    - if @photo_session.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@photo_session.errors.count, "error")} prohibited this photo_session from being saved:"
+        %ul
+          - @photo_session.errors.full_messages.each do |message|
+            %li= message
 
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
-  .form-group
-    = f.label :description
-    = f.text_area :description, class: 'form-control'
-  .form-group
-    = f.label :price
-    = f.number_field :price, class: 'form-control'
-
-  .actions
-    = f.submit 'Save'
+    .row
+      .col-12.col-md-6
+        .form-group
+          = f.text_field :title, class: 'form-control', placeholder: 'Title'
+        .form-group
+          = f.text_field :for_whom, class: 'form-control', placeholder: 'For whom'
+        .form-group
+          = f.text_field :preparation, class: 'form-control', placeholder: 'Preparation'
+        .form-group
+          = f.text_field :what_to_take, class: 'form-control', placeholder: 'What to take'
+        .form-group
+          = f.text_area :description, class: 'form-control', placeholder: 'Description'
+      .col-12.col-md-6
+        .form-row
+          .form-group.col-12.col-md-4
+            .form-check
+              = f.check_box :published, class: 'form-check-input'
+              = f.label :published, class: 'form-check-label'
+          .form-group.col-12.col-md-4
+            = f.label :session_type
+            = f.select :session_type, PhotoSession.session_types.keys, class: 'form-control'
+          .form-group.col-12.col-md-4
+            = f.label :currency
+            %br
+            = f.collection_select :currency_id, Currency.all, :id, :title, class: 'form-control'
+        .form-group
+          = f.number_field :duration, class: 'form-control', placeholder: 'Duration'
+        .form-group
+          = f.number_field :photos_count, class: 'form-control', placeholder: 'Photo count'
+        .form-group
+          = f.number_field :period_of_execution, class: 'form-control', placeholder: 'Period of execution'
+    .row.justify-content-end
+      .col-12.col-md-4
+        .actions
+          = f.submit 'Save', class: 'btn btn-success btn-block'
