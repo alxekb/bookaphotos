@@ -26,6 +26,11 @@ class PhotoSession < ApplicationRecord
   has_many :session_days, dependent: :destroy
   accepts_nested_attributes_for :session_days, allow_destroy: true, reject_if: ->(a) { a[:id].nil? && a[:price].nil? }
 
+  enum session_type: {
+    special: 0,
+    express: 1
+  }
+
   validates :title,
            :description,
            :user_id,
@@ -40,6 +45,7 @@ class PhotoSession < ApplicationRecord
             :period_of_execution,
             :photos_count, numericality: { greater_than_or_equal_to: 1 }
   validates :published, inclusion: { in: [true, false] }
+  validates :session_type, presence: true, inclusion: { in: PhotoSession.session_types }
 
   def self.touch
     update_all(updated_at: Time.now)

@@ -20,7 +20,6 @@ class SessionDay < ApplicationRecord
             presence: true
   validates :price,
             :price_per_additional_photo, numericality: { greater_than_or_equal_to: 1 }
-  validates :special, inclusion: { in: [true, false] }
 
   def session_time
     self.start_time.strftime("%M%H").to_i * 100

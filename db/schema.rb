@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180504172401) do
+ActiveRecord::Schema.define(version: 20180505151355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 20180504172401) do
     t.text "for_whom"
     t.text "preparation"
     t.text "what_to_take"
+    t.integer "session_type", default: 0
     t.index ["currency_id"], name: "index_photo_sessions_on_currency_id"
     t.index ["user_id"], name: "index_photo_sessions_on_user_id"
   end
@@ -191,7 +192,6 @@ ActiveRecord::Schema.define(version: 20180504172401) do
   create_table "session_days", force: :cascade do |t|
     t.bigint "photo_session_id"
     t.datetime "start_time"
-    t.boolean "special"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
