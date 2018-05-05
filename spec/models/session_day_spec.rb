@@ -18,6 +18,6 @@ RSpec.describe SessionDay, type: :model do
 
     it { is_expected.to belong_to(:photo_session) }
     it { is_expected.to belong_to(:currency) }
-    it { is_expected.to belongs_to(:location) }
+    it { is_expected.to belong_to(:location) }
   end
 end
