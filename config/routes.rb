@@ -17,7 +17,22 @@ Rails.application.routes.draw do
       resources :session_days
       resources :invoices
       resources :clients, as: :clients
-      resources :tasks
+      resources :tasks, except: %i[new edit update destroy create] do
+        member do
+          patch :start_editing
+          patch :finish_editing
+          patch :start_sorting
+          patch :finish_sorting
+          patch :start_processing
+          patch :finish_processing
+          patch :send_photos
+          patch :client_receive
+          patch :client_review
+          patch :client_add_service
+          patch :closing_order
+          patch :archiving_order
+        end
+      end
     end
 
     scope module: :client, as: :client, path: "profile" do
