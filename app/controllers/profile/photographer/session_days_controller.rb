@@ -2,7 +2,7 @@ class Profile::Photographer::SessionDaysController < Profile::PhotographerContro
   before_action :set_session_day, only: %i[show new]
 
   def index
-    @session_days = current_user.session_days
+    @session_days = current_user.photo_sessions.joins(:session_days)
   end
 
   def show; end

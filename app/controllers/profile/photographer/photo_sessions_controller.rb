@@ -4,7 +4,7 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
   # GET /photo_sessions
   # GET /photo_sessions.json
   def index
-    @photo_sessions = PhotoSession.all.decorate
+    @photo_sessions = current_user.photo_sessions.decorate
   end
 
   # GET /photo_sessions/1
