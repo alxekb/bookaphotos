@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180505151355) do
+ActiveRecord::Schema.define(version: 20180505155146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,10 @@ ActiveRecord::Schema.define(version: 20180505151355) do
     t.decimal "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "session_day_id"
+    t.bigint "city_id"
+    t.index ["city_id"], name: "index_locations_on_city_id"
+    t.index ["session_day_id"], name: "index_locations_on_session_day_id"
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
@@ -198,7 +202,9 @@ ActiveRecord::Schema.define(version: 20180505151355) do
     t.bigint "currency_id"
     t.decimal "price_per_additional_photo"
     t.integer "additional_photos_limit"
+    t.bigint "location_id"
     t.index ["currency_id"], name: "index_session_days_on_currency_id"
+    t.index ["location_id"], name: "index_session_days_on_location_id"
     t.index ["photo_session_id"], name: "index_session_days_on_photo_session_id"
   end
 
