@@ -2,7 +2,6 @@ ActiveAdmin.register PhotoSession do
 
   index do
     column :title
-    column :price
     column :user
     column :created_at
     actions
@@ -12,6 +11,7 @@ ActiveAdmin.register PhotoSession do
     f.inputs "PhotoSession Details" do
       f.input :title
       f.input :published
+      f.input :session_type
 
       f.inputs "Covers" do
         f.has_many :covers do |c|
@@ -33,12 +33,12 @@ ActiveAdmin.register PhotoSession do
 
       f.has_many :session_days do |s|
         s.input :start_time, as: :just_datetime_picker
-        s.input :special
         s.input :price
         s.input :price_per_additional_photo
         s.input :additional_photos_limit
         s.input :currency
         s.input :_destroy, as: :boolean, required: false, label: "Remove" if s.object.present?
+        s.input :location
       end
 
       f.input :user

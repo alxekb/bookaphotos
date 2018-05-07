@@ -101,7 +101,7 @@ gem "elasticsearch-model", github: "elastic/elasticsearch-rails", branch: "5.x"
 gem "elasticsearch-rails", github: "elastic/elasticsearch-rails", branch: "5.x"
 gem "elasticsearch-dsl"
 
-gem "paperclip", "~> 5.0.0"
+gem "paperclip", "~> 6.0"
 
 gem "gmap_coordinates_picker", "0.0.10"
 gem "activeadmin_latlng"
@@ -111,3 +111,5 @@ gem "gretel"
 gem "draper", "~> 3.0", ">= 3.0.1"
 
 gem "aasm", "~> 4.12", ">= 4.12.3"
+
+gem "stripe"

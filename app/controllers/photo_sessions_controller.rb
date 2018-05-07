@@ -1,6 +1,10 @@
 class PhotoSessionsController < ApplicationController
   def index
-    @photosessions = PhotoSession.search(params).page(params[:page])
+    if params
+      @photosessions = PhotoSession.search(params).page(params[:page])
+    else
+      @photosessions = PhotoSession.all
+    end
   end
 
   def show
@@ -12,9 +16,9 @@ class PhotoSessionsController < ApplicationController
     @photosession = PhotoSession.find params[:photo_session_id]
     @date = SessionDay.find params[:session_date_id]
     if current_user
-      @booking = current_user.bookings.new
+      @order = current_user.bookings.new
     else
-      @booking = Order.new
+      @order = Order.new
     end
   end
 end
