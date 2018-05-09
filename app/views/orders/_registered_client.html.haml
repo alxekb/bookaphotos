@@ -16,17 +16,16 @@
       .col-6
         .choose-photo-count
           %h5 How many photos you want to get?
-          #slider-photo-count{ "data-min": @photosession.photos_count, "data-max": 99, "data-value": @photosession.photos_count }
+          #slider-photo-count{ "data-min": 1, "data-max": 99, "data-value": @photosession.photos_count }
           %label
             = f.number_field :photo_count,
               value: @photosession.photos_count,
               class: 'form-control',
               step: 1,
-              max: 100,
-              min: @photosession.photos_count.to_i,
-              readonly: true
+              max: 99,
+              min: 1
             %small{ class: "form-text text-muted" }
-              max 99
+              max #{@photosession.photos_count}
           %h5.additional-option Additional options
           .form-group
             .form-check
