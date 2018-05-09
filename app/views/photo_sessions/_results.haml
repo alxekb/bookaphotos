@@ -31,7 +31,8 @@
           %p.card-text.text-right
             %h3.text-white
               = photosession.currency
-              = photosession.price
+              = photosession.session_days.map(&:price).min
+          -#BUG TODO select the price from session days?
           = link_to 'Book', photosession, class: 'btn btn-success book-btn'
 
 = paginate @photosessions, theme: 'twitter-bootstrap-4'

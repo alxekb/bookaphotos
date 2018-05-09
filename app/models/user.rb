@@ -36,4 +36,8 @@ class User < ApplicationRecord
   validates :role,
             presence: true,
             inclusion: { in: User.roles }
+
+  def to_s
+    email
+  end
 end

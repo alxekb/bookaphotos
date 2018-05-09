@@ -40,7 +40,7 @@ class Order < ApplicationRecord
 
   def order_additional_photos_limit
     if session_day
-      if self.photo_count != self.session_day.additional_photos_limit
+      if self.photo_count > self.session_day.additional_photos_limit
         errors.add(:photo_count, "Can't be more than specified by photographer.")
       end
     end

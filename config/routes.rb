@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders
+  resources :charges
 
   get "/portfolio(/:theme)", to: "portfolio#index", as: "portfolio"
   get "/about_us", to: "home#about", as: "about"

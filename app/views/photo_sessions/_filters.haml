@@ -15,18 +15,18 @@
             Search by price ($)
         .row
           .col
-            = f.number_field :min, name: 'min', value: params[:min] || @photosessions.aggregations.min_price[:value].to_i, class: 'form-control'
+            = f.number_field :min, name: 'min', value: params[:min] || @photosessions.aggregations.min_price[:value], class: 'form-control'
           .col
-            = f.number_field :max, name: 'max', value: params[:max] || @photosessions.aggregations.max_price[:value].to_i, class: 'form-control'
+            = f.number_field :max, name: 'max', value: params[:max] || @photosessions.aggregations.max_price[:value], class: 'form-control'
         .slider-range-wrapper
           #slider-range{ "data-min": @photosessions.aggregations.min_price[:value].to_i, "data-max": @photosessions.aggregations.max_price[:value].to_i, "data-value": [params[:min] || @photosessions.aggregations.min_price[:value].to_i, params[:max] || @photosessions.aggregations.max_price[:value].to_i] }
 
 
 
-      .form-check
-        %label.form-check-label
-          = check_box_tag 'special', '1', params[:special].present? ? true : false, class: 'form-check-input'
-          Special offers only
+      -#.form-check
+      -#  %label.form-check-label
+      -#    = check_box_tag 'special', '1', params[:special].present? ? true : false, class: 'form-check-input'
+      -#    Special offers only
       .form-group.filter-section.filter-popular-cities
         %label
           %b Popular cities

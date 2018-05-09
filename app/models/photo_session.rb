@@ -45,7 +45,7 @@ class PhotoSession < ApplicationRecord
             :period_of_execution,
             :photos_count, numericality: { greater_than_or_equal_to: 1 }
   validates :published, inclusion: { in: [true, false] }
-  validates :session_type, presence: true, inclusion: { in: PhotoSession.session_types }
+  validates :session_type, presence: true, inclusion: { in: PhotoSession.session_types.keys }
 
   def self.touch
     update_all(updated_at: Time.now)

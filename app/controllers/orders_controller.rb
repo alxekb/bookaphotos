@@ -1,14 +1,16 @@
 class OrdersController < ApplicationController
   def create
     @order = Order.new(orders_params)
+    @order.total_amount = @order.session_day.price
     unless user_signed_in?
       @order.client = new_client
     end
     respond_to do |format|
-      if @order.save
-        format.html { redirect_to root_path, notice: 'Your order have been saved!' }
+      if @order.save!
+        format.html { redirect_to new_charge_path(order_id: @order.id) }
       else
         format.html { redirect_to photo_session_order_path(@order.photo_session, @order.session_day.id), alert: 'Errors' }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -29,6 +31,7 @@ class OrdersController < ApplicationController
           :retouch,
           :photographer_id,
           :client_id,
+          :total_amount
         )
   end
 
