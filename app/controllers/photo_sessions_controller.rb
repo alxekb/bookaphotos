@@ -1,10 +1,6 @@
 class PhotoSessionsController < ApplicationController
   def index
-    if params
-      @photosessions = PhotoSession.search(params).page(params[:page])
-    else
-      @photosessions = PhotoSession.all
-    end
+    @photosessions = PhotoSession.search(params).page(params[:page])
   end
 
   def show

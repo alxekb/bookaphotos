@@ -10,7 +10,6 @@ module PhotoSessionSearchable
       mapping do
         indexes :title, analyzer: "snowball", boost: 100, fielddata: true
         indexes :description, analyzer: "snowball", boost: 100
-        indexes :price, type: :integer
         indexes :updated_at, type: :date
         indexes :cities do
           indexes :id
@@ -26,7 +25,7 @@ module PhotoSessionSearchable
           indexes :start_time, type: :date
           indexes :session_time, type: :integer
           indexes :special
-          indexes :price
+          indexes :price, type: :integer
         end
       end
     end
@@ -35,7 +34,7 @@ module PhotoSessionSearchable
     #
     def as_indexed_json(_options = {})
       as_json(
-        only: %w[title description price updated_at],
+        only: %w[title description updated_at],
         methods: %w[cities themes session_days]
         )
     end
@@ -66,7 +65,7 @@ module PhotoSessionSearchable
             end
 
             must do
-              range :price do
+              range "session_days.price" do
                 gte params[:min]
                 lte params[:max]
               end
@@ -83,12 +82,11 @@ module PhotoSessionSearchable
                 term "themes.title": params[:theme]
               end
             end
-
-            if params[:special]
-              must do
-                term "session_days.special": true
-              end
-            end
+            # if params[:special]
+            #   must do
+            #     term "session_days.special": true
+            #   end
+            # end
 
             if params[:date].present?
               must do
@@ -154,12 +152,19 @@ module PhotoSessionSearchable
         end
 
         aggregation :min_price do
-          min field: :price
+          min field: "session_days.price"
         end
 
         aggregation :max_price do
-          max field: :price
+          max field: "session_days.price"
         end
+        # aggregation :min_price do
+        #   min field: :price
+        # end
+        #
+        # aggregation :max_price do
+        #   max field: :price
+        # end
 
         aggregation :popular_titles do
           terms do
