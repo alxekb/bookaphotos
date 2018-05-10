@@ -24,3 +24,12 @@
     %h4 Finished photosessions
     %hr
     = render partial: 'profile/client/dashboard/photo_session'
+-#.row.mt-3
+-#  .col-12
+-#    - @list.each do |entry|
+-#      %p
+-#        - hasshed = entry.to_hash
+-#        = hasshed
+-#        - url = @drop_box_user.get_temporary_link(hasshed["path_lower"]).link
+-#        = image_tag(url)
+-#TODO move to albums page
