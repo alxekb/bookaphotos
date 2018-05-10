@@ -113,3 +113,5 @@ gem "draper", "~> 3.0", ">= 3.0.1"
 gem "aasm", "~> 4.12", ">= 4.12.3"
 
 gem "stripe"
+
+gem "dropbox_api"

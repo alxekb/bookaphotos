@@ -23,6 +23,14 @@ class UserDecorator < Draper::Decorator
     "#{first_name} #{last_name}"
   end
 
+  def connected_dropbox
+    if profile.dropbox_token
+      h.link_to "Dropbox - connected", h.photographer_dropbox_auth_path, class: "nav-link bg-light-green disabled"
+    else
+      h.link_to "Connect Dropbox", h.photographer_dropbox_auth_path, class: "nav-link"
+    end
+  end
+
   def to_s
     email
   end
