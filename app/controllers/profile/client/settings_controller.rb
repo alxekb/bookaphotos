@@ -1,4 +1,4 @@
-class Profile::Client::SettingsController < ProfileController
+class Profile::Client::SettingsController < Profile::ClientController
   def index
     @user_profile
   end
