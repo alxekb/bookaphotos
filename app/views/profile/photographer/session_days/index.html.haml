@@ -6,21 +6,22 @@
     .col-3
       %button.btn.btn-primary{ type: :submit } Submit
     .col-3
-      = link_to 'New Shooting Day', new_photographer_session_day_path
+      = link_to 'New Session Day', new_photographer_session_day_path
 %table.table
   %thead
     %tr
-      %th{:scope => "col"} Date
-      %th{:scope => "col"} Time
+      %th{:scope => "col"} Session Date
+      %th{:scope => "col"} Session Time
       %th{:scope => "col"} Photosession
       %th{:scope => "col"} Location
       %th{:scope => "col"} Booked appointments
       %th{:scope => "col"} Status
   %tbody
-    - @photo_sessions.each do |photo_session|
-      - photo_session.session_days.each do |shooting_day|
-        %tr
-          %th{ scope: "row"}= shooting_day.start_time.strftime("%d.%m.%Y")
-          %td= shooting_day.start_time.strftime("%H:%M")
-          %td= photo_session.title
-          %td= photo_session.user.locations.each(&:name)
+    - @session_days.each do |session_day|
+      %tr
+        %th{ scope: "row"}= session_day.day
+        %td= session_day.hour
+        %td= session_day.photo_session_title
+        %td= session_day.location_name
+        %td= session_day.booked_appointments
+        = session_day.status
