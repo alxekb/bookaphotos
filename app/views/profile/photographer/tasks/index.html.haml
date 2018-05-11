@@ -8,29 +8,29 @@
       %div.form-group
         %input.form-control{type: :date}
 %div.container.full-scroll.mt-3
+  .row.text-left
+    .col-sm-4
+      %h6 GG
+%div.container.full-scroll.mt-3
   .row.text-left.flex-nowrap
     .col-sm-3
-      %h6 Upcoming Photosessions
-      .card
-        .card-header YAY
-        .card-body
-          loremipsum dolor
-      .card
-        .card-header YAY
-        .card-body
-          loremipsum dolor
-      .card
-        .card-header YAY
-        .card-body
-          loremipsum dolor
-      .card
-        .card-header YAY
-        .card-body
-          loremipsum dolor
-      .card
-        .card-header YAY
-        .card-body
-          loremipsum dolor
+      %h6 Upcoming Events
+      .row
+        .col-12
+          - @user.upcoming_events.each do |event|
+            .card
+              .card-header
+                = event.photo_session.title
+                %span.fa.fa-cogs
+              .card-body
+                %p Order Id: ##{event.id}
+                %p
+                  Date: #{event.photo_session_day}
+                  %br
+                  Time: #{event.photo_session_hour}
+                %p
+                  Status: #{event.aasm_state}
+
     .col-sm-3
       %h6 Sorting Photos
       .card
@@ -54,12 +54,13 @@
           loremipsum dolor
     .col-sm-3
       %h6 Sending photos
-      %hr
-      - 10.times do
-        .card
-          .card-header Much 10
-          .card-body
-            Lots of clients
+      .row
+        .col-12
+          - 10.times do
+            .card
+              .card-header Much 10
+              .card-body
+                Lots of clients
     .col-sm-3
       %h6 Done
       .card
@@ -84,3 +85,5 @@
         .card-header YAY
         .card-body
           loremipsum dolor
+  .row.text-left.flex-nowrap
+

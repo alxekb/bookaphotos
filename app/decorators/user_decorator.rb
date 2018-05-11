@@ -35,10 +35,55 @@ class UserDecorator < Draper::Decorator
     email
   end
 
+  # Photographer  decorations
+
+  def upcoming_events
+    orders.joins(photo_session: :session_days)
+          .where("session_days.start_time >= ?", Date.current).decorate
+  end
+
   def upcoming_events_count
     orders.joins(photo_session: :session_days)
         .where("session_days.start_time >= ?", Date.current).count
   end
+
+  def editing_orders
+    orders.editing
+  end
+
+  def sorting_orders
+    orders.sorting
+  end
+
+  def processing_orders
+    orders.processing
+  end
+
+  def sent_orders
+    orders.sent
+  end
+
+  def client_received_orders
+    orders.client_received
+  end
+
+  def client_reviewed_orders
+    orders.client_reviewed
+  end
+
+  def client_services_extended
+    orders.client_service_extend
+  end
+
+  def closed_orders
+    orders.order_closed
+  end
+
+  def archived_orders
+    order.archived
+  end
+
+  # End Photographer decorations
 
   # client photo sessions
   def upcoming_photosessions

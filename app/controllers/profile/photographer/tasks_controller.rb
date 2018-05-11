@@ -1,7 +1,5 @@
-class Profile::Photographer::TasksController < ProfileController
+class Profile::Photographer::TasksController < Profile::PhotographerController
   include OrderStateActions
-  before_action :set_order
-
   def index
     @user = current_user.decorate
   end
