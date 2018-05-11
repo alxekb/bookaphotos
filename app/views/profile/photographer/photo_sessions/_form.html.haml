@@ -10,14 +10,19 @@
     .row
       .col-12.col-md-6
         .form-group
+          = f.label 'Photo session Title'
           = f.text_field :title, class: 'form-control', placeholder: 'Title'
         .form-group
+          = f.label 'For Whom'
           = f.text_field :for_whom, class: 'form-control', placeholder: 'For whom'
         .form-group
+          = f.label 'Preparation'
           = f.text_field :preparation, class: 'form-control', placeholder: 'Preparation'
         .form-group
+          = f.label 'What to take with you'
           = f.text_field :what_to_take, class: 'form-control', placeholder: 'What to take'
         .form-group
+          = f.label 'Description'
           = f.text_area :description, class: 'form-control', placeholder: 'Description'
       .col-12.col-md-6
         .form-row
@@ -33,10 +38,13 @@
             %br
             = f.collection_select :currency_id, Currency.all, :id, :title, class: 'form-control'
         .form-group
+          = f.label 'Photo session duration (minutes)'
           = f.number_field :duration, class: 'form-control', placeholder: 'Duration'
         .form-group
+          = f.label 'Photo session photo count'
           = f.number_field :photos_count, class: 'form-control', placeholder: 'Photo count'
         .form-group
+          = f.label 'Period of photo processing (days)'
           = f.number_field :period_of_execution, class: 'form-control', placeholder: 'Period of execution'
     .row.justify-content-end
       .col-12.col-md-4
