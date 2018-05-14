@@ -46,9 +46,45 @@ class UserDecorator < Draper::Decorator
           .where("session_days.start_time >= ?", Date.current).decorate
   end
 
+  def upcoming_events_price
+    upcoming_events.sum(&:total_amount)
+  end
+
   def upcoming_events_count
-    orders.joins(photo_session: :session_days)
+    orders.where(aasm_state: [:created, :paid]).joins(photo_session: :session_days)
         .where("session_days.start_time >= ?", Date.current).count
+  end
+
+  def sorting_photos_count
+    orders_by_state(:sorting).count
+  end
+
+  def sorting_photos_price
+    sorting_orders.sum(&:total_amount)
+  end
+
+  def editing_photos_count
+    orders_by_state(:editing).count
+  end
+
+  def editing_photos_price
+    editing_orders.sum(&:total_amount)
+  end
+
+  def sent_photos_count
+    orders_by_state(:sent).count
+  end
+
+  def sent_photos_price
+    sent_orders.sum(&:total_amount)
+  end
+
+  def closed_orders_count
+    orders_by_state(:order_closed).count
+  end
+
+  def closed_orders_price
+    closed_orders.sum(&:total_amount)
   end
 
   def editing_orders

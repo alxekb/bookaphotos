@@ -5,23 +5,33 @@
     %div.col.border-3.text-center.mr-2.p-0
       %span Upcoming PhotoSessions
       %span.d-block= @photographer.upcoming_events_count
-      %span 500$
+      %span
+        $
+        = @photographer.upcoming_events_price
+    %div.col.border-3.text-center.mr-2.p-0
+      %span Editing Photos
+      %span.d-block= @photographer.editing_photos_count
+      %span
+        $
+        = @photographer.editing_photos_price
     %div.col.border-3.text-center.mr-2.p-0
       %span Sorting Photos
-      %span.d-block 5
-      %span 500$
+      %span.d-block= @photographer.sorting_photos_count
+      %span
+        $
+        = @photographer.sorting_photos_price
     %div.col.border-3.text-center.mr-2.p-0
-      %span Developing Photos
-      %span.d-block 5
-      %span 500$
-    %div.col.border-3.text-center.mr-2.p-0
-      %span Sending Photos
-      %span.d-block 5
-      %span 500$
+      %span Sent Photos
+      %span.d-block= @photographer.sent_photos_count
+      %span
+        $
+        = @photographer.sent_photos_price
     %div.col.border-3.text-center.mr-2.p-0
       %span Done
-      %span.d-block 5
-      %span 500$
+      %span.d-block= @photographer.closed_orders_count
+      %span
+        $
+        = @photographer.closed_orders_price
   %div.row.py-5
     %div.col
       = week_calendar events: @photographer.session_days, attribute: :start_time do |_date, session_days|

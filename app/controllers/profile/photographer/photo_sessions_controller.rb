@@ -65,7 +65,7 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_photo_session
-    @photo_session = PhotoSession.find_by(id: params[:id])
+    @photo_session = PhotoSession.find_by(id: params[:id]).decorate
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
