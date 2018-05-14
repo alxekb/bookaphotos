@@ -513,6 +513,7 @@ DEPENDENCIES
   rails (~> 5.1.5)
   rails-controller-testing
   rails-erd
+  responders
   rspec-rails (~> 3.6)
   rubocop
   rvm1-capistrano3
