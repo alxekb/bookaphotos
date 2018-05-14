@@ -18,11 +18,10 @@ module ProfilesHelper
 
   def update_state_link(object)
     next_state = object.aasm.events.map(&:name).first
-    link_to send("#{next_state.to_s}_photographer_tasks_path",
+    next_state = next_state.to_s == "sending" ? :send_photos : next_state
+    link_to next_state.to_s.humanize, send("#{next_state.to_s}_photographer_tasks_path",
                    order_id: object.id),
               remote: true,
-              method: :patch do
-      content_tag(:span, "", class: "fa fa-tasks float-right")
-    end
+              method: :patch, class: "btn btn-success"
   end
 end

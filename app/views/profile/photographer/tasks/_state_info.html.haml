@@ -1,0 +1,15 @@
+Choose your actions for this task:
+-#= update_state_link(@order)
+%br
+- unless @order.sent?
+  - if @order.processing? || @order.processed?
+    - if @order.photographer.profile.dropbox_token
+      .alert.alert-primary
+        In order to sent photos, ensure you created
+        %br
+        a dropbox folder with name of the order id, which is #{@order.id}
+      = update_state_link(@order)
+    - else
+      %p.bg-secondary.text-danger In order to send photos you must connect your dropbox account.
+  - elsif !@order.sent?
+    = update_state_link(@order)

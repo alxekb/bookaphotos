@@ -1,0 +1,10 @@
+:plain
+  var title      = '.modal-title';
+      loader     = '.ajax-loader';
+      content    = '.modal-body';
+      dataRemote = 'a[data-remote="true"]';
+      toolbar    = '.modal-footer';
+      modal      = '#cardModal';
+  $(title).html("Task Actions");
+  $(content).html("#{j render partial: 'profile/photographer/tasks/state_info', locals: { :@order => @order } }");
+

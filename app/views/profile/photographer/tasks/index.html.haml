@@ -13,30 +13,34 @@
       %h6 GG
 %div.container.full-scroll.mt-3
   .row.text-left.flex-nowrap
-    .col-sm-3.border
+    .col-sm-3.border.mx-1.pt-2
       %h6 Upcoming Events
       .row
         .col-12
           - @user.upcoming_events.each do |event|
-            .card
-              .card-header
-                %span.float-left= event.photo_session_title
-                = link_to start_editing_photographer_tasks_path(order_id: event.id),
-                          remote: true, method: :patch do
-                  %span.fa.fa-tasks.float-right
-              .card-body
-                %p Order Id: ##{event.id}
-                %p
-                  Date: #{event.photo_session_day}
-                  %br
-                  Time: #{event.photo_session_hour}
-                %p
-                  Status: #{event.aasm_state}
-
-    .col-sm-3
+            = render partial: 'card', locals: { :@order => event }
+    .col-sm-3.border.mx-1.pt-2
       %h6 Editing / Edited
       .row
         #editing_state.col-12
           - @user.editing_orders.each do |order|
+            = render partial: 'card', locals: { :@order => order }
+    .col-sm-3.border.mx-1.pt-2
+      %h6 Sorting / Sorted
+      .row
+        #sorting_state.col-12
+          - @user.sorting_orders.each do |order|
+            = render partial: 'card', locals: { :@order => order }
+    .col-sm-3.border.mx-1.pt-2
+      %h6 Processing / Processed
+      .row
+        #processing_state.col-12
+          - @user.processing_orders.each do |order|
+            = render partial: 'card', locals: { :@order => order }
+    .col-sm-3.border.mx-1.pt-2
+      %h6 Sending / Sent
+      .row
+        #send_state.col-12
+          - @user.sent_orders.each do |order|
             = render partial: 'card', locals: { :@order => order }
 = render 'transition_modal'

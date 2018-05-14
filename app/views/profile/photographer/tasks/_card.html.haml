@@ -1,7 +1,7 @@
-.card
+.card{id: "#{@order.id}"}
   .card-header
     %span.float-left= @order.photo_session.title
-    %button.btn.btn-primary.float-right{"data-target" => "#cardModal", "data-toggle" => "modal", :type => "button"}
+    = link_to photographer_tasks_path(order_id: @order.id), data: { target: '#cardModal', toggle: 'modal' }, remote: true, class: 'btn btn-primary float-right' do
       %i.fa.fa-tasks
   .card-body
     %p Order Id: ##{@order.id}
@@ -9,5 +9,5 @@
       Date: #{@order.photo_session_day}
       %br
       Time: #{@order.photo_session_hour}
-    %p.bg-light-green
+    %p#order_status.bg-light-green
       Status: #{@order.aasm_state}
