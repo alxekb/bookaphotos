@@ -10,6 +10,9 @@
     = f.label :name
     = f.text_field :name, class: 'form-control'
   .form-group
+    = f.label 'City'
+    = f.collection_select :city_id, City.all, :id, :title, class: 'form-control'
+  .form-group
     = f.label :how_to_find
     = f.text_area :how_to_find, class: 'form-control'
   .form-group
@@ -18,7 +21,6 @@
   .form-group
     %label
       Coordinates
-    = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw', :lat_column => 'lat', :lng_column => 'lng' , :zoom_level => 14, :default_coordinates => [@location.lat || 10, @location.lng || 10], autocomplete: { enable: true, class: 'form-control' }
-
+    = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw', :lat_column => 'lat', :lng_column => 'lng' , :zoom_level => 12, :default_coordinates => [default_latitude(@location), default_longitude(@location)], autocomplete: { enable: true, class: 'form-control' }
   .actions
     = f.submit 'Save', class: 'btn btn-primary'

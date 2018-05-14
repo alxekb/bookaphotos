@@ -1,6 +1,15 @@
 class Profile::Photographer::TasksController < Profile::PhotographerController
   include OrderStateActions
+  respond_to :html, :js, :json
+  before_action :set_order, except: :index
+
   def index
     @user = current_user.decorate
+  end
+
+  private
+
+  def set_order
+    @order = Order.find(params[:order_id])
   end
 end

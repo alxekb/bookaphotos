@@ -7,6 +7,7 @@ class SessionDay < ApplicationRecord
   belongs_to :photo_session
   belongs_to :currency
   belongs_to :location
+  has_many :orders
 
   after_commit { self.photo_session.__elasticsearch__.index_document }
 

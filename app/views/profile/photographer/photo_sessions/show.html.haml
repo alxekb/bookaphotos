@@ -6,6 +6,6 @@
   = @photo_session.user.email
   = @photo_session.duration
 
-= link_to 'Edit', edit_photographer_photo_session_path([current_user.profile, @photo_session])
+= link_to 'Edit', edit_photographer_photo_session_path(@photo_session)
 \|
 = link_to 'Back', photographer_photo_sessions_path

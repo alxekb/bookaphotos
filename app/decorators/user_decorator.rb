@@ -37,8 +37,12 @@ class UserDecorator < Draper::Decorator
 
   # Photographer  decorations
 
+  def session_days
+    SessionDay.joins(:orders).where("orders.photographer_id = ?", object.id).decorate
+  end
+
   def upcoming_events
-    orders.joins(photo_session: :session_days)
+    orders.where(aasm_state: [:created, :paid]).joins(photo_session: :session_days)
           .where("session_days.start_time >= ?", Date.current).decorate
   end
 
@@ -48,39 +52,44 @@ class UserDecorator < Draper::Decorator
   end
 
   def editing_orders
-    orders.editing
+    orders_by_state [:editing, :edited]
   end
 
   def sorting_orders
-    orders.sorting
+    orders_by_state [:sorting, :sorted]
   end
 
   def processing_orders
-    orders.processing
+    orders_by_state [:processing, :processed]
   end
 
   def sent_orders
-    orders.sent
+    orders_by_state :sent
   end
 
   def client_received_orders
-    orders.client_received
+    orders_by_state :client_received
   end
 
   def client_reviewed_orders
-    orders.client_reviewed
+    orders_by_state :client_reviewed
   end
 
   def client_services_extended
-    orders.client_service_extend
+    orders_by_state :client_service_extend
   end
 
   def closed_orders
-    orders.order_closed
+    orders_by_state :order_closed
   end
 
   def archived_orders
-    order.archived
+    orders_by_state :archived
+  end
+
+  # Drying up states method
+  def orders_by_state(states)
+    orders.where(aasm_state: states).joins(photo_session: :session_days).distinct.decorate
   end
 
   # End Photographer decorations

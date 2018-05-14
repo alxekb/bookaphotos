@@ -1,0 +1,13 @@
+.card
+  .card-header
+    %span.float-left= @order.photo_session.title
+    %button.btn.btn-primary.float-right{"data-target" => "#cardModal", "data-toggle" => "modal", :type => "button"}
+      %i.fa.fa-tasks
+  .card-body
+    %p Order Id: ##{@order.id}
+    %p
+      Date: #{@order.photo_session_day}
+      %br
+      Time: #{@order.photo_session_hour}
+    %p.bg-light-green
+      Status: #{@order.aasm_state}

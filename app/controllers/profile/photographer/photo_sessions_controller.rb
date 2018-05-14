@@ -15,6 +15,8 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
   # GET /photo_sessions/new
   def new
     @photo_session = current_user.photo_sessions.new
+    @photo_session.covers.build
+    @photo_session.photos.build
   end
 
   # GET /photo_sessions/1/edit
@@ -81,7 +83,9 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
             :for_whom,
             :preparation,
             :what_to_take,
-            :session_type
+            :session_type,
+            covers_attributes: [:photo],
+            photos_attributes: [:photo]
           )
   end
 end

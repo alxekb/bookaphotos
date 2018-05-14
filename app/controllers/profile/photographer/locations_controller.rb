@@ -14,7 +14,7 @@ class Profile::Photographer::LocationsController < Profile::PhotographerControll
 
   # GET /locations/new
   def new
-    @location = Location.new(lat: 10, lng: 11)
+    @location = Location.new
   end
 
   # GET /locations/1/edit
@@ -76,6 +76,6 @@ class Profile::Photographer::LocationsController < Profile::PhotographerControll
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def location_params
-    params.fetch(:location, {}).permit(:name, :how_to_find, :address, :lat, :lng)
+    params.fetch(:location, {}).permit(:name, :city_id, :how_to_find, :address, :lat, :lng)
   end
 end

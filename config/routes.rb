@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :invoices
       resources :clients, as: :clients
       resources :tasks, except: %i[new edit update destroy create] do
-        member do
+        collection do
           patch :start_editing
           patch :finish_editing
           patch :start_sorting

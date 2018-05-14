@@ -24,12 +24,12 @@
       %span 500$
   %div.row.py-5
     %div.col
-      = week_calendar events: @photographer.orders.decorate, attribute: :created_at do |_date, orders|
-        - orders.each do |order|
-          = link_to photographer_photo_session_path(order.photo_session), class: 'd-block profile_photo_session_link' do
+      = week_calendar events: @photographer.session_days, attribute: :start_time do |_date, session_days|
+        - session_days.each do |session_day|
+          = link_to photographer_photo_session_path(session_day.photo_session), class: 'd-block profile_photo_session_link' do
             %div.d-block.w-100.border-bottom
-              = order.time
+              = session_day.hour
               %br
-              = order.photo_session.title
+              = session_day.photo_session.title
               %br
-              = order.photo_session.cities.map(&:title).join(',')
+              = session_day.photo_session.cities.map(&:title).join(',')
