@@ -15,8 +15,8 @@ class Profile::Photographer::DropboxController < Profile::PhotographerController
   private
 
   def authenticator
-    client_id = Rails.application.secrets.drop_box_client_key
-    client_secret = Rails.application.secrets.drop_box_client_secret
+    client_id = "0pgahaatwgoc2wi"
+    client_secret = "r9whhpdgqri9hax"
 
     DropboxApi::Authenticator.new(client_id, client_secret)
   end
