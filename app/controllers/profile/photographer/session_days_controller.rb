@@ -1,18 +1,19 @@
 class Profile::Photographer::SessionDaysController < Profile::PhotographerController
-  before_action :set_session_day, only: %i[show new]
+  before_action :set_session_day, only: %i[show]
 
   def index
-    @session_days = current_user.photo_sessions.joins(:session_days)
+    @photo_sessions = current_user.photo_sessions.decorate
+    @session_days = SessionDay.joins(:photo_session).where("photo_sessions.user_id = ?", @user.id).decorate
   end
 
   def show; end
 
   def new
-    @session_day = SessionDay.new
+    @session_day = SessionDay.new.decorate
   end
 
   def create
-    @session_day = SessionDay.new(session_day_params)
+    @session_day = SessionDay.new(session_day_params).decorate
     respond_to do |format|
       if @session_day.save
         format.html { redirect_to [:photographer, @session_day], notice: "Session Day was successfully created." }
@@ -27,14 +28,15 @@ class Profile::Photographer::SessionDaysController < Profile::PhotographerContro
   private
 
   def set_session_day
-    @session_day = SessionDay.find(params[:id])
+    @session_day = SessionDay.find(params[:id]).decorate
   end
 
   def session_day_params
     params.require(:session_day)
           .permit(
-            :session_day_id,
+            :photo_session_id,
             :start_time,
+            :price,
             :currency_id,
             :price_per_additional_photo,
             :additional_photos_limit,

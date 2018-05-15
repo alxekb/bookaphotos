@@ -1,11 +1,47 @@
 %p#notice= notice
+.row
+  .col-12
+    Title:
+    = @photo_session.title
+  .col-12
+    Description:
+    = @photo_session.description
+  .col-12
+    Duration:
+    = @photo_session.duration
+  .col-12
+    For whom:
+    = @photo_session.for_whom
+  .col-12
+    Preparation:
+    = @photo_session.preparation
+  .col-12
+    What to take with you:
+    = @photo_session.what_to_take
+  .col-3.col-md-auto.border
+    Published: #{@photo_session.published}
+  .col-3.col-md-auto.border
+    Session Type: #{@photo_session.session_type}
+  .col-3.col-md-auto.border
+    Currency: #{@photo_session.currency.title}
+  .col-4.col-md-auto.border
+    Period of photo processing: #{@photo_session.period_of_execution}
+  .col-3.col-md-auto.border
+    Photo count: #{@photo_session.photos_count}
+.row
+  .col-12
+    %h4 Covers
+  - @photo_session.covers.each do |cover|
+    .col-md-3
+      = image_tag(cover.photo.url(:thumb), class: 'img-fluid img-thumbnail')
+%hr
+.row
+  .col-12
+    %h4 Photos
+  - @photo_session.photos.each do |photo|
+    .col-md-3
+      = image_tag(photo.photo(:thumb), class: 'img-fluid img-thumbnail')
 
-%p
-  = @photo_session.title
-  = @photo_session.description
-  = @photo_session.user.email
-  = @photo_session.duration
-
-= link_to 'Edit', edit_photographer_photo_session_path([current_user.profile, @photo_session])
+= link_to 'Edit', edit_photographer_photo_session_path(@photo_session)
 \|
 = link_to 'Back', photographer_photo_sessions_path

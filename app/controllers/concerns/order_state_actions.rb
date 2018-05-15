@@ -6,7 +6,7 @@ module OrderStateActions
   end
 
   def finish_editing
-    @order.end_editing!
+    @order.finish_editing!
   end
 
   def start_sorting
@@ -47,11 +47,5 @@ module OrderStateActions
 
   def archiving_order
     @order.archive_order!
-  end
-
-  private
-
-  def set_order
-    @order = Order.find(params[:order_id])
   end
 end

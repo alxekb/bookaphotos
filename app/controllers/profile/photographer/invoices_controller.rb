@@ -2,7 +2,7 @@ class Profile::Photographer::InvoicesController < Profile::PhotographerControlle
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   def index
-    @invoices = current_user.invoices
+    @invoices = current_user.orders.decorate
   end
 
   private

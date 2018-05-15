@@ -1,4 +1,4 @@
-class Profile::Client::PhotoSessionsController < ProfileController
+class Profile::Client::PhotoSessionsController < Profile::ClientController
   def index
     @orders = @user.bookings.decorate
   end
