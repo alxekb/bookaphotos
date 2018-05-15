@@ -1,6 +1,6 @@
 %h1 Editing Photo Session
 
-= render 'form'
+= render 'form', url: photographer_photo_session_path(@photo_session)
 
 = link_to 'Show', [:photographer, @photo_session]
 \|
