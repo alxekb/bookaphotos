@@ -103,7 +103,7 @@ gem "elasticsearch-dsl"
 
 gem "paperclip", "~> 6.0"
 
-gem "gmap_coordinates_picker", "0.0.10"
+gem "gmap_coordinates_picker", github: "l1meon/gmap_coordinates_picker", branch: "master"
 gem "activeadmin_latlng"
 
 gem "simple_calendar", "~> 2.0"
