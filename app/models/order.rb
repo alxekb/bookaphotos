@@ -23,7 +23,8 @@ class Order < ApplicationRecord
             inclusion: { in: [true] }
   validates :i_want_to_get_info, inclusion: { in: [true, false] }
   validate :ensure_user_agreement
-  validate :order_additional_photos_limit
+  # currently there is no option for additional photos (disabled)
+  #validate :order_additional_photos_limit
 
   private
 

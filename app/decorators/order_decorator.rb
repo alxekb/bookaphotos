@@ -43,4 +43,16 @@ class OrderDecorator < ApplicationDecorator
   def created_day
     created_at.strftime("%d %b %Y")
   end
+
+  def session_day_lat
+    session_day.location.lat
+  end
+
+  def session_day_lng
+    session_day.location.lng
+  end
+
+  def session_day_location
+    session_day.location
+  end
 end

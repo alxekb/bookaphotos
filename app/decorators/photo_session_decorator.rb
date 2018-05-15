@@ -10,7 +10,7 @@ class PhotoSessionDecorator < ApplicationDecorator
   end
 
   def photographer_full_name
-    "#{user.first_name}" "#{user.last_name}"
+    "#{user.first_name} #{user.last_name}"
   end
 
   def photographer_phone

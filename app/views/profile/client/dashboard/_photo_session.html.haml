@@ -9,12 +9,12 @@
       %th{:scope => "col"} Actions
       %th{:scope => "col"} Status
   %tbody
-    - @user.finished_photosessions.each do |order|
+    - @user.finished_photosessions.decorate.each do |order|
       - photosession = order.photo_session
       %tr
         %td
           %div
-            %h5= order.photo_session.title
+            %h5= order.photo_session_title
             = order.id
             %span
               Ordered:
@@ -25,19 +25,19 @@
             photos
         %td
           %div
-            = photosession.day
+            = order.photo_session_day
             %br
-            = photosession.hour
+            = order.photo_session_hour
         %td
           %div= order.comment
         %td
           %div= photosession.photographer_email
           %div= photosession.photographer_phone
         %td
-          = link_to 'Cancel', root_path, class: 'btn btn-outline-danger'
+          = link_to 'Cancel', '#', class: 'btn btn-outline-danger'
           or
-          = link_to 'Postpone', root_path, class: 'btn btn-outline-primary'
-        %td In progress
+          = link_to 'Postpone', '#', class: 'btn btn-outline-primary'
+        %td= order.aasm_state
       %tr.border-bottom-order
         %td{ colspan: 4 }
           %h5 Instructions
@@ -54,4 +54,4 @@
                 %div{ "aria-labelledby" => "#{spec}-tab", :role => "tabpanel", class: index === 0 ? "tab-pane fade show active" : "tab-pane fade", id: spec }
                   %p= photosession[spec.to_sym]
               %div{ "aria-labelledby" => "map-tab", :role => "tabpanel", class: "tab-pane fade", id: "map" }
-                = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw',  :static => 'true', :zoom_level => 10 , :default_coordinates => [photosession.lat || 10, photosession.lng || 10], map_width: '100%', autocomplete: { enable: true, class: 'form-control' }
+                = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw',  :static => 'true', :zoom_level => 10 , :default_coordinates => [order.session_day_lat || 10, order.session_day_lng || 10], map_width: '100%', autocomplete: { enable: true, class: 'form-control' }

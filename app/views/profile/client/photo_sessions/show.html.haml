@@ -17,8 +17,7 @@
             = @order.id
           .col-6 Order status
           .col-6
-            Paid
-            -#= @order.status
+            = @order.aasm_state
           .col-6 Photographer
           .col-6
             = @photo_session.photographer_full_name
@@ -43,7 +42,7 @@
           -#TODO Where the location is stored?
         .col-6 Address
         .col-6
-          = @photo_session.how_route
+          = @order.session_day_location.address
           -#TODO Where the address is stored?
       .row.pt-md-4.mt-md-5
         .col-12.text-center
