@@ -1,5 +1,5 @@
 .col-12
-  = form_for @photo_session, url:  photographer_photo_session_path do |f|
+  = form_for @photo_session, url:  photographer_photo_sessions_path do |f|
     - if @photo_session.errors.any?
       #error_explanation
         %h2= "#{pluralize(@photo_session.errors.count, "error")} prohibited this photo_session from being saved:"
