@@ -12,4 +12,8 @@ Choose your actions for this task:
     - else
       %p.bg-secondary.text-danger In order to send photos you must connect your dropbox account.
   - elsif !@order.sent?
-    = update_state_link(@order)
+    - if @order.created?
+      .alert.alert-info
+        To further process this task, the order must be paid
+    - else
+      = update_state_link(@order)
