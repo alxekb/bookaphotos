@@ -52,9 +52,9 @@ class OrdersController < ApplicationController
 
   def new_client_profile
     client_profile = new_client.build_profile
-    client_profile.first_name = user_params[:first_name]
-    client_profile.last_name = user_params[:last_name]
-    client_profile.phone = user_params[:phone]
+    client_profile.first_name = params[:user][:first_name]
+    client_profile.last_name = params[:user][:last_name]
+    client_profile.phone = params[:user][:phone]
     client_profile.save
   end
 end
