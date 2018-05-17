@@ -20,22 +20,16 @@
           - @user.upcoming_events.each do |event|
             = render partial: 'card', locals: { :@order => event }
     .col-sm-3.border.mx-1.pt-2
-      %h6 Editing / Edited
-      .row
-        #editing_state.col-12
-          - @user.editing_orders.each do |order|
-            = render partial: 'card', locals: { :@order => order }
-    .col-sm-3.border.mx-1.pt-2
       %h6 Sorting / Sorted
       .row
         #sorting_state.col-12
           - @user.sorting_orders.each do |order|
             = render partial: 'card', locals: { :@order => order }
     .col-sm-3.border.mx-1.pt-2
-      %h6 Processing / Processed
+      %h6 Editing / Edited
       .row
-        #processing_state.col-12
-          - @user.processing_orders.each do |order|
+        #editing_state.col-12
+          - @user.editing_orders.each do |order|
             = render partial: 'card', locals: { :@order => order }
     .col-sm-3.border.mx-1.pt-2
       %h6 Sending / Sent

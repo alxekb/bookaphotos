@@ -20,8 +20,6 @@ Rails.application.routes.draw do
           patch :finish_editing
           patch :start_sorting
           patch :finish_sorting
-          patch :start_processing
-          patch :finish_processing
           patch :send_photos
           patch :client_receive
           patch :client_review
