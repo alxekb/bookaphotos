@@ -17,14 +17,6 @@ module OrderStateActions
     @order.finish_sorting!
   end
 
-  def start_processing
-    @order.start_processing!
-  end
-
-  def finish_processing
-    @order.finish_processing!
-  end
-
   def send_photos
     @order.sending!
   end

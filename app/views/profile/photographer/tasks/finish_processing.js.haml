@@ -1,4 +1,0 @@
-:plain
-  $("##{@order.id}").remove();
-  $('#processing_state').prepend("#{j render partial: 'profile/photographer/tasks/card', locals: { :@order => @order } }");
-  $('#cardModal').modal('hide');
