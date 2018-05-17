@@ -1,0 +1,29 @@
+.col-12.data-info
+  .alert.alert-info.alert-dismissable.fade.show{role: 'alert', id: session_day.id }
+    %button.close{type: 'button', data: { dismiss: 'alert' }, aria: { label: 'Close' } }
+      %span{aria: { hidden: 'true' } } &times;
+    %h4.alert-heading= session_day.photo_session_title
+    %p
+      Address: 
+      = session_day.location.address
+    %hr
+    %h3.alert-heading Client Info
+    %table.table
+      %thead.thead-light
+        %tr
+          %th Full Name
+          %th Contact Phone
+          %th Email
+          %th Date/Time
+          %th Payment status
+      %tbody
+        - orders.each do |order|
+          %tr
+            %td= order.client_full_name
+            %td= order.client_phone
+            %td= order.client_email
+            %td
+              = order.created_day
+              %span -
+              = order.created_hour
+            %td= order.aasm_state
