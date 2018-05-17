@@ -216,6 +216,7 @@ GEM
       actionpack (>= 4.1)
       activesupport (>= 4.1)
     hashie (3.5.7)
+    high_voltage (3.1.0)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -503,6 +504,7 @@ DEPENDENCIES
   gmap_coordinates_picker!
   gretel
   haml-rails (~> 1.0)
+  high_voltage (~> 3.1)
   jbuilder (~> 2.5)
   jquery-rails
   jquery-ui-rails

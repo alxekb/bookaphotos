@@ -117,3 +117,5 @@ gem "stripe"
 gem "dropbox_api"
 
 gem "responders"
+
+gem "high_voltage", "~> 3.1"
