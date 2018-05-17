@@ -1,0 +1,16 @@
+  - name: Create bucket
+    s3_bucket:
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      region: "{{ region }}"
+      name: "{{ application_name }}-{{ application_environment }}"
+
+  - name: Give application user access to bucket
+    iam_policy:
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      iam_type: user
+      iam_name: "{{ aws_application_user }}"
+      policy_name: "s3_limited_access_{{ application_name_with_environment }}"
+      state: present
+      policy_json: "{{ lookup('template','s3_policy.json.j2', convert_data=False) |string}}"

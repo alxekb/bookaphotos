@@ -1,0 +1,42 @@
+#!/bin/bash
+
+APP_PATH=$1
+HOST=`hostname`
+APP_NAME=`basename $APP_PATH`
+ReTry=0
+
+echo "Working on $APP_NAME at $APP_PATH on $HOST"
+
+while [ $ReTry -lt 10 ]; do
+  if [ $ReTry -eq 0 ]; then
+    echo "Attempting $HOST phased restart..."
+  else
+    echo "Attempting $HOST phased restart (${ReTry} retries) ..."
+  fi
+
+  RESULT=`service puma status $APP_PATH | grep "isn't there :("`
+  if [ ! -z "$RESULT" ]; then
+    echo " * --> puma isn't running $APP_PATH"
+    ReTry=10
+    break
+  fi
+
+  RESULT=`service puma phased-restart $APP_PATH | grep "Command phased-restart sent success"`
+  echo $RESULT
+  if [ ! -z "$RESULT" ]; then
+    break
+  fi
+  sleep 3
+  ReTry=$[ReTry+1]
+done
+
+if [ $ReTry -eq 10 ]; then
+  echo "Attempting $HOST harsh restart..."
+  service puma stop $APP_PATH
+  if [ -f "/home/pbsdeploy/${APP_NAME}/shared/tmp/pids/puma.pid" ]; then
+    kill `cat /home/pbsdeploy${APP_NAME}/shared/tmp/pids/puma.pid`
+    rm -f "/home/pbsdeploy/${APP_NAME}/shared/tmp/pids/puma.pid"
+  fi
+  rm -f "/home/pbsdeploy/${APP_NAME}/shared/tmp/pids/puma.state"
+  service puma start $APP_PATH
+fi

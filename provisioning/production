@@ -1,0 +1,20 @@
+[localhost]
+127.0.0.1 ansible_python_interpreter=/usr/local/bin/python
+
+[localhost:vars]
+application_name_environment=production
+application_environment=production
+application_node_count=1
+application_instance_type=t2.micro
+rds_instance_type=db.t2.micro
+rds_instance_size=10
+
+[application]
+[application:vars]
+application_name_environment=production
+application_environment=production
+
+[all_application_nodes]
+application_name_environment=production
+[all_application_nodes:vars]
+application_environment=production

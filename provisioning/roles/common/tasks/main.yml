@@ -1,0 +1,36 @@
+---
+- name: update apt
+  shell: apt-get update
+
+- name: install system packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - ntp
+    - curl
+    - git
+    - htop
+    - imagemagick
+    - libmagickwand-dev         # imagemagic gem dependency
+    - libmagic-dev              # filemagic gem dependency
+    - libgmp-dev                # puma dependency
+    - postgresql-server-dev-9.6 # pg gem dependency
+    - python-mysqldb            # ansible mysqldb dependency
+    - ruby
+    - vim
+    - wget
+    - zsh
+
+- name: configure hostname
+  hostname: name={{ inventory_hostname }}
+
+- name: update /etc/hosts with hostname
+  lineinfile: dest=/etc/hosts regexp='.*{{ inventory_hostname }}$' line='127.0.0.1 {{ inventory_hostname }}' state=present
+
+- name: configure timezone
+  template: src=timezone.j2 dest=/etc/timezone
+
+- name: more configure timezone
+  file: src=/usr/share/zoneinfo/{{ server.timezone }} dest=/etc/localtime state=link force=yes backup=yes
+
+- name: set default system language pack
+  shell: locale-gen {{ server.locale }}

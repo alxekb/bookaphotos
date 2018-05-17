@@ -1,0 +1,15 @@
+---
+- name: install varnish
+  apt: name=varnish state=latest
+
+- name: Create /etc/default/varnish
+  template: src=varnish.j2 dest=/etc/default/varnish owner=root group=root mode=0755
+  notify:
+    - restart varnish
+
+- name: Create /etc/varnish/default.vcl
+  template: src=default.vcl.j2 dest=/etc/varnish/default.vcl owner=root group=root mode=0755
+  notify:
+    - reload varnish
+
+- service: name=varnish state=running

@@ -1,0 +1,4 @@
+check process puma_master with pidfile {{ rails_app_path }}/shared/tmp/pids/puma.pid
+  start program "/etc/init.d/puma start {{ rails_app_path }}"
+  stop program "/etc/init.d/puma stop {{ rails_app_path }}"
+  if 5 restarts within 5 cycles then timeout

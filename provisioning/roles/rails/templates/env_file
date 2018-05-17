@@ -1,0 +1,17 @@
+RAILS_ENV={{ application_environment }}
+SECRET_KEY_BASE={{ secret_key_base }}
+
+HOST={{ host_name }}
+ASSET_HOST={{ asset_host }}
+
+DATABASE_HOST={{ hostvars['localhost']['rds_endpoint'] }}
+DATABASE_NAME={{ database_name }}
+DATABASE_USER={{ database_user }}
+DATABASE_PASSWORD={{ database_password }}
+
+REDIS_HOST={{ hostvars['localhost']['redis_host'] }}
+REDIS_PORT={{ hostvars['localhost']['redis_port'] }}
+
+S3_BUCKET_NAME={{ application_name }}-{{ application_environment }}
+AWS_ACCESS_KEY_ID={{ aws_application_access_key }}
+AWS_SECRET_ACCESS_KEY={{ aws_application_secret_key }}

@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  roles:
+    - { role: populate-aws, tags: [rails, nginx] }
+
+- hosts: all_application_nodes
+  gather_facts: true
+  sudo: yes
+  user: "{{ user }}"
+  roles:
+    - common
+    - ssh-security
+    - rvm-gpg
+    - rvm_io.ruby
+    - puma-rvm
+    - { role: jdauphant.nginx, tags: [nginx] }
+    - { role: monit, tags: [monit] }
+    - { role: rails, tags: [rails] }
+    - { role: logrotate, tags: [logrotate] }
