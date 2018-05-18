@@ -11,16 +11,17 @@
       %th{:scope => "col"} Date latest ordered
       %th{:scope => "col"} Times
   %tbody
-    - @orders.each do |order|
+    - @orders.each do |client, orders|
+      - latest_order = orders.last.decorate
       %tr
-        %th{:scope => "row"}= order.id
-        %td= order.client_email
-        %td= order.client_phone
-        %td= order.client_full_name
-        %td= order.comment
-        %td= order.photo_session_title
+        %th{:scope => "row"}= latest_order.id
+        %td= client.email
+        %td= client.phone
+        %td= client.decorate.full_name
+        %td= latest_order.comment
+        %td= latest_order.photo_session_title
         %td
-          = order.created_hour
+          = latest_order.created_hour
           %br
-          = order.created_day
-        %td 0
+          = latest_order.created_day
+        %td= orders.count
