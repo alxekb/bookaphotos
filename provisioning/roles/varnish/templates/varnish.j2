@@ -1,0 +1,58 @@
+# Alternative 3, Advanced configuration
+#
+# See varnishd(1) for more information.
+
+# Important if you want it to start :)
+
+START={{ varnish_start }}
+
+# Main configuration file. You probably want to change it :)
+
+VARNISH_VCL_CONF={{ varnish_vcl_conf }}
+
+#
+# Default address and port to bind tox
+# Blank address means all IPv4 and IPv6 interfaces, otherwise specify
+# a host name, an IPv4 dotted quad, or an IPv6 address in brackets.
+
+VARNISH_LISTEN_ADDRESS={{ varnish_listen_address }}
+VARNISH_LISTEN_PORT={{ varnish_listen_port }}
+
+# Telnet admin interface listen address and port
+VARNISH_ADMIN_LISTEN_ADDRESS={{ varnish_admin_listen_address }}
+VARNISH_ADMIN_LISTEN_PORT={{ varnish_admin_listen_port }}
+
+# # The minimum number of worker threads to start
+VARNISH_MIN_THREADS={{ varnish_min_threads }}
+
+# The Maximum number of worker threads to start
+VARNISH_MAX_THREADS={{ varnish_max_threads }}
+
+# Idle timeout for worker threads
+VARNISH_THREAD_TIMEOUT={{ varnish_thread_timeout }}
+
+# Cache file location
+VARNISH_STORAGE_FILE={{ varnish_storage_file }}
+
+# Cache file size: in bytes, optionally using k / M / G / T suffix,
+# or in percentage of available disk space using the % suffix.
+VARNISH_STORAGE_SIZE={{ varnish_storage_size }}
+
+# File containing administration secret
+VARNISH_SECRET_FILE={{ varnish_secret_file }}
+
+# # Backend storage specification
+VARNISH_STORAGE="{{ varnish_storage }}"
+
+# Default TTL used when the backend does not specify one
+VARNISH_TTL={{ varnish_ttl }}
+
+# DAEMON_OPTS is used by the init script.  If you add or remove options, make
+# sure you update this section, too.
+DAEMON_OPTS="-a ${VARNISH_LISTEN_ADDRESS}:${VARNISH_LISTEN_PORT} \
+             -f ${VARNISH_VCL_CONF} \
+             -T ${VARNISH_ADMIN_LISTEN_ADDRESS}:${VARNISH_ADMIN_LISTEN_PORT} \
+             -t ${VARNISH_TTL} \
+             -S ${VARNISH_SECRET_FILE} \
+             -w ${VARNISH_MIN_THREADS},${VARNISH_MAX_THREADS},${VARNISH_THREAD_TIMEOUT} \
+             -s ${VARNISH_STORAGE},${VARNISH_STORAGE_FILE},${VARNISH_STORAGE_SIZE}"

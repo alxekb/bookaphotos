@@ -1,0 +1,27 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: "App name"
+      debug: var=application_name
+
+    - name: "Environment name"
+      debug: var=application_environment
+
+    - name: "Application Name with Environment"
+      debug: var=application_name_with_environment
+
+    - name: "User"
+      debug: var=user
+
+    - name: "Region"
+      debug: var=region
+
+    - name: "How many EC2 instances to create."
+      debug: var=application_node_count
+
+    - name: "What size are the application servers"
+      debug: var=application_instance_type
+
+    - name: "What size is the DB server"
+      debug: var=rds_instance_type

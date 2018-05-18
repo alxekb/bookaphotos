@@ -1,0 +1,34 @@
+---
+application_name: photo_booking_system
+application_name_with_environment: "{{ application_name }}_{{ application_name_environment }}"
+user: pbsdeploy
+
+server:
+  timezone: UTC
+  locale: en_GB.UTF-8
+
+region: eu-west-1
+zone: eu-west-1a
+ami: ami-f95ef58a
+
+aws_application_user: raileandumitru
+
+aws_access_key: to_be_configured
+aws_application_access_key: to_be_configured
+ec2_access_key: "{{ aws_access_key }}"
+
+aws_secret_key: to_be_configured
+aws_application_secret_key: to_be_configured
+ec2_secret_key: "{{ aws_secret_access_key }}"
+
+bugsnag_api_key: a4b2dd75a5c56895d15a77b1a2ca4954
+
+asset_host: "https://{{ application_name }}-{{ application_name_environment }}.s3.amazonaws.com"
+
+secret_key_base: eb413bad5e02998f684dfdc44c6d6c9af6eef0e14bdb8e8eff4fe1f3e0f047cc06561d5acdb1436af8c118c5ce3f49f4cc91705f649e7baaec4da58e6bccb48d
+
+database_name: "{{ application_name_with_environment }}"
+database_user: "root"
+database_password: fJWUC8fbKAN8A7sHtT0IkxIV
+
+database_root_password: fJWUC8fbKAN8A7sHtT0IkxIV

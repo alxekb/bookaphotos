@@ -1,0 +1,29 @@
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  roles:
+    - infrastructure
+
+- hosts: new_db_application_nodes
+  user: ubuntu
+  gather_facts: true
+  sudo: yes
+  roles:
+    - user
+    - ssh-security
+
+- hosts: new_application_nodes
+  user: ubuntu
+  gather_facts: true
+  sudo: yes
+  roles:
+    - user
+    - ssh-security
+
+- hosts: all_application_nodes
+  user: "{{ user }}"
+  gather_facts: true
+  sudo: yes
+  roles:
+    - user
+    - ssh-security

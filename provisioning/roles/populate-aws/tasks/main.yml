@@ -1,0 +1,70 @@
+---
+- name: Get EC2 instances
+  ec2_remote_facts:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ region }}"
+    filters:
+      instance-state-name: running
+      "tag:Name": "application-{{ application_name_environment }}"
+      "tag:Project": "{{ application_name }}"
+      "tag:Stages": "{{ application_name_environment }}"
+  register: all_application_nodes
+
+- name: Get RDS facts
+  rds:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ region }}"
+    command: facts
+    instance_name: "rds-{{ application_name_environment }}"
+  register: rds_nodes
+
+- name: Get Redis security group
+  ec2_group:
+    name: redis
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    description: Security group that allow redis traffic
+    region: "{{ region }}"
+    rules:
+      - proto: tcp
+        from_port: 6379
+        to_port: 6379
+        cidr_ip: 0.0.0.0/0
+  register: redis_security_group
+
+- name: Get Redis facts
+  elasticache:
+    name: "redis-{{ application_name_environment }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ region }}"
+    zone: "{{ zone }}"
+    num_nodes: 1
+    state: present
+    engine: redis
+    node_type: cache.m1.small
+    security_group_ids:
+      - "{{ redis_security_group.group_id }}"
+  register: redis_instance
+
+- name: Set Redis host
+  set_fact:
+    redis_host: "{{ redis_instance.elasticache.data.CacheNodes[0].Endpoint.Address }}"
+
+- name: Set Redis port
+  set_fact:
+    redis_port: "{{ redis_instance.elasticache.data.CacheNodes[0].Endpoint.Port }}"
+
+- name: Set rds_endpoint variable
+  set_fact:
+    rds_endpoint: "{{ rds_nodes.instance.endpoint }}"
+
+- name: Add all instance public IPs to all_application_nodes group
+  add_host: name={{ item.public_ip_address }} groups=all_application_nodes
+  with_items: "{{ all_application_nodes.instances }}"
+
+- name: Wait for port 22 to be ready
+  wait_for: port=22 delay=10 host={{ item.public_ip_address }}
+  with_items: "{{ all_application_nodes.instances }}"

@@ -1,0 +1,3 @@
+{{ application_environment }}:
+  adapter: redis
+  url: redis://{{ hostvars['localhost']['redis_host'] }}:{{ hostvars['localhost']['redis_port'] }}

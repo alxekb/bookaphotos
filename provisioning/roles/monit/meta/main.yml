@@ -1,0 +1,6 @@
+---
+dependencies:
+  - role: pgolm.monit
+    monit_poll_period: 20
+    monit_poll_start_delay: 60
+    sudo: yes

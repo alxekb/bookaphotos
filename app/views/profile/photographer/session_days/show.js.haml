@@ -1,0 +1,2 @@
+:plain
+  $('#session_day_info').hide('slide', { direction: 'left' }, 300).show('slide', { direction: 'right' }, 300).html("#{j render partial: 'profile/photographer/session_days/session_day', locals: { orders: @orders, session_day: @session_day} }");
