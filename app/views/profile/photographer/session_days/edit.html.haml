@@ -1,6 +1,6 @@
-%h1 New Session Day
+%h1 Edit Session Day
 .col-12
-  = form_for @session_day, url:  photographer_session_days_path do |f|
+  = form_for @session_day, url:  photographer_session_day_path(@session_day) do |f|
     - if @session_day.errors.any?
       #error_explanation
         %h2= "#{pluralize(@session_day.errors.count, "error")} prohibited this session_day from being saved:"

@@ -16,6 +16,7 @@
       %th{:scope => "col"} Location
       %th{:scope => "col"} Booked appointments
       %th{:scope => "col"} Status
+      %th.text-center{:scope => "col", colspan: 2} Actions
   %tbody
     - @session_days.each do |session_day|
       %tr
@@ -25,3 +26,5 @@
         %td= session_day.location_name
         %td= session_day.booked_appointments
         = session_day.status
+        %td= link_to 'Show', [:photographer, session_day], class: 'btn btn-info'
+        %td= link_to 'Edit', edit_photographer_session_day_path(session_day), class: 'btn btn-primary'
