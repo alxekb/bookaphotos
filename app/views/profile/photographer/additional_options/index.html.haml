@@ -1,0 +1,22 @@
+.row
+  .col-12.col-md-7
+    %h1 Listing available additional options
+  .col-12.col-md-5
+    = link_to 'New Additional option', new_photographer_additional_option_path, class: 'btn btn-primary'
+.row
+  .col-12.col-md-12.col-xl-7
+    %table.table
+      %thead
+        %tr
+          %th Name
+          %th
+          %th
+          %th
+
+      %tbody
+        - @additional_options.each do |additional_option|
+          %tr
+            %td= additional_option.name
+            %td= link_to 'Show', [:photographer, additional_option], class: 'btn btn-info'
+            %td= link_to 'Edit', edit_photographer_additional_option_path(additional_option), class: 'btn btn-primary'
+            %td= link_to 'Destroy', [:photographer, additional_option], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

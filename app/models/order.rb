@@ -6,6 +6,9 @@ class Order < ApplicationRecord
   belongs_to :photo_session
   belongs_to :session_day
 
+  has_many :selected_options, class_name: "Order::SelectedOption", foreign_key: :order_id
+  accepts_nested_attributes_for :selected_options
+
 
   validates :client_id,
             :photographer_id,

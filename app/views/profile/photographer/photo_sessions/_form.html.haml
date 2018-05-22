@@ -24,6 +24,9 @@
         .form-group
           = f.label 'Description'
           = f.text_area :description, class: 'form-control', placeholder: 'Description'
+        = f.fields_for :options do |option|
+          = render 'option_fields', f: option
+        = link_to_add_fields 'Add Option', f, :options
       .col-12.col-md-6
         .form-row
           = f.fields_for :covers do |cover|

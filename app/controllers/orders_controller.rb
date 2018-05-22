@@ -31,7 +31,9 @@ class OrdersController < ApplicationController
           :retouch,
           :photographer_id,
           :client_id,
-          :total_amount
+          :total_amount,
+          selected_options: [:id, :photo_session_additional_option_id],
+          selected_options_attributes: [:order_id, :id]
         )
   end
 
