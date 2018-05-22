@@ -1,1 +1,42 @@
-%h1= @session_day.photo_session_title
+%h3
+  Session day of Photosession:
+  = @session_day.photo_session_title
+%hr
+.row
+  .col-12.col-md-auto
+    %ul.list-group
+      %li.list-group-item.list-group-item-info
+        Event Time
+      %li.list-group-item
+        Day: #{@session_day.day}
+      %li.list-group-item
+        Hour: #{@session_day.hour}
+  .col-12.col-md-auto
+    %ul.list-group
+      %li.list-group-item.list-group-item-info
+        Price and Currency
+      %li.list-group-item
+        Price: #{@session_day.price}
+      %li.list-group-item
+        Currency: #{@session_day.currency_name}
+  .col-12.col-md-auto
+    %ul.list-group
+      %li.list-group-item.list-group-item-info
+        Additional information
+      %li.list-group-item
+        Additional photos limit: #{@session_day.additional_photos_limit}
+  .col-12.col-md-auto
+    %ul.list-group
+      %li.list-group-item.list-group-item-info
+        Location
+      %li.list-group-item
+        City: #{@session_day.location_city}
+      %li.list-group-item
+        Name/Label: #{@session_day.location_name}
+      %li.list-group-item
+        Address: #{@session_day.location_address}
+      %li.list-group-item
+        How to find:
+        %p= @session_day.location_find
+      %li.list-group-item
+        = render_gmap_coordinate_picker api_key: 'AIzaSyAvgY2gVt4mWuyAfJbBfLTMnl_Vbsd_Ydw',  :zoom_level => 10 , :default_coordinates => [@session_day.location_latitude, @session_day.location_longitude]
