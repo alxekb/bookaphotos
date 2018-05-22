@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @additional_option.name
+
+= link_to 'Edit', edit_photographer_additional_option_path(@additional_option)
+\|
+= link_to 'Back', photographer_additional_options_path
