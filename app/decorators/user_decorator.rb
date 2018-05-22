@@ -40,7 +40,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def upcoming_events
-    orders.where(aasm_state: [:created, :paid]).joins(photo_session: :session_days)
+    orders.where(aasm_state: :paid).joins(photo_session: :session_days)
           .where("session_days.start_time >= ?", Date.current).decorate
   end
 
