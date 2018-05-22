@@ -1,0 +1,10 @@
+---
+rvm_root: /usr/local/rvm
+rvm_exe: /usr/local/rvm/bin/rvm
+puma_ruby: 2.5.0
+rails_apps: []
+puma_threads: [1, 2]
+puma_workers: 2
+puma_worker_timeout: 20
+puma_auth_token: 7ae11d646b59ea97b2c85d1523b7e200b891236cc6285912dd659e7fb3e72244
+puma_version: 3.4.0

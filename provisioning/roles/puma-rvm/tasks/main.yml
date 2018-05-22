@@ -1,0 +1,55 @@
+---
+- name: create /home/pbsdeploy/{{ application_name }}
+  file: path=/home/pbsdeploy/{{ application_name }} state=directory mode=0755 owner=pbsdeploy group=pbsdeploy
+
+- name: Check rubies
+  shell: ls {{ rvm_root }}/rubies/{{ ruby_version }}*
+  register: ruby_versions
+  ignore_errors: True
+  changed_when: False
+
+- name: Install ruby
+  command: "{{ rvm_exe }} install {{ ruby_version }}"
+
+- name: Create application rvm aliases
+  command: "{{ rvm_exe }} alias create {{ rails_name }} {{ ruby_version }}@{{ rails_name }} --create creates={{ rvm_root }}/wrappers/{{ rails_name }}"
+
+- name: Install puma gem
+  command: "{{ rvm_exe }} {{ rails_name }} do gem install puma -v {{ puma_version }}"
+
+- name: Generate application shared directory
+  file: dest={{ rails_shared }} state=directory owner={{ rails_user | default("www-data") }} group={{ rails_user | default("www-data") }}
+
+- name: Generate application config directory
+  file: dest={{ rails_shared }}/config state=directory owner={{ rails_user | default("www-data") }} group={{ rails_user | default("www-data") }}
+
+- name: Generate application log directory
+  file: dest={{ rails_shared }}/log state=directory owner={{ rails_user | default("www-data") }} group={{ rails_user | default("www-data") }}
+
+- name: "Environment name"
+  debug: var=application_environment
+
+- name: Generate puma config
+  template: src=config.rb.j2 dest={{ rails_shared }}/config/puma.rb owner={{ rails_user | default("www-data") }} group={{ rails_user | default("www-data") }} mode=0600
+  notify: restart puma
+
+- name: Generate application tmp directory
+  file: dest={{ rails_shared }}/tmp state=directory owner={{ rails_user | default("www-data") }} group={{ rails_user | default("www-data") }}
+
+- name: Generate application tmp/sockets directory
+  file: dest={{ rails_shared }}/tmp/sockets state=directory owner={{ rails_user | default("www-data") }} group={{ rails_user | default("www-data") }}
+
+- name: Generate application secrets.yml
+  template: src=secrets.yml.j2 dest={{ rails_shared }}/config/secrets.yml owner={{ rails_user | default("www-data") }} group={{ rails_user | default("www-data") }} mode=0600
+
+- name: Install puma init script
+  template: src=puma.j2 dest=/etc/init.d/puma owner=root group=root mode=0755
+
+- name: Install run-puma script
+  template: src=run-puma.j2 dest=/usr/local/bin/run-puma owner=root group=root mode=0755
+
+- name: Install phased-restart-retry.sh
+  template: src=phased-restart-retry.sh.j2 dest=/usr/local/bin/phased-restart-retry.sh owner=root group=root mode=0755
+
+- name: Create /etc/puma.conf
+  template: src=puma.conf.j2 dest=/etc/puma.conf owner=root group=root mode=0755

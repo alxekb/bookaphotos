@@ -11,8 +11,6 @@ module OrderStateMachine
       state :edited
       state :sorting
       state :sorted
-      state :processing
-      state :processed
       state :sent
       state :client_received
       state :client_reviewed
@@ -24,32 +22,24 @@ module OrderStateMachine
         transitions from: :created, to: :paid
       end
 
-      event :start_editing do
-        transitions from: :paid, to: :editing
-      end
-
-      event :finish_editing do
-        transitions from: :editing, to: :edited
-      end
-
       event :start_sorting do
-        transitions from: :edited, to: :sorting
+        transitions from: :paid, to: :sorting
       end
 
       event :finish_sorting do
         transitions from: :sorting, to: :sorted
       end
 
-      event :start_processing do
-        transitions from: :sorted, to: :processing
+      event :start_editing do
+        transitions from: :sorted, to: :editing
       end
 
-      event :finish_processing do
-        transitions from: :processing, to: :processed
+      event :finish_editing do
+        transitions from: :editing, to: :edited
       end
 
       event :sending do
-        transitions from: :processed, to: :sent
+        transitions from: :edited, to: :sent
       end
 
       event :client_receiving do

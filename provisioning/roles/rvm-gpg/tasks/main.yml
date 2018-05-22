@@ -1,0 +1,10 @@
+---
+- name: copy gpg certificates into /home/pbsdeploy
+  copy:
+    content: "{{ rvm_gpg_key }}"
+    dest: "/home/pbsdeploy/rvm.asc"
+    owner: root
+    group: root
+    mode: 0600
+- name: Import rvm gpg
+  command: "/usr/bin/gpg --import /home/pbsdeploy/rvm.asc"

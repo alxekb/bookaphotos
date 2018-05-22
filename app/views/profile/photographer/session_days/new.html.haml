@@ -14,7 +14,8 @@
           = f.collection_select :photo_session_id, @session_day.user_photo_sessions, :id, :title, class: 'form-control', placeholder: 'Select photo session'
         .form-group
           = f.label 'Start Time'
-          = f.datetime_select :start_time, class: 'form-control', placeholder: 'Start Time'
+          - @day = params[:day].to_datetime
+          = f.datetime_select :start_time, class: 'form-control', placeholder: 'Start Time', selected: @day
         .form-group
           = f.label 'Location'
           = f.collection_select :location_id, @session_day.user_locations, :id, :name, class: 'form-control'

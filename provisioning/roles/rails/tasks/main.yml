@@ -1,0 +1,24 @@
+---
+- name: "DEBUG"
+  debug: var=environment
+
+- name: "DEBUG"
+  debug: var=environment
+
+- name: "DEBUG"
+  debug: var=environment
+
+- name: create .env file
+  template: >
+    src=env_file
+    dest=/home/{{ ansible_ssh_user }}/{{ application_name }}/shared/.env
+
+- name: create database.yml file
+  template: >
+    src=database.yml
+    dest=/home/{{ ansible_ssh_user }}/{{ application_name }}/shared/config/database.yml
+
+- name: create cable.yml file
+  template: >
+    src=cable.yml
+    dest=/home/{{ ansible_ssh_user }}/{{ application_name }}/shared/config/cable.yml

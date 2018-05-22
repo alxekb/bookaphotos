@@ -1,12 +1,16 @@
 class Profile::Photographer::SessionDaysController < Profile::PhotographerController
   before_action :set_session_day, only: %i[show]
 
+  respond_to :html, :js, :json
+
   def index
     @photo_sessions = current_user.photo_sessions.decorate
     @session_days = SessionDay.joins(:photo_session).where("photo_sessions.user_id = ?", @user.id).decorate
   end
 
-  def show; end
+  def show
+    @orders = @session_day.orders.decorate
+  end
 
   def new
     @session_day = SessionDay.new.decorate

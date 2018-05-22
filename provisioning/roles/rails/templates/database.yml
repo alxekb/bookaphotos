@@ -1,0 +1,7 @@
+{{ application_environment }}:
+  adapter: postgresql
+  host:     {{ hostvars['localhost']['rds_endpoint'] }}
+  database: {{ database_name }}
+  username: {{ database_user }}
+  password: {{ database_password }}
+  pool: 15

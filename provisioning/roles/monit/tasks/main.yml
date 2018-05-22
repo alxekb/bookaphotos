@@ -1,0 +1,13 @@
+---
+
+- name: Nginx monit
+  action: template src=nginx.monitrc dest=/etc/monit/conf.d/nginx.monitrc
+  notify:
+    - reload monit
+  sudo: yes
+
+- name: Puma monit
+  action: template src=puma.monitrc dest=/etc/monit/conf.d/puma-{{rails_name}}.monitrc
+  notify:
+    - reload monit
+  sudo: yes

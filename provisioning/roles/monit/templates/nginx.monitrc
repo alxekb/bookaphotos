@@ -1,0 +1,4 @@
+check process nginx with pidfile /var/run/nginx.pid
+  start program = "/etc/init.d/nginx start"
+  stop program = "/etc/init.d/nginx stop"
+  if failed host 0.0.0.0 port 8181 type tcp then alert

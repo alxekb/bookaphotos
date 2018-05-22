@@ -1,0 +1,11 @@
+#!/usr/bin/env puma
+
+environment '{{ application_environment }}'
+pidfile '{{ rails_shared }}/tmp/pids/puma.pid'
+state_path '{{ rails_shared }}/tmp/pids/puma.state'
+threads {{ puma_threads[0] }}, {{ puma_threads[1] }}
+bind 'unix://{{ rails_shared }}/tmp/sockets/puma.sock'
+workers {{ puma_workers }}
+worker_timeout {{ puma_worker_timeout }}
+activate_control_app 'unix://{{ rails_shared }}/tmp/sockets/pumactl.sock'
+directory '/home/{{ ansible_ssh_user }}/{{ application_name }}/current' # https://github.com/puma/puma/issues/539

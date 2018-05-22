@@ -1,0 +1,23 @@
+---
+- name: Setup admin group
+  group: name=admin gid=3001
+
+- name: Setup pbsdeploy user
+  user: name=pbsdeploy shell=/bin/zsh groups=admin,users,staff,sudo append=yes generate_ssh_key=yes
+
+- name: Setup sudo
+  template: src=sudoers dest=/etc/sudoers.d/10_pbsdeploy
+
+- name: create /home/pbsdeploy
+  file: path=/home/pbsdeploy state=directory mode=0755 owner=pbsdeploy group=pbsdeploy
+
+- name: Setup zsh shell
+  template: src=zshrc dest=/home/pbsdeploy/.zshrc
+
+- name: Copy keys
+  script: keys.rb pbsdeploy pbsdeploy
+  tags: [keys]
+# - user: name=ubuntu state=absent remove=yes
+
+- name: Install oh-my-zsh
+  shell: curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | ZSH=/home/pbsdeploy/.oh-my-zsh sh creates=/home/pbsdeploy/.oh-my-zsh

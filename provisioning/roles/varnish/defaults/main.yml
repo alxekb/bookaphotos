@@ -1,0 +1,21 @@
+varnish_cacheable_urls:
+  - /api/v1/another
+varnish_cachable_url_time: 30s
+varnish_default: /etc/default/varnish
+varnish_listen_address: "{{ ansible_eth0.ipv4.address }}"
+varnish_listen_port: 8180
+varnish_admin_listen_address: 127.0.0.1
+varnish_admin_listen_port: 6082
+varnish_min_threads: 1
+varnish_max_threads: 1000
+varnish_thread_timeout: 120
+varnish_storage: file
+varnish_storage_file: /var/lib/varnish/$INSTANCE/varnish_storage.bin
+varnish_storage_size: 1G
+varnish_secret_file: /etc/varnish/secret
+varnish_ttl: 120
+varnish_vcl_conf: /etc/varnish/default.vcl
+varnish_vcl_includes: /etc/varnish/inc
+varnish_start: yes
+varnish_backend_host: 127.0.0.1
+varnish_backend_port: 8181
