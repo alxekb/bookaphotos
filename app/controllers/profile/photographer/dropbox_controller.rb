@@ -22,6 +22,7 @@ class Profile::Photographer::DropboxController < Profile::PhotographerController
   end
 
   def redirect_uri
-    "http://#{request.host_with_port}/photographer/dropbox/auth_callback"
+    @host = Rails.env.development? ? request.host_with_port : request.host
+    "#{request.protocol}#{@host}/photographer/dropbox/auth_callback"
   end
 end
