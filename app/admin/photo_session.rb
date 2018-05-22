@@ -41,6 +41,11 @@ ActiveAdmin.register PhotoSession do
         s.input :location
       end
 
+      f.has_many :options do |o|
+        o.input :additional_option
+        o.input :price
+      end
+
       f.input :user
       f.input :description
       f.input :duration

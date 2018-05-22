@@ -28,6 +28,7 @@ Rails.application.routes.draw do
           patch :archiving_order
         end
       end
+      resources :additional_options
       get "dropbox/auth" => "dropbox#auth", as: :dropbox_auth
       get "dropbox/auth_callback" => "dropbox#auth_callback", as: :dropbox_callback
     end

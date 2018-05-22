@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180510152119) do
+ActiveRecord::Schema.define(version: 20180521233137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20180510152119) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "additional_options", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_additional_options_on_user_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -120,6 +128,16 @@ ActiveRecord::Schema.define(version: 20180510152119) do
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
+  create_table "order_selected_options", force: :cascade do |t|
+    t.bigint "photo_session_additional_option_id"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "idx_order_selected_option_order"
+    t.index ["photo_session_additional_option_id", "order_id"], name: "idx_on_oso_ps_ao_o_uniq", unique: true
+    t.index ["photo_session_additional_option_id"], name: "idx_order_selected_option_ps_ao"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.bigint "photo_session_id"
     t.datetime "created_at", null: false
@@ -139,6 +157,17 @@ ActiveRecord::Schema.define(version: 20180510152119) do
     t.index ["photo_session_id"], name: "index_orders_on_photo_session_id"
     t.index ["photographer_id"], name: "index_orders_on_photographer_id"
     t.index ["session_day_id"], name: "index_orders_on_session_day_id"
+  end
+
+  create_table "photo_session_additional_options", force: :cascade do |t|
+    t.bigint "photo_session_id"
+    t.bigint "additional_option_id"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["additional_option_id"], name: "index_photo_session_additional_options_on_additional_option_id"
+    t.index ["photo_session_id", "additional_option_id"], name: "idx_on_psao_ps_ao_uniq", unique: true
+    t.index ["photo_session_id"], name: "index_photo_session_additional_options_on_photo_session_id"
   end
 
   create_table "photo_sessions", force: :cascade do |t|
@@ -234,8 +263,13 @@ ActiveRecord::Schema.define(version: 20180510152119) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "additional_options", "users"
   add_foreign_key "langs_users", "langs"
   add_foreign_key "langs_users", "users"
+  add_foreign_key "order_selected_options", "orders"
+  add_foreign_key "order_selected_options", "photo_session_additional_options"
+  add_foreign_key "photo_session_additional_options", "additional_options"
+  add_foreign_key "photo_session_additional_options", "photo_sessions"
   add_foreign_key "photo_sessions", "currencies"
   add_foreign_key "profiles", "users"
   add_foreign_key "session_days", "currencies"
