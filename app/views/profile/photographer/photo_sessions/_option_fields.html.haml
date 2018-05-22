@@ -1,8 +1,8 @@
 .form-row
   .form-group.col-12.col-md-6
-    = f.label "Photo Session option"
+    = f.label "Additional option"
     %br
     = f.collection_select :additional_option_id, current_user.additional_options, :id, :name, class: 'form-control'
-  .form-group.col-12.col-md-6
+  .form-group.col-12.col-md-4
     = f.label "Option Price", class: ''
     = f.number_field :price, class: 'form-control'

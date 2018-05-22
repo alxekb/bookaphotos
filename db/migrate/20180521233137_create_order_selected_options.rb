@@ -6,5 +6,6 @@ class CreateOrderSelectedOptions < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+    add_index :order_selected_options, [:photo_session_additional_option_id, :order_id], unique: true, name: "idx_on_oso_ps_ao_o_uniq"
   end
 end

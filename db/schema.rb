@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20180521233137) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "idx_order_selected_option_order"
+    t.index ["photo_session_additional_option_id", "order_id"], name: "idx_on_oso_ps_ao_o_uniq", unique: true
     t.index ["photo_session_additional_option_id"], name: "idx_order_selected_option_ps_ao"
   end
 
@@ -165,6 +166,7 @@ ActiveRecord::Schema.define(version: 20180521233137) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["additional_option_id"], name: "index_photo_session_additional_options_on_additional_option_id"
+    t.index ["photo_session_id", "additional_option_id"], name: "idx_on_psao_ps_ao_uniq", unique: true
     t.index ["photo_session_id"], name: "index_photo_session_additional_options_on_photo_session_id"
   end
 

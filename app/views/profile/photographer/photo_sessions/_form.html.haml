@@ -1,8 +1,8 @@
 .col-12
   = form_for @photo_session, url:  url do |f|
     - if @photo_session.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@photo_session.errors.count, "error")} prohibited this photo_session from being saved:"
+      .alert.alert-danger#error_explanation
+        %h4.alert-heading= "#{pluralize(@photo_session.errors.count, "error")} prohibited this photo session from being saved:"
         %ul
           - @photo_session.errors.full_messages.each do |message|
             %li= message
@@ -26,7 +26,7 @@
           = f.text_area :description, class: 'form-control', placeholder: 'Description'
         = f.fields_for :options do |option|
           = render 'option_fields', f: option
-        = link_to_add_fields 'Add Option', f, :options
+        = link_to_add_fields 'Add Additional Option', f, :options
       .col-12.col-md-6
         .form-row
           = f.fields_for :covers do |cover|

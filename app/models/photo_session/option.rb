@@ -12,6 +12,7 @@ class PhotoSession::Option < ApplicationRecord
             numericality: { greater_than_or_equal_to: 1 },
             allow_nil: false,
             allow_blank: false
+  validates :additional_option_id, presence: true, uniqueness: { scope: :photo_session_id, message: "must be uniq" }
 
   def option_with_price
     "#{additional_option.name} $#{price}"

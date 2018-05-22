@@ -48,6 +48,5 @@ class Profile
         params.require(:additional_option).permit(:name)
       end
     end
-
   end
 end
