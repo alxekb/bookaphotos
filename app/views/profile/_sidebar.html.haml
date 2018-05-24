@@ -10,8 +10,15 @@
   %div.row.justify-content-center.profile-settings.mb-4
     %div.col-12.d-block.text-center.mb-2
       %i.fa.fa-bell.fa-2x
-    %div.col-6.profile-icon.d-block.border-3.rounded-circle.pr-0.pl-0.text-center
-      - if @user_profile.avatar.present?
-        = image_tag(@user_profile.avatar.url(:medium))
-      - else
-        %i.fa.fa-user.fa-5x.align-middle
+    -#%div.col-6.profile-icon.d-block.border-3.rounded-circle.pr-0.pl-0.text-center
+    -#  - if @user_profile.avatar.present?
+    -#    = link_to photographer_settings_path do
+    -#      = image_tag(@user_profile.avatar.url(:medium), class: "img-fluid rounded-circle")
+    -#  - else
+    -#    %i.fa.fa-user.fa-5x.align-middle
+    - if @user_profile.avatar.present?
+      = link_to photographer_settings_path do
+        = image_tag(@user_profile.avatar.url(:medium), class: "img-fluid rounded-circle border")
+    - else
+      = link_to photographer_settings_path do
+        %i.fa.fa-user.fa-5x.align-middle.img-fluid.rounded-circle

@@ -21,11 +21,19 @@ class UserDecorator < Draper::Decorator
     "#{first_name} #{last_name}"
   end
 
+  def dropbox_status
+    if profile.dropbox_token
+      h.content_tag :span, "Connected", class: "badge badge-success"
+    else
+      h.content_tag(:span, "Not Connected", class: "badge badge-secondary")
+    end
+  end
+
   def connected_dropbox
     if profile.dropbox_token
-      h.link_to "Dropbox - connected", h.photographer_dropbox_auth_path, class: "nav-link bg-light-green disabled"
+      h.link_to "Disconnect", h.photographer_dropbox_disconnect_path, class: "btn btn-danger"
     else
-      h.link_to "Connect Dropbox", h.photographer_dropbox_auth_path, class: "nav-link"
+      h.link_to "Connect", h.photographer_dropbox_auth_path, class: "btn btn-success"
     end
   end
 
