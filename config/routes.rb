@@ -28,9 +28,12 @@ Rails.application.routes.draw do
           patch :archiving_order
         end
       end
+
       resource :settings, only: %i[index update] do
         get "/", to: "settings#index"
       end
+
+      resources :additional_options
       get "dropbox/auth" => "dropbox#auth", as: :dropbox_auth
       get "dropbox/auth_callback" => "dropbox#auth_callback", as: :dropbox_callback
       get "dropbox/disconnect" => "dropbox#disconnect", as: :dropbox_disconnect

@@ -7,6 +7,12 @@ class OrdersController < ApplicationController
     end
     respond_to do |format|
       if @order.save!
+        options = PhotoSession::Option.find(params[:order][:selected_options])
+        options.each do |option|
+          selected_option = @order.selected_options.build(photo_session_additional_option_id: option.id)
+          binding.pry
+          selected_option.save
+        end
         format.html { redirect_to new_charge_path(order_id: @order.id) }
       else
         format.html { redirect_to photo_session_order_path(@order.photo_session, @order.session_day.id), alert: 'Errors' }
@@ -31,7 +37,8 @@ class OrdersController < ApplicationController
           :retouch,
           :photographer_id,
           :client_id,
-          :total_amount
+          :total_amount,
+          selected_options: [:id, :photo_session_additional_option_id]
         )
   end
 
