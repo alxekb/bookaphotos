@@ -17,8 +17,8 @@
     -#  - else
     -#    %i.fa.fa-user.fa-5x.align-middle
     - if @user_profile.avatar.present?
-      = link_to photographer_settings_path do
+      = link_to send("#{@user_profile.role}_settings_path") do
         = image_tag(@user_profile.avatar.url(:medium), class: "img-fluid rounded-circle border")
     - else
-      = link_to photographer_settings_path do
+      = link_to send("#{@user_profile.role}_settings_path") do
         %i.fa.fa-user.fa-5x.align-middle.img-fluid.rounded-circle
