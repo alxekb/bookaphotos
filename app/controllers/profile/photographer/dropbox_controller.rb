@@ -7,9 +7,15 @@ class Profile::Photographer::DropboxController < Profile::PhotographerController
   def auth_callback
     auth_bearer = authenticator.get_token(params[:code], redirect_uri: redirect_uri)
     profile.dropbox_token = auth_bearer.token
-    profile.save!
+    profile.save
     session[:dropbox_token] = auth_bearer.token
-    redirect_to photographer_path
+    redirect_to photographer_settings_path, notice: "Successfully connected dropbox"
+  end
+
+  def disconnect
+    profile.dropbox_token = nil
+    profile.save
+    redirect_to photographer_settings_path, notice: "Dropbox disconnected"
   end
 
   private

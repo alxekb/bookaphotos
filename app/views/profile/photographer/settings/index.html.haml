@@ -1,0 +1,56 @@
+.row
+  .col-12
+    %h3 Profile Settings
+.row.pt-3
+  .col-12.col-md-5.col-xl-4
+    #nav-tab.nav.nav-tabs{role: 'tablist' }
+      = link_to 'Profile', '#profile',
+        class: 'nav-item nav-link active',
+        id: 'nav-profile-tab',
+        data: { toggle: 'tab' },
+        role: 'tab',
+        aria: { controls: 'profile', selected: 'true' }
+      = link_to 'Dropbox', '#dropbox',
+        class: 'nav-item nav-link',
+        id: 'nav-dropbox-tab',
+        data: { toggle: 'tab' },
+        role: 'tab',
+        aria: { cotrols: 'dropbox', selected: 'false' }
+  #nav-tabContent.col-12.tab-content.pt-3
+    #profile.tab-pane.fade.show.active{role: 'tabpanel', aria: { labelledby: 'nav-profile-tab' } }
+      = form_for @user_profile, url: photographer_settings_path, method: :patch do |f|
+        .form-group.row
+          .col-sm-2.col-md-2.col-form-label
+            = f.label 'First Name'
+          .col-sm-10.col-md-auto
+            = f.text_field :first_name, class: 'form-control', placeholder: 'First Name'
+        .form-group.row
+          .col-sm-2.col-md-2.col-form-label
+            = f.label 'Last Name'
+          .col-sm-10.col-md-auto
+            = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
+        .form-group.row
+          .col-sm-2.col-md-2.col-form-label
+            = f.label 'Phone'
+          .col-sm-10.col-md-auto
+            = f.text_field :phone, class: 'form-control', placeholder: 'Phone'
+        .form-group.row
+          .col-sm-2.col-md-2.col-form-label
+            = f.label 'Avatar'
+          .col-sm-6.col-md-auto
+            - if @user_profile.avatar.present?
+              = image_tag(@user_profile.avatar.url(:medium), class: 'img-fluid img-thumbnail')
+              .form-group
+                = f.check_box :remove_avatar, class: 'form-check-input'
+                = f.label 'Delete image', class: 'form-check-label'
+            -else
+              = f.file_field :avatar
+        .form-group.row
+          .col-sm-6.col-md-2
+            = f.submit 'Save', class: 'btn btn-outline-primary btn-block'
+    #dropbox.tab-pane.fade{role: 'tabpanel', aria: { labelledby: 'nav-dropbox-tab' } }
+      .row
+        .col-sm-2
+          Status: #{@photographer.dropbox_status}
+        .col-sm-10.col-md-auto
+          = @photographer.connected_dropbox
