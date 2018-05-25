@@ -1,12 +1,18 @@
-%form
-  .row
-    .col-6
-      .form-group
-        %input.form-control{ placeholder: "Search photosession" }
-    .col-3
-      %button.btn.btn-primary{ type: :submit } Submit
-    .col-3
-      = link_to 'New Session Day', new_photographer_session_day_path
+.row
+  .col-12.col-md-10
+    = form_for 'filter', url: photographer_session_days_path, method: :get do |f|
+      .row
+        .col-6
+          .form-group
+            = f.text_field :q, name: 'q', value: params[:q], placeholder: 'Search by name', class: 'form-control'
+        .col-2
+          = f.submit 'Search', name: nil, class: 'btn btn-outline-primary'
+          = link_to 'Clear filters', photographer_session_days_path, class: 'btn btn-outline-warning'
+        .col-2
+          = link_to 'New Session Day', new_photographer_session_day_path, class: 'btn btn-info'
+.row
+  .col-12
+    = paginate @session_days, theme: 'twitter-bootstrap-4'
 %table.table
   %thead
     %tr
@@ -25,3 +31,6 @@
         %td= session_day.location_name
         %td= session_day.booked_appointments
         = session_day.status
+.row
+  .col-12
+    = paginate @session_days, theme: 'twitter-bootstrap-4'

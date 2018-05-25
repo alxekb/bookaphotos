@@ -5,7 +5,7 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
   # GET /photo_sessions.json
   def index
     result = current_user.photo_sessions.search(params).page(params[:page]).per(20)
-    @photo_sessions = PhotoSessionsDecorator.decorate(result.records, with: PhotoSessionDecorator)
+    @photo_sessions = PagesDecorator.decorate(result.records, with: PhotoSessionDecorator)
   end
 
   # GET /photo_sessions/1

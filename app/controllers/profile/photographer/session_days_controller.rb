@@ -5,7 +5,7 @@ class Profile::Photographer::SessionDaysController < Profile::PhotographerContro
 
   def index
     @photo_sessions = current_user.photo_sessions.decorate
-    @session_days = SessionDay.joins(:photo_session).where("photo_sessions.user_id = ?", @user.id).decorate
+    @session_days = SessionDay.by_photo_session(params[:q], current_user).page(params[:page]).per(2)
   end
 
   def show
