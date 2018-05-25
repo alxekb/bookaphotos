@@ -1,9 +1,7 @@
 class PhotoSessionDecorator < ApplicationDecorator
   delegate_all
 
-  decorates_association :orders
   decorates_association :client
-  #decorates_association :session_days
 
   def photographer
     user
@@ -35,6 +33,10 @@ class PhotoSessionDecorator < ApplicationDecorator
 
   def location
     user.location.name
+  end
+
+  def created_at
+    object.created_at.to_date.strftime("%d-%m-%Y")
   end
 
   def active_session_days_count
