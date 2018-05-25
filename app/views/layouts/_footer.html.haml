@@ -1,0 +1,32 @@
+%footer.container.bg-light.p-3
+  .row.justify-content-center
+    .col-12.col-md-3
+      %ul.list-unstyled
+        %li
+          = link_to 'Privacy policy', page_path('about')
+        %li
+          %a{href: '#'} Sitemap
+        %li
+          .span
+            Login pages
+            %a{href: '#'} photographer
+            %a{href: '#'} client
+    .col-12.col-md-3
+      %ul.list-unstyled
+        %li
+          = link_to 'About', page_path('about')
+        %li
+          %a{href: '#'} Navigation
+        %li
+          %a{href: '#'} Site Search tool
+    .col-12.col-md-3
+      %ul.list-unstyled
+        %li
+          %a{href: '#'} Contact
+        %li
+          %a{href: '#'} Social
+        %li
+          %a{href: '#'} Copyright
+  .container
+    %input.form-control.col-8{:placeholder => "find something in this website", :type => "text"}
+      %button.btn.btn-primary.col-2{:type => "buton"} Search

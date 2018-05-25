@@ -113,10 +113,8 @@ ActiveRecord::Schema.define(version: 20180510152119) do
     t.decimal "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "session_day_id"
     t.bigint "city_id"
     t.index ["city_id"], name: "index_locations_on_city_id"
-    t.index ["session_day_id"], name: "index_locations_on_session_day_id"
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
