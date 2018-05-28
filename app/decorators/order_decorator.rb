@@ -3,6 +3,8 @@ class OrderDecorator < ApplicationDecorator
 
   decorates_association :photo_session
   decorates_association :session_day
+  decorates_association :user
+  decorates_association :client
 
   def photo_session_day
     session_day.day
@@ -30,6 +32,14 @@ class OrderDecorator < ApplicationDecorator
 
   def client_full_name
     "#{client.first_name} #{client.last_name}"
+  end
+
+  def client_last_booking
+    client.bookings.last.decorate
+  end
+
+  def client_total_bookings
+    client.bookings.count
   end
 
   def photo_session_title

@@ -18,7 +18,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{object.profile.first_name} #{object.profile.last_name}"
   end
 
   def connected_dropbox
@@ -138,5 +138,9 @@ class UserDecorator < Draper::Decorator
   def finished_photosessions
     bookings.joins(photo_session: :session_days)
         .where("session_days.start_time <= ?", Date.current)
+  end
+
+  def last_booking
+    bookings.last
   end
 end
