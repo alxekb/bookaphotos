@@ -1,11 +1,16 @@
-%div.d-flex.flex-wrap.flex-md-nowrap.pb-2.mb-3
-  %form
-  .row
-    .col-6.col-md-auto
-      .form-group
-        %input.form-control{ placeholder: "Search photosession" }
-    .col-2
-      %button.btn.btn-primary{ type: :submit } Search
+.row
+  .col-12.col-md-10
+    = form_for 'filter', url: photographer_invoices_path, method: :get do |f|
+      .row
+        .col-6
+          .form-group
+            = f.text_field :q, name: 'q', value: params[:q], placeholder: 'Search by name', class: 'form-control'
+        .col-2
+          = f.submit 'Search', name: nil, class: 'btn btn-outline-primary'
+          = link_to 'Clear filters', photographer_invoices_path, class: 'btn btn-outline-warning'
+.row
+  .col-12
+    = paginate @invoices, theme: 'twitter-bootstrap-4'
 %div.container
   %div.row
     %div.col-lg-12
@@ -18,11 +23,27 @@
             %th{:scope => "col"} Price
             %th{:scope => "col"} Status
         %tbody
-          - @invoices.each do |invoice|
-            - invoice.photo_session.session_days.each do |session_day|
-              %tr
-                %th{ scope: "row"}= session_day.start_time.strftime("%d.%m.%Y")
-                %td= invoice.photo_session.title
-                %td= invoice.client_full_name
-                %td= invoice.total_amount
-                %td= invoice.aasm_state
+          - @invoices.each do |order|
+            %tr
+              %th{scope: "row"}
+                = order.session_day.day
+                |
+                = order.session_day.hour
+              %td= order.photo_session.title
+              %td= order.client_full_name
+              %td= order.total_amount
+              %td= order.aasm_state
+          -#- @photo_sessions.each do |photo_session|
+          -#  - photo_session.orders.decorate.each do |order|
+          -#    %tr
+          -#      %th{scope: "row"}
+          -#        = order.session_day.day
+          -#        |
+          -#        = order.session_day.hour
+          -#      %td= photo_session.title
+          -#      %td= order.client_full_name
+          -#      %td= order.total_amount
+          -#      %td= order.aasm_state
+.row
+  .col-12
+    = paginate @invoices, theme: 'twitter-bootstrap-4'
