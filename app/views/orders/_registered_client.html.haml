@@ -2,9 +2,10 @@
   - if @order.errors.any?
     #error_explanation
       %h2= "#{pluralize(@order.errors.count, "error")} prohibited this photo_session from being saved:"
-      %ul
-        - @order.errors.full_messages.each do |message|
-          %li= message
+      .alert.alert-danger
+        %ul
+          - @order.errors.full_messages.each do |message|
+            %li= message
   #order-photosession
     .row
       .col-12
@@ -27,6 +28,16 @@
             %small{ class: "form-text text-muted" }
               max #{@photosession.photos_count}
           %h5.additional-option Additional options
+          -#- @photosession.options.each_with_index do |option, index|
+          -#  = f.fields_for :selected_options, index: index do |fm|
+          -#    = fm.hidden_field :photo_session_additional_option_id, value: option.id
+          -#    = fm.label "#{option.additional_option.name} $#{option.price}"
+          -#    = fm.check_box :photo_session_additional_option_id, {}, option.id
+          -#    %br
+          - @photosession.options.each do |option|
+            = f.check_box :selected_options, { multiple: true }, option.id, false
+            %label #{option.additional_option.name} $#{option.price}
+            %br
           .form-group
             .form-check
               %label.form-check-label

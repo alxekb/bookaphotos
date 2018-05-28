@@ -1,0 +1,40 @@
+%h1 Edit Session Day
+.col-12
+  = form_for @session_day, url:  photographer_session_day_path(@session_day) do |f|
+    - if @session_day.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@session_day.errors.count, "error")} prohibited this session_day from being saved:"
+        %ul
+          - @session_day.errors.full_messages.each do |message|
+            %li= message
+    .row
+      .col-12.col-md-6
+        .form-group
+          = f.label 'Photo Session'
+          = f.collection_select :photo_session_id, @session_day.user_photo_sessions, :id, :title, class: 'form-control', placeholder: 'Select photo session'
+        .form-group
+          = f.label 'Start Time'
+          -#- @day = params[:day].to_datetime
+          = f.datetime_select :start_time, class: 'form-control', placeholder: 'Start Time', selected: @session_day.session_day_params(params)
+        .form-group
+          = f.label 'Location'
+          = f.collection_select :location_id, @session_day.user_locations, :id, :name, class: 'form-control'
+      .col-12.col-md-6
+        .form-row
+          .form-group.col-8.col-md-6
+            = f.label 'Price'
+            = f.number_field :price, class: 'form-control', placeholder: 'Price'
+          .form-group.col-4.col-md-6
+            = f.label :currency
+            %br
+            = f.collection_select :currency_id, Currency.all, :id, :title, class: 'form-control'
+        .form-group
+          = f.label 'Price per additional photo'
+          = f.number_field :price_per_additional_photo, class: 'form-control', placeholder: 'Price per additional photo'
+        .form-group
+          = f.label 'Additional photos limit'
+          = f.number_field :additional_photos_limit, class: 'form-control', placeholder: 'Additional photos limit'
+    .row.justify-content-end
+      .col-12.col-md-4
+        .actions
+          = f.submit 'Save', class: 'btn btn-success btn-block'

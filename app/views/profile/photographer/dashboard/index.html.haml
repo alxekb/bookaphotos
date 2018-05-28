@@ -1,45 +1,55 @@
 %div.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3
   %span Hello, #{current_user.email}
-%div.container
-  %div.row.justify-content-between
-    %div.col.border-3.text-center.mr-2.p-0
-      %span Upcoming PhotoSessions
-      %span.d-block= @photographer.upcoming_events_count
-      %span
-        $
-        = @photographer.upcoming_events_price
-    %div.col.border-3.text-center.mr-2.p-0
-      %span Editing Photos
-      %span.d-block= @photographer.editing_photos_count
-      %span
-        $
-        = @photographer.editing_photos_price
-    %div.col.border-3.text-center.mr-2.p-0
-      %span Sorting Photos
-      %span.d-block= @photographer.sorting_photos_count
-      %span
-        $
-        = @photographer.sorting_photos_price
-    %div.col.border-3.text-center.mr-2.p-0
-      %span Sent Photos
-      %span.d-block= @photographer.sent_photos_count
-      %span
-        $
-        = @photographer.sent_photos_price
-    %div.col.border-3.text-center.mr-2.p-0
-      %span Done
-      %span.d-block= @photographer.closed_orders_count
-      %span
-        $
-        = @photographer.closed_orders_price
-  %div.row.py-5
-    %div.col
-      = week_calendar events: @photographer.session_days, attribute: :start_time do |_date, session_days|
-        - session_days.each do |session_day|
-          = link_to photographer_photo_session_path(session_day.photo_session), class: 'd-block profile_photo_session_link' do
-            %div.d-block.w-100.border-bottom
-              = session_day.hour
-              %br
-              = session_day.photo_session.title
-              %br
-              = session_day.photo_session.cities.map(&:title).join(',')
+%div.row.justify-content-between
+  %div.col.border-3.text-center.mr-2.p-0
+    %span Upcoming PhotoSessions
+    %span.d-block= @photographer.upcoming_events_count
+    %span
+      $
+      = @photographer.upcoming_events_price
+  %div.col.border-3.text-center.mr-2.p-0
+    %span Editing Photos
+    %span.d-block= @photographer.editing_photos_count
+    %span
+      $
+      = @photographer.editing_photos_price
+  %div.col.border-3.text-center.mr-2.p-0
+    %span Sorting Photos
+    %span.d-block= @photographer.sorting_photos_count
+    %span
+      $
+      = @photographer.sorting_photos_price
+  %div.col.border-3.text-center.mr-2.p-0
+    %span Sent Photos
+    %span.d-block= @photographer.sent_photos_count
+    %span
+      $
+      = @photographer.sent_photos_price
+  %div.col.border-3.text-center.mr-2.p-0
+    %span Done
+    %span.d-block= @photographer.closed_orders_count
+    %span
+      $
+      = @photographer.closed_orders_price
+%div.row.py-5
+  %div.col
+    = week_calendar events: @photographer.session_days, attribute: :start_time do |_date, session_days|
+      - if Date.current <= _date
+        - if Date.current.to_date ==  _date
+          - day = _date.to_datetime + DateTime.current.localtime.hour.to_i.hour
+        - else
+          - day = _date.to_datetime
+        = link_to '+ Add session', new_photographer_session_day_path(day: day), class: 'btn btn-info btn-block'
+      - session_days.each do |session_day|
+        .row.py-3
+          .col-12
+            -#= link_to photographer_photo_session_path(session_day.photo_session), remote: true, class: 'd-block profile_photo_session_link'
+            = link_to photographer_session_day_path(session_day), remote: true, class: 'd-block profile_photo_session_link' do
+              .row
+                .col-12.col-md-auto
+                  = session_day.hour
+                .col-12.col-md-auto
+                  = session_day.photo_session_title
+                .col-12.col-md-auto
+                  = session_day.photo_session.cities.map(&:title).join(',')
+.row#session_day_info

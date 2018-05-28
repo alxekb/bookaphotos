@@ -1,0 +1,15 @@
+.row.justify-content-center
+  .col-12.col-md-6
+    = form_for @additional_option, url: url do |f|
+      - if @additional_option.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@additional_option.errors.count, "error")} prohibited this additional_option from being saved:"
+          %ul
+            - @additional_option.errors.full_messages.each do |message|
+              %li= message
+
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control'
+      .actions
+        = f.submit 'Save', class: 'btn btn-success'

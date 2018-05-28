@@ -34,10 +34,9 @@
                 = image_tag(@user_profile.avatar.url(:medium), class: 'img-fluid img-thumbnail')
               .col-12.col-md-9
                 .form-group.form-check.pt-md-3
-                  = f.check_box :_destroy, class: 'form-check-input', id: 'avatarRemove'
+                  = f.check_box :remove_avatar, class: 'form-check-input', id: 'avatarRemove'
                   %label.form-check-label{for: 'avatarRemove'}
                     Remove avatar
-                -#= f.check_box :_destroy
             - else
               .col-12.col-md-9
                 %label

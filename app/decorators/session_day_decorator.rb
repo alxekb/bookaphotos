@@ -20,8 +20,40 @@ class SessionDayDecorator < ApplicationDecorator
     location.name
   end
 
+  def location_address
+    location.address
+  end
+
+  def location_find
+    location.how_to_find
+  end
+
+  def location_city
+    location.city.title
+  end
+
+  def location_latitude
+    location.lat
+  end
+
+  def location_longitude
+    location.lng
+  end
+
+  def currency_name
+    currency.title
+  end
+
   def booked_appointments
     Order.where("session_day_id = ?", object.id).count
+  end
+
+  def session_day_params(params)
+    if params[:day]
+      @day = params[:day].to_datetime
+    else
+      @day = DateTime.current.to_datetime
+    end
   end
 
   def status

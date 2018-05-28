@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :locations
   has_many :invoices
   has_many :photo_sessions
+  has_many :additional_options
 
   has_and_belongs_to_many :langs
 
