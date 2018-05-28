@@ -6,10 +6,13 @@
       Tasks
   %li.nav-item
     = link_to photographer_session_days_path, class: 'nav-link' do
-      Shooting days
+      Session days
   %li.nav-item
     = link_to photographer_photo_sessions_path, class: 'nav-link' do
       Photosessions
+  %li.nav-item
+    = link_to photographer_additional_options_path, class: 'nav-link' do
+      Additional Options
   %li.nav-item
     = link_to photographer_locations_path, class: 'nav-link' do
       Locations
@@ -19,5 +22,3 @@
   %li.nav-item
     = link_to photographer_clients_path, class: 'nav-link' do
       Clients
-  %li.nav-item
-    = @photographer.connected_dropbox

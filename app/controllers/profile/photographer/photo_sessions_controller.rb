@@ -86,7 +86,12 @@ class Profile::Photographer::PhotoSessionsController < Profile::PhotographerCont
             :what_to_take,
             :session_type,
             covers_attributes: [:photo],
-            photos_attributes: [:photo]
+            photos_attributes: [:photo],
+            options_attributes: [
+              :additional_option_id,
+              :price,
+              :photo_session_id
+            ]
           )
   end
 end

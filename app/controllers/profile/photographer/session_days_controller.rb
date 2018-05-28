@@ -1,5 +1,5 @@
 class Profile::Photographer::SessionDaysController < Profile::PhotographerController
-  before_action :set_session_day, only: %i[show]
+  before_action :set_session_day, only: %i[show edit update]
 
   respond_to :html, :js, :json
 
@@ -24,6 +24,20 @@ class Profile::Photographer::SessionDaysController < Profile::PhotographerContro
         format.json { render :show, status: :created, location: @session_day }
       else
         format.html { render :new }
+        format.json { render json: @session_day.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def edit; end
+
+  def update
+    respond_to do |format|
+      if @session_day.update(session_day_params)
+        format.html { redirect_to [:photographer, @session_day], notice: "Session day was successfully updated." }
+        format.json { render :show, status: :ok, location: @session_day }
+      else
+        format.html { render :edit }
         format.json { render json: @session_day.errors, status: :unprocessable_entity }
       end
     end

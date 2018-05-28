@@ -28,6 +28,9 @@ class PhotoSession < ApplicationRecord
 
   has_many :orders
 
+  has_many :options, class_name: "PhotoSession::Option", foreign_key: :photo_session_id
+  accepts_nested_attributes_for :options
+
   enum session_type: {
     special: 0,
     express: 1

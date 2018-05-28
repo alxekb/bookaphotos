@@ -1,0 +1,4 @@
+.form-group.col-12.border
+  = f.label "Photo Session #{f.object.class}"
+  = f.file_field :photo
+  = image_tag(f.object.photo(:thumb))
