@@ -2,7 +2,9 @@ class Profile::Photographer::InvoicesController < Profile::PhotographerControlle
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   def index
-    @invoices = current_user.orders.decorate
+    result = current_user.photo_sessions.search(params)
+    paginated = Kaminari.paginate_array(Order.where(photo_session_id: result.records.pluck(:id)))
+    @invoices = PagesDecorator.decorate(paginated.page(params[:page]).per(20), with: OrderDecorator)
   end
 
   private

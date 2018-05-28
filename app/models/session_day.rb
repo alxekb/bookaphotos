@@ -29,6 +29,10 @@ class SessionDay < ApplicationRecord
     self.start_time.strftime("%M%H").to_i * 100
   end
 
+  def self.by_photo_session(q, user)
+    SessionDay.joins(:photo_session).where("photo_sessions.title like ? AND photo_sessions.user_id = ?", "%#{q}%", user.id)
+  end
+
   private
 
   def time_cannot_be_in_the_past
