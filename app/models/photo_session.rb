@@ -26,6 +26,8 @@ class PhotoSession < ApplicationRecord
   has_many :session_days, dependent: :destroy
   accepts_nested_attributes_for :session_days, allow_destroy: true, reject_if: ->(a) { a[:id].nil? && a[:price].nil? }
 
+  has_many :orders
+
   has_many :options, class_name: "PhotoSession::Option", foreign_key: :photo_session_id
   accepts_nested_attributes_for :options
 

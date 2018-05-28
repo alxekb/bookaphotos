@@ -1,4 +1,5 @@
 %h1 Clients
+= paginate @paginated, theme: 'twitter-bootstrap-4'
 %table.table.table-striped
   %thead
     %tr
@@ -7,21 +8,28 @@
       %th{:scope => "col"} Client phone
       %th{:scope => "col"} Client name
       %th{:scope => "col"} Client comment
-      %th{:scope => "col"} Prohotosession
+      %th{:scope => "col"} Last Pohotosession
       %th{:scope => "col"} Date latest ordered
       %th{:scope => "col"} Times
   %tbody
-    - @orders.each do |client, orders|
-      - latest_order = orders.last.decorate
+    -#- @orders.map(&:client).map(&:decorate).each do |client|
+    -#  %tr
+    -#    %th{scope: "row"}= client.last_booking.id
+    -#    %td= client.email
+    -#    %td= client.phone
+    -#    %td= client.full_name
+    - @orders.each do |order|
       %tr
-        %th{:scope => "row"}= latest_order.id
-        %td= client.email
-        %td= client.phone
-        %td= client.decorate.full_name
-        %td= latest_order.comment
-        %td= latest_order.photo_session_title
+        %th{scope: "row"}= order.client_last_booking.id
+        %td= order.client_email
+        %td= order.client_phone
+        %td= order.client_full_name
+        %td= order.client_last_booking.comment
+        %td= order.client_last_booking.photo_session_title
         %td
-          = latest_order.created_hour
+          = order.client_last_booking.created_hour
           %br
-          = latest_order.created_day
-        %td= orders.count
+          = order.client_last_booking.created_day
+        %td= order.client_total_bookings
+= paginate @paginated, theme: 'twitter-bootstrap-4'
+
